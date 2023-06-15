@@ -1,7 +1,9 @@
 import type { IBoardCommentListUIProps } from "./BoardCommentList.types";
 import * as S from "./BoardCommentList.styles";
 import { getDate } from "../../../../commons/libraries/utils";
-export default function BoardCommentListUI(props: IBoardCommentListUIProps) {
+export default function BoardCommentListUI(
+  props: IBoardCommentListUIProps
+): JSX.Element {
   return (
     <div>
       {props.data?.fetchBoardComments.map((el) => (

@@ -16,10 +16,10 @@ const FETCH_BOARD = gql`
   }
 `;
 
-export default function BoardsEditPage() {
+export default function BoardsEditPage(): JSX.Element {
   const router = useRouter();
 
-  if (!router || typeof router.query.boardId !== "string") return <></>;
+  if (typeof router.query.boardId !== "string") return <></>;
 
   const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
     FETCH_BOARD,
