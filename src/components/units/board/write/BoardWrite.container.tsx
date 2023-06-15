@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import type { IBoardWriteProps } from "./BoardWrite.types";
+import type { Address } from "react-daum-postcode/lib/loadPostcode";
 import type {
   IMutation,
   IMutationCreateBoardArgs,
@@ -14,11 +15,16 @@ import type {
 export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -34,6 +40,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     IMutationUpdateBoardArgs
   >(UPDATE_BOARD);
 
+  // ? 작성자 변경 onChange 함수
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>): void => {
     setWriter(event.target.value);
     if (event.target.value !== "") {
@@ -52,6 +59,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     }
   };
 
+  // ? 비밀번호 변경 onChange 함수
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>): void => {
     setPassword(event.target.value);
     if (event.target.value !== "") {
@@ -70,6 +78,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     }
   };
 
+  // ? 본문 제목 변경 onChange 함수
   const onChangeTitle = (event: ChangeEvent<HTMLInputElement>): void => {
     setTitle(event.target.value);
     if (event.target.value !== "") {
@@ -88,6 +97,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     }
   };
 
+  // ? 본문 변경 onChange 함수
   const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>): void => {
     setContents(event.target.value);
     if (event.target.value !== "") {
@@ -106,6 +116,36 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     }
   };
 
+  // ? 유튜브 URL onChange 함수
+  const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>): void => {
+    setYoutubeUrl(event.target.value);
+  };
+
+  // ? 상세 주소 onChange 함수
+  const onChangeAddressDetail = (
+    event: ChangeEvent<HTMLInputElement>
+  ): void => {
+    setAddressDetail(event.target.value);
+  };
+
+  // ? 주소찾기 버튼 onClick 함수
+  const onClickAddressSearch = (): void => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const onClickAddressToggle = (): void => {
+    setIsOpen((prev) => !prev);
+  };
+
+  // ? 주소찾기 완료 onClick 함수
+  const onCompleteAddressSearch = (data: Address): void => {
+    console.log(data);
+    setAddress(data.address);
+    setZipcode(data.zonecode);
+    setIsOpen((prev) => !prev);
+  };
+
+  // ? 게시글 등록 버튼 onClick 함수
   const onClickSubmit = async (): Promise<void> => {
     if (writer !== "") {
       setWriterError("작성자를 입력해주세요.");
@@ -128,6 +168,12 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
               password,
               title,
               contents,
+              youtubeUrl,
+              boardAddress: {
+                zipcode,
+                address,
+                addressDetail,
+              },
             },
           },
         });
@@ -144,6 +190,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     }
   };
 
+  // ? 게시글 수정 버튼 onClick 함수
   const onClickUpdate = async (): Promise<void> => {
     if (title !== "" && contents !== "") {
       alert("수정한 내용이 없습니다.");
@@ -193,11 +240,19 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       onChangePassword={onChangePassword}
       onChangeTitle={onChangeTitle}
       onChangeContents={onChangeContents}
+      onChangeYoutubeUrl={onChangeYoutubeUrl}
+      onChangeAddressDetail={onChangeAddressDetail}
+      onClickAddressSearch={onClickAddressSearch}
+      onCompleteAddressSearch={onCompleteAddressSearch}
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
+      onClickAddressToggle={onClickAddressToggle}
       isActive={isActive}
       isEdit={props.isEdit}
       data={props.data}
+      zipcode={zipcode}
+      address={address}
+      isOpen={isOpen}
     />
   );
 }
