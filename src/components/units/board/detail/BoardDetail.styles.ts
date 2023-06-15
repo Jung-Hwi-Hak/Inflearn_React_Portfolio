@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-
+import ReactPlayer from "react-player";
 export const Wrapper = styled.div`
   width: 1200px;
   margin: 100px;
@@ -80,4 +80,22 @@ export const Button = styled.button`
     background-color: gold;
     border-color: white;
   }
+`;
+
+export const IconWrapper = styled.div`
+  text-align: center;
+`;
+
+export const LinkIcon = styled.img``;
+
+export const LocationIcon = styled.img``;
+
+export const YoutubeWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+export const Youtube = styled(ReactPlayer)`
+  width: auto;
 `;

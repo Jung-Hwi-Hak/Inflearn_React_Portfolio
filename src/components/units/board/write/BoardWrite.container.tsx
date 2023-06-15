@@ -147,18 +147,19 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
 
   // ? 게시글 등록 버튼 onClick 함수
   const onClickSubmit = async (): Promise<void> => {
-    if (writer !== "") {
+    if (writer === "") {
       setWriterError("작성자를 입력해주세요.");
     }
-    if (password !== "") {
+    if (password === "") {
       setPasswordError("비밀번호를 입력해주세요.");
     }
-    if (title !== "") {
+    if (title === "") {
       setTitleError("제목을 입력해주세요.");
     }
-    if (contents !== "") {
+    if (contents === "") {
       setContentsError("내용을 입력해주세요.");
     }
+
     if (writer !== "" && password !== "" && title !== "" && contents !== "") {
       try {
         const result = await createBoard({
@@ -192,12 +193,19 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
 
   // ? 게시글 수정 버튼 onClick 함수
   const onClickUpdate = async (): Promise<void> => {
-    if (title !== "" && contents !== "") {
+    if (
+      title === "" &&
+      contents === "" &&
+      youtubeUrl === "" &&
+      address === "" &&
+      addressDetail === "" &&
+      zipcode === ""
+    ) {
       alert("수정한 내용이 없습니다.");
       return;
     }
 
-    if (password !== "") {
+    if (password === "") {
       alert("비밀번호를 입력해주세요.");
       return;
     }
@@ -205,6 +213,14 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     const updateBoardInput: IUpdateBoardInput = {};
     if (title !== "") updateBoardInput.title = title;
     if (contents !== "") updateBoardInput.contents = contents;
+    if (youtubeUrl !== "") updateBoardInput.youtubeUrl = youtubeUrl;
+    if (zipcode !== "" || address !== "" || addressDetail !== "") {
+      updateBoardInput.boardAddress = {};
+      if (zipcode !== "") updateBoardInput.boardAddress.zipcode = zipcode;
+      if (address !== "") updateBoardInput.boardAddress.address = address;
+      if (addressDetail !== "")
+        updateBoardInput.boardAddress.addressDetail = addressDetail;
+    }
 
     try {
       if (typeof router.query.boardId !== "string") {

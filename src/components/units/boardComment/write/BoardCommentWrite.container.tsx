@@ -14,6 +14,7 @@ export default function BoardCommentWrite(): JSX.Element {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
+  const [star, setStar] = useState(0);
 
   const router = useRouter();
   const [createBoardComment] = useMutation<
@@ -49,8 +50,8 @@ export default function BoardCommentWrite(): JSX.Element {
           createBoardCommentInput: {
             writer,
             contents,
-            rating: 0,
             password,
+            rating: star,
           },
           boardId: router.query.boardId,
         },
@@ -64,6 +65,10 @@ export default function BoardCommentWrite(): JSX.Element {
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
+
+    setWriter("");
+    setPassword("");
+    setContents("");
   };
 
   return (
@@ -72,7 +77,10 @@ export default function BoardCommentWrite(): JSX.Element {
       onChangePassword={onChangePassword}
       onChangeContents={onChangeContents}
       onClickWrite={onClickWrite}
+      writer={writer}
+      password={password}
       contents={contents}
+      setStar={setStar}
     />
   );
 }
