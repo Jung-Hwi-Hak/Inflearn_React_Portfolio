@@ -1,6 +1,5 @@
 import type { ILayoutHeaderUIProps } from "./LayoutHeader.types";
 import * as S from "./LayoutHeader.styles";
-import { Space } from "antd";
 
 export default function LayoutHeaderUI(
   props: ILayoutHeaderUIProps
