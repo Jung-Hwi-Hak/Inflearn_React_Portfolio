@@ -56,6 +56,12 @@ export const Button = styled.button`
   background-color: black;
   color: white;
   cursor: pointer;
+  margin-left: 5px;
 `;
 
 export const Star = styled(Rate)``;
+
+export const ButtonFlex = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
