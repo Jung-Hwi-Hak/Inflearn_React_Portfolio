@@ -34,6 +34,7 @@ export default function BoardCommentWrite(
     Pick<IMutation, "updateBoardComment">,
     IMutationUpdateBoardCommentArgs
   >(UPDATE_BOARD_COMMENT);
+
   // Writer STATE 함수
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>): void => {
     setWriter(event.target.value);
@@ -46,6 +47,7 @@ export default function BoardCommentWrite(
 
   // Contents STATE 함수
   const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>): void => {
+    console.log(event.target.value);
     setContents(event.target.value);
   };
 
