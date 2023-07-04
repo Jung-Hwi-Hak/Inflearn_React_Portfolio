@@ -6,6 +6,7 @@ export default function LayoutNavigationUI(
   props: ILayoutNavigationUIProps
 ): JSX.Element {
   const NAVIGATION_MENUS = [
+    { name: "파이어베이스", page: "firebasePage" },
     { name: "라이브강아지", page: "dogPage" },
     { name: "라이브게시판", page: "/boards" },
     { name: "동물사진", page: "/patpicture" },
