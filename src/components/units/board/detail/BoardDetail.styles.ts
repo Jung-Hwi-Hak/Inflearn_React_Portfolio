@@ -99,3 +99,14 @@ export const YoutubeWrapper = styled.div`
 export const Youtube = styled(ReactPlayer)`
   width: auto;
 `;
+
+export const UploadImageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const UploadImage = styled.img`
+  width: 800px;
+  margin: 15px;
+`;

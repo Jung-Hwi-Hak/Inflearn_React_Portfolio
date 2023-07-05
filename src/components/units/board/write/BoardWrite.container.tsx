@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ChangeEvent } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
@@ -25,6 +25,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -39,6 +40,12 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     Pick<IMutation, "updateBoard">,
     IMutationUpdateBoardArgs
   >(UPDATE_BOARD);
+
+  useEffect(() => {
+    const images = props.data?.fetchBoard.images;
+    if (images === undefined || images === null) return;
+    setFileUrls([...images]);
+  }, [props.data]);
 
   // ? 작성자 변경 onChange 함수
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -145,6 +152,13 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
     setIsOpen((prev) => !prev);
   };
 
+  // ? 사진 첨부 함수
+  const onChangeFileUrls = (fileUrl: string, index: number): void => {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
+  };
+
   // ? 게시글 등록 버튼 onClick 함수
   const onClickSubmit = async (): Promise<void> => {
     if (writer === "") {
@@ -175,6 +189,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
                 address,
                 addressDetail,
               },
+              images: fileUrls,
             },
           },
         });
@@ -221,6 +236,7 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       if (addressDetail !== "")
         updateBoardInput.boardAddress.addressDetail = addressDetail;
     }
+    updateBoardInput.images = fileUrls;
 
     try {
       if (typeof router.query.boardId !== "string") {
@@ -263,12 +279,14 @@ export default function BoardWrite(props: IBoardWriteProps): JSX.Element {
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
       onClickAddressToggle={onClickAddressToggle}
+      onChangeFileUrls={onChangeFileUrls}
       isActive={isActive}
       isEdit={props.isEdit}
       data={props.data}
       zipcode={zipcode}
       address={address}
       isOpen={isOpen}
+      fileUrls={fileUrls}
     />
   );
 }

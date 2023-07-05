@@ -2,6 +2,7 @@ import * as S from "./BoardDetail.styles";
 import { getDate } from "../../../../commons/libraries/utils";
 import type { IBoardDetailUIProps } from "./BoardDetail.types";
 import { Tooltip } from "antd";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardDetailUI(props: IBoardDetailUIProps): JSX.Element {
   return (
@@ -40,6 +41,16 @@ export default function BoardDetailUI(props: IBoardDetailUIProps): JSX.Element {
               />
             </S.YoutubeWrapper>
           )}
+          <S.UploadImageWrapper>
+            {props.data?.fetchBoard?.images
+              ?.filter((el) => el)
+              .map((el) => (
+                <S.UploadImage
+                  key={uuidv4()}
+                  src={`https://storage.googleapis.com/${el}`}
+                />
+              ))}
+          </S.UploadImageWrapper>
         </S.Body>
       </S.CardWrapper>
       <S.BottomWrapper>

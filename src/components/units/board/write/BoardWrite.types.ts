@@ -18,6 +18,7 @@ export interface IBoardWriteUIProps {
   onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   onChangeYoutubeUrl: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFileUrls: (fileUrl: string, index: number) => void;
   onClickAddressSearch: () => void;
   onClickAddressToggle: () => void;
   onCompleteAddressSearch: (data: Address) => void;
@@ -29,6 +30,7 @@ export interface IBoardWriteUIProps {
   isActive: boolean;
   isEdit: boolean;
   data?: Pick<IQuery, "fetchBoard">;
+  fileUrls: string[];
 }
 
 export interface ISubmitButtonProps {

@@ -1,5 +1,7 @@
 import type { IBoardWriteUIProps } from "./BoardWrite.types";
 import * as S from "./BoardWrite.styles";
+import { v4 as uuidv4 } from "uuid";
+import UploadsImg from "../../../commons/uploads/img01/UploadsImg01.container";
 export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
   return (
     <>
@@ -96,9 +98,16 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
         </S.InputWrapper>
         <S.ImageWrapper>
           <S.Label>사진첨부</S.Label>
-          <S.UploadButton>+</S.UploadButton>
-          <S.UploadButton>+</S.UploadButton>
-          <S.UploadButton>+</S.UploadButton>
+          <S.UploadImgWrapper>
+            {props.fileUrls.map((el, index) => (
+              <UploadsImg
+                key={uuidv4()}
+                index={index}
+                fileUrl={el}
+                onChangeFileUrls={props.onChangeFileUrls}
+              />
+            ))}
+          </S.UploadImgWrapper>
         </S.ImageWrapper>
         <S.OptionWrapper>
           <S.Label>메인설정</S.Label>

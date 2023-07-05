@@ -12,9 +12,11 @@ export default function FirebaseWriterUI(
           <S.InputTypeSpan>작성자:</S.InputTypeSpan>
         </S.FlexInputLabel>
         <S.FlexInput
+          type="text"
           ref={props.writerInputRef}
           id="writer_input"
           onChange={props.onChangeWriter}
+          defaultValue={props.isEdit ? props.firebaseEditBoard?.writer : ""}
         />
       </S.FelxInputWrapper>
       <S.FelxInputWrapper>
@@ -26,6 +28,7 @@ export default function FirebaseWriterUI(
           ref={props.titleInputRef}
           id="title_input"
           onChange={props.onChangeTitle}
+          defaultValue={props.isEdit ? props.firebaseEditBoard?.title : ""}
         />
       </S.FelxInputWrapper>
       <S.FelxInputWrapper>
@@ -33,11 +36,19 @@ export default function FirebaseWriterUI(
           <S.ContentsIcon />
           <S.InputTypeSpan>본문:</S.InputTypeSpan>
         </S.FlexInputLabel>
-        <S.FlexInput id="contents_input" onChange={props.onChangeContents} />
+        <S.FlexInput
+          ref={props.contentsInputRef}
+          id="contents_input"
+          onChange={props.onChangeContents}
+          defaultValue={props.isEdit ? props.firebaseEditBoard?.contents : ""}
+        />
       </S.FelxInputWrapper>
       <S.ButtonWrapper>
-        <S.SubmitButton onClick={props.onClickSubmit} type="primary">
-          게시물 등록
+        <S.SubmitButton
+          onClick={props.isEdit ? props.onClickEdit : props.onClickSubmit}
+          type="primary"
+        >
+          {props.isEdit ? "게시물 수정" : "게시물 등록"}
         </S.SubmitButton>
         <S.CancelButton onClick={props.onClickCancel} type="primary" danger>
           취소

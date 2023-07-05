@@ -1,10 +1,22 @@
-import { addDoc, collection, getFirestore } from "firebase/firestore/lite";
+import {
+  addDoc,
+  collection,
+  doc,
+  getFirestore,
+  updateDoc,
+} from "firebase/firestore/lite";
 import { useRouter } from "next/router";
 import { firebaseApp } from "../../../../commons/libraries/firebase";
 import { useState, type ChangeEvent, useRef } from "react";
-import FirebaseWriterUI from "./FirebaseWriter.presenter";
+import { v4 as uuid } from "uuid";
 
-export default function FirebaseWriterPage(): JSX.Element {
+import FirebaseWriterUI from "./FirebaseWriter.presenter";
+import { getDateHour } from "../../../../commons/libraries/utils";
+import type { FirebaseWriterPageProps } from "./FirebaseWriter.types";
+
+export default function FirebaseWriterPage(
+  props: FirebaseWriterPageProps
+): JSX.Element {
   const writerInputRef = useRef<any>(null);
   const titleInputRef = useRef<any>(null);
   const contentsInputRef = useRef<any>(null);
@@ -14,6 +26,7 @@ export default function FirebaseWriterPage(): JSX.Element {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
 
+  // ? 게시물 등록 함수
   const onClickSubmit = async (): Promise<void> => {
     console.log(writer === undefined, title === undefined, contents === "");
     if (writer === "") {
@@ -31,11 +44,18 @@ export default function FirebaseWriterPage(): JSX.Element {
       contentsInputRef.current.focus();
       return;
     }
+    const uuidv4 = uuid();
     const firebaseBoard = collection(
       getFirestore(firebaseApp),
       "firebaseBoard"
     );
-    await addDoc(firebaseBoard, { writer, title, contents })
+    await addDoc(firebaseBoard, {
+      uuidv4,
+      writer,
+      title,
+      contents,
+      timestamp: getDateHour(),
+    })
       .then(() => {
         alert("게시물 등록 성공");
         void router.push("/firebasePage");
@@ -43,6 +63,17 @@ export default function FirebaseWriterPage(): JSX.Element {
       .catch((err) => {
         alert(err);
       });
+  };
+
+  const onClickEdit = async (): Promise<void> => {
+    console.log(String(router.query.firebaseId));
+    const firebaseBoard = getFirestore(firebaseApp);
+    const docRef = doc(
+      firebaseBoard,
+      "firebaseBoad",
+      String(router.query.firebaseBoardId)
+    );
+    await updateDoc(docRef, { writer: "병아리" });
   };
 
   const onClickCancel = (): void => {
@@ -61,6 +92,9 @@ export default function FirebaseWriterPage(): JSX.Element {
 
   return (
     <FirebaseWriterUI
+      onClickEdit={onClickEdit}
+      firebaseEditBoard={props.firebaseEditBoard}
+      isEdit={props.isEdit}
       onClickSubmit={onClickSubmit}
       onClickCancel={onClickCancel}
       onChangeWriter={onChangeWriter}

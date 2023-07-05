@@ -1,6 +1,5 @@
 import type { FirebaseListUIProps } from "./FirebaseList.types";
 import * as S from "./FirebaseList.styles";
-import { v4 as uuidv4 } from "uuid";
 
 export default function FirebaseListUI(
   props: FirebaseListUIProps
@@ -14,7 +13,11 @@ export default function FirebaseListUI(
         <S.TableColumnHeaderBasic>작성자</S.TableColumnHeaderBasic>
       </S.TableRow>
       {props.dataBoards?.map((el: any, index: number) => (
-        <S.TableRow key={uuidv4()}>
+        <S.TableRow
+          key={index + 1}
+          id={props.dataBoardsId[index]}
+          onClick={props.onClickMoveToBoardDetail}
+        >
           <S.TableColumnBasic>{index + 1}</S.TableColumnBasic>
           <S.TableColumnBasic>{el.title}</S.TableColumnBasic>
           <S.TableColumnContents>{el.contents}</S.TableColumnContents>
