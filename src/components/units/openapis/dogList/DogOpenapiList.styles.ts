@@ -11,7 +11,7 @@ export const DogImg = styled.img`
 export const DogImgBr = styled.br`
   display: none;
 
-  &:nth-child(3n) {
+  &:nth-of-type(3n) {
     display: block;
   }
 `;

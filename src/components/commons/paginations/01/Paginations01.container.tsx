@@ -6,12 +6,11 @@ export default function Paginations01(props: IPaginations01Props): JSX.Element {
   const [startPage, setStartPage] = useState(1);
   const [activePage, setActivePage] = useState(1);
   // ? 게시글 마지막 페이지
-  const lastPage = Math.ceil(props.count ?? 10 / 10);
+  const lastPage = Math.ceil((props.count ?? 10) / 10);
 
   // ? 페이지 클릭 함수
   const onClickPage = (event: MouseEvent<HTMLSpanElement>): void => {
     const activePage = Number(event.currentTarget.id);
-    console.log(activePage);
     setActivePage(activePage);
     void props.refetch({ page: activePage });
   };

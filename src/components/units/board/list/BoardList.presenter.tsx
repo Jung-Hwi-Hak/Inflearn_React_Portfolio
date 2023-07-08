@@ -3,11 +3,18 @@ import Paginations01 from "../../../commons/paginations/01/Paginations01.contain
 import SearchBar01 from "../../../commons/searchBars/searchBar01/SearchBar01.container";
 import * as S from "./BoardList.styles";
 import type { IBoardListUIProps } from "./BoardList.types";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardListUI(props: IBoardListUIProps): JSX.Element {
+  const SECRET = "@#$%";
   return (
     <S.Wrapper>
-      <SearchBar01 />
+      <SearchBar01
+        refetch={props.refetch}
+        keyword={props.keyword}
+        refetchBoardsCount={props.refetchBoardsCount}
+        onChangeKeyword={props.onChangeKeyword}
+      />
       <S.TableTop />
       <S.HeaderRow>
         <S.ColumnHeaderBasic>ID</S.ColumnHeaderBasic>
@@ -21,7 +28,14 @@ export default function BoardListUI(props: IBoardListUIProps): JSX.Element {
             {String(el._id).slice(-4).toUpperCase()}
           </S.ColumnBasic>
           <S.ColumnTitle id={el._id} onClick={props.onClickMoveToBoardDetail}>
-            {el.title}
+            {el.title
+              .replaceAll(props.keyword, `${SECRET}${props.keyword}${SECRET}`)
+              .split(SECRET)
+              .map((el) => (
+                <S.SearchKeyword key={uuidv4()} isMatch={el === props.keyword}>
+                  {el}
+                </S.SearchKeyword>
+              ))}
           </S.ColumnTitle>
           <S.ColumnBasic>{el.writer}</S.ColumnBasic>
           <S.ColumnBasic>{getDate(el.createdAt)}</S.ColumnBasic>

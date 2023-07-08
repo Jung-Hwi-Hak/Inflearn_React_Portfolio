@@ -23,9 +23,21 @@ const BackgroundImage = styled.div`
   animation: grain 0.5s steps(1) infinite;
 `;
 
+const BackgroundInk = styled.div<{ top: string; left: string }>((props) => ({
+  position: "absolute",
+  opacity: "0.2",
+  width: "500px",
+  height: "500px",
+  top: props.top,
+  left: props.left,
+  background: 'url("/images/background/ink.png") no-repeat',
+}));
+
 export default function Layout(props: ILayout): JSX.Element {
   return (
     <>
+      <BackgroundInk top={"5px"} left={"30px"} />
+      <BackgroundInk top={"200px"} left={"90%"} />
       <BackgroundImage />
       <LayoutHeader />
       <LayoutBanner />
