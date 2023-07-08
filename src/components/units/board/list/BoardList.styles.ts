@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ITextTokenProps } from "./BoardList.types";
+import type { ITextTokenProps } from "./BoardList.types";
 
 export const Wrapper = styled.div`
   width: 1200px;
