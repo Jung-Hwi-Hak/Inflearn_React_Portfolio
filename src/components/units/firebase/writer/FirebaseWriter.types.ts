@@ -2,7 +2,7 @@ import type { DocumentData } from "firebase/firestore/lite";
 import type { ChangeEvent, MutableRefObject } from "react";
 
 export interface FirebaseWriterUIProps {
-  onClickEdit?: () => Promise<void>;
+  onClickEdit?: () => void;
   firebaseEditBoard?: DocumentData;
   isEdit: boolean;
   onClickSubmit: () => Promise<void>;

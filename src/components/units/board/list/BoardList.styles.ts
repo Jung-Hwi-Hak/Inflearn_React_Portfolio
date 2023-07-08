@@ -13,6 +13,13 @@ export const TableTop = styled.div`
 export const TableBottom = styled.div`
   border-bottom: 2px solid gray;
 `;
+export const HeaderRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 52px;
+  line-height: 52px;
+  border-bottom: 1px solid gray;
+`;
 
 export const Row = styled.div`
   display: flex;
@@ -22,7 +29,7 @@ export const Row = styled.div`
   border-bottom: 1px solid gray;
 
   :hover {
-    color: blue;
+    color: tomato;
   }
 `;
 
@@ -45,10 +52,6 @@ export const ColumnTitle = styled.div`
   width: 70%;
   text-align: center;
   cursor: pointer;
-
-  :hover {
-    color: blue;
-  }
 `;
 
 export const Footer = styled.div`

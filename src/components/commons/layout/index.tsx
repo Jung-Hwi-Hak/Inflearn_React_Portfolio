@@ -8,15 +8,25 @@ interface ILayout {
 }
 
 const Body = styled.div`
-  height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
+const BackgroundImage = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 110%;
+  height: 100%;
+  background-image: url("/images/background/noise.png");
+  animation: grain 0.5s steps(1) infinite;
+`;
+
 export default function Layout(props: ILayout): JSX.Element {
   return (
     <>
+      <BackgroundImage />
       <LayoutHeader />
       <LayoutBanner />
       <LayoutNavigation />

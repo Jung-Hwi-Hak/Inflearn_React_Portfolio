@@ -6,22 +6,23 @@ export default function LayoutNavigationUI(
   props: ILayoutNavigationUIProps
 ): JSX.Element {
   const NAVIGATION_MENUS = [
-    { name: "파이어베이스", page: "/firebasePage" },
-    { name: "라이브강아지", page: "/dogPage" },
-    { name: "라이브게시판", page: "/boards" },
-    { name: "동물사진", page: "/patpicture" },
-    { name: "마이페이지", page: "/mypages" },
+    { name: "Firebase Boards", page: "/firebasePage" },
+    { name: "Public APIs", page: "/publicApis" },
+    { name: "Graphql Boards", page: "/boards" },
+    { name: "My Page", page: "/mypages" },
   ];
 
   return (
-    <S.Wrapper>
-      {NAVIGATION_MENUS.map((el) => (
-        <Fragment key={el.page}>
-          <S.MenuItem id={el.page} onClick={props.onClickMoveToMenu}>
-            {el.name}
-          </S.MenuItem>
-        </Fragment>
-      ))}
-    </S.Wrapper>
+    <>
+      <S.Wrapper>
+        {NAVIGATION_MENUS.map((el) => (
+          <Fragment key={el.page}>
+            <S.MenuItem id={el.page} onClick={props.onClickMoveToMenu}>
+              {el.name}
+            </S.MenuItem>
+          </Fragment>
+        ))}
+      </S.Wrapper>
+    </>
   );
 }

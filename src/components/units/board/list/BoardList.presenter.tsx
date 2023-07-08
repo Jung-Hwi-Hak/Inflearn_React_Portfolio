@@ -1,18 +1,20 @@
 import { getDate } from "../../../../commons/libraries/utils";
 import Paginations01 from "../../../commons/paginations/01/Paginations01.container";
+import SearchBar01 from "../../../commons/searchBars/searchBar01/SearchBar01.container";
 import * as S from "./BoardList.styles";
 import type { IBoardListUIProps } from "./BoardList.types";
 
 export default function BoardListUI(props: IBoardListUIProps): JSX.Element {
   return (
     <S.Wrapper>
+      <SearchBar01 />
       <S.TableTop />
-      <S.Row>
+      <S.HeaderRow>
         <S.ColumnHeaderBasic>ID</S.ColumnHeaderBasic>
         <S.ColumnHeaderTitle>제목</S.ColumnHeaderTitle>
         <S.ColumnHeaderBasic>작성자</S.ColumnHeaderBasic>
         <S.ColumnHeaderBasic>날짜</S.ColumnHeaderBasic>
-      </S.Row>
+      </S.HeaderRow>
       {props.data?.fetchBoards.map((el) => (
         <S.Row key={el._id}>
           <S.ColumnBasic>

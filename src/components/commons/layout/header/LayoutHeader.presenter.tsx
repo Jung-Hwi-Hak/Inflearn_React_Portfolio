@@ -7,12 +7,14 @@ export default function LayoutHeaderUI(
   return (
     <S.Wrapper>
       <S.InnerWrapper>
-        <S.InnerLogo onClick={props.onClickLogo} src="/images/logo.png" />
+        <S.LogoWrapper onClick={props.onClickLogo}>I CAN</S.LogoWrapper>
         <div>
-          <S.InnerButton onClick={props.onClickMoveToLogin} type="primary">
-            로그인
-          </S.InnerButton>
-          <S.InnerButton>회원가입</S.InnerButton>
+          <S.HeaderButtonLogin onClick={props.onClickMoveToLogin}>
+            {"<"} 로그인 {"/>"}
+          </S.HeaderButtonLogin>
+          <S.HeaderButtonSignUp>
+            {"<"} 회원가입 {"/>"}
+          </S.HeaderButtonSignUp>
         </div>
       </S.InnerWrapper>
     </S.Wrapper>

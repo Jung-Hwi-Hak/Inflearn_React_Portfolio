@@ -5,6 +5,7 @@ import {
   getFirestore,
   updateDoc,
 } from "firebase/firestore/lite";
+// import {getFirestore, doc, updateDoc} from "firebase/firestore"
 import { useRouter } from "next/router";
 import { firebaseApp } from "../../../../commons/libraries/firebase";
 import { useState, type ChangeEvent, useRef } from "react";
@@ -65,15 +66,36 @@ export default function FirebaseWriterPage(
       });
   };
 
-  const onClickEdit = async (): Promise<void> => {
+  const onClickEdit = (): void => {
     console.log(String(router.query.firebaseId));
-    const firebaseBoard = getFirestore(firebaseApp);
-    const docRef = doc(
-      firebaseBoard,
-      "firebaseBoad",
-      String(router.query.firebaseBoardId)
+    // const firebaseBoard = getFirestore(firebaseApp);
+    const firebaseBoard = collection(
+      getFirestore(firebaseApp),
+      "firebaseBoard"
     );
-    await updateDoc(docRef, { writer: "병아리" });
+    const docRef = doc(firebaseBoard, String(router.query.firebaseId));
+    // const data: dataInterfase = {};
+    type dataType = {
+      writer?: string;
+      contents?: string;
+      title?: string;
+      timestamp?: string;
+    };
+    const data: dataType = {};
+
+    if (writer !== "") data.writer = writer;
+    if (contents !== "") data.contents = contents;
+    if (title !== "") data.title = title;
+    data.timestamp = getDateHour();
+
+    updateDoc(docRef, data)
+      .then((docRef) => {
+        void router.push(`/firebasePage/${String(router.query.firebaseId)}`);
+        console.log("Value of an Existing Document Field has been updated");
+      })
+      .catch((error) => {
+        console.log(error, "asd");
+      });
   };
 
   const onClickCancel = (): void => {
