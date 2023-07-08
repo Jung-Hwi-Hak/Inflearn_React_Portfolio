@@ -74,7 +74,7 @@ export default function FirebaseWriterPage(
       "firebaseBoard"
     );
     const docRef = doc(firebaseBoard, String(router.query.firebaseId));
-    // const data: dataInterfase = {};
+    // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
     type dataType = {
       writer?: string;
       contents?: string;
