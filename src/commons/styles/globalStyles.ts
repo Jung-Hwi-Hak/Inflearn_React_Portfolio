@@ -13,8 +13,6 @@ export const globalStyles = css`
     position: relative;
     width: 100%;
     height: 100%;
-    overflow-x: hidden;
-    z-index: 9;
   }
   @font-face {
     font-family: "myFont";

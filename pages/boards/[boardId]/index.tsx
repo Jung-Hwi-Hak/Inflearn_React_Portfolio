@@ -1,13 +1,44 @@
-import BoardDetail from "../../../src/components/units/board/detail/BoardDetail.container";
-import BoardCommentList from "../../../src/components/units/boardComment/list/BoardCommentList.container";
-import BoardCommentWrite from "../../../src/components/units/boardComment/write/BoardCommentWrite.container";
+import InfiniteScroll from "react-infinite-scroller";
+import CommentsBoardView from "../../../src/components/commons/comments/board/view/CommentsBoardView.index";
+import CommonetsBoardWrite from "../../../src/components/commons/comments/board/wirte/CommentsBoardWrite.index";
+import BoardDetail from "../../../src/components/units/board/detail/BoardDetail.index";
+import { useQueryIdChecker } from "../../../src/components/commons/hooks/customs/useQueryIdChecker";
+import { useQueryFetchBoardComments } from "../../../src/components/commons/hooks/queries/useQueryFetchBoardComments";
 
 export default function BoardDetailPage(): JSX.Element {
+  const { id } = useQueryIdChecker("boardId");
+  const { data, fetchMore } = useQueryFetchBoardComments({ boardId: id });
+
+  const onLoadMore = () => {
+    console.log("Teatas");
+    if (!data) return;
+
+    void fetchMore({
+      variables: {
+        page: Math.ceil(data?.fetchBoardComments.length / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult?.fetchBoardComments)
+          return { fetchBoardComments: [...prev.fetchBoardComments] };
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        };
+      },
+    });
+  };
+
   return (
     <>
       <BoardDetail />
-      <BoardCommentWrite />
-      <BoardCommentList />
+      <CommonetsBoardWrite />
+      <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
+        {data?.fetchBoardComments.map((el) => (
+          <CommentsBoardView key={el._id} el={el} />
+        )) ?? <></>}
+      </InfiniteScroll>
     </>
   );
 }
