@@ -4,6 +4,8 @@ export interface UploadImg01Props {
   index: number;
   fileUrl: string;
   onChangeFileUrls: (fileUrl: string, index: number) => void;
+  register: any;
+  watch: any;
 }
 
 export interface UploadImg01UIProps {

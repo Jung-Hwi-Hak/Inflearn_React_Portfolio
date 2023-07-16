@@ -1,19 +1,25 @@
 import type { ChangeEvent } from "react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useMutationCreateBoardComment } from "../mutations/useMutationCreateBoardComment";
 import { FETCH_BOARD_COMMENTS } from "../queries/useQueryFetchBoardComments";
 import { useMutationUpdateBoardComment } from "../mutations/useMutationUpdateBoardComment";
 import { useMutationDeleteBoardComment } from "../mutations/useMutationDeleteBoardComment";
-import { Modal } from "antd";
+import { Form, Modal } from "antd";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { yupSchema } from "../../comments/board/wirte/CommentsBoardWrite.validation";
+import type { IBoardComment } from "../../../../commons/types/generated/types";
+import { useForm } from "react-hook-form";
 
 interface IUpdateBoardCommentInput {
   contents?: string;
+  rating?: number;
 }
 
 interface IUseBoardComment {
   boardId: string;
   boardCommentId?: string;
   onToggleEdit?: () => void;
+  el?: IBoardComment | undefined;
 }
 
 export const useBoardComment = (args: IUseBoardComment) => {
@@ -21,6 +27,22 @@ export const useBoardComment = (args: IUseBoardComment) => {
   const [createBoardComment] = useMutationCreateBoardComment();
   const [updateBoardComment] = useMutationUpdateBoardComment();
   const [deleteBoardComment] = useMutationDeleteBoardComment();
+  const starRef = useRef<HTMLInputElement>(null);
+  const [form] = Form.useForm();
+  const { register, handleSubmit, watch, reset, setValue } = useForm({
+    resolver: yupResolver(yupSchema),
+    mode: "onChange",
+    defaultValues: {
+      writer: args.el?.writer ?? "",
+      password: "",
+      contents: args.el?.contents ?? "",
+      star: 0,
+    },
+  });
+
+  const onChangeStar = (value: number) => {
+    setValue("star", value);
+  };
 
   const onChangeDeletePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setMyPassword(event?.target.value);
@@ -59,7 +81,7 @@ export const useBoardComment = (args: IUseBoardComment) => {
     try {
       const updateBoardCommentInput: IUpdateBoardCommentInput = {};
       if (data.contents) updateBoardCommentInput.contents = data.contents;
-
+      if (data.star) updateBoardCommentInput.rating = data.star;
       if (!args.boardCommentId) return;
 
       await updateBoardComment({
@@ -81,7 +103,7 @@ export const useBoardComment = (args: IUseBoardComment) => {
     }
   };
 
-  const onClickWrite = (reset: any) => async (data: any) => {
+  const onClickWrite = async (data: any) => {
     try {
       await createBoardComment({
         variables: {
@@ -101,6 +123,7 @@ export const useBoardComment = (args: IUseBoardComment) => {
         ],
       });
       reset();
+      form.resetFields();
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -111,5 +134,10 @@ export const useBoardComment = (args: IUseBoardComment) => {
     onClickUpdate,
     onChangeDeletePassword,
     onClickDelete,
+    onChangeStar,
+    register,
+    handleSubmit,
+    watch,
+    starRef,
   };
 };

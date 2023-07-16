@@ -11,53 +11,54 @@ import type {
 import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-// import { boolean } from "yup";
-
-interface IDatas {
-  writer: string;
-  password: string;
-  title: string;
-  contents: string;
-  //   zipcode: string;
-  //   address: string;
-  //   addressDetail: "";
-  //   youtubeUrl: "";
-  //   images: ["", "", ""];
-}
+import { useQueryFetchBoard } from "../queries/useQueryFetchBoard";
 
 export const useBoardNew = () => {
   const router = useRouter();
+
   const [isOpen, toggleIsOpen] = useToggle();
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
   const [buttonState, setButtonState] = useState(false);
+
+  // ! 게시글 등록 api
   const [mutation] = useMutation<
     Pick<IMutation, "createBoard">,
     IMutationCreateBoardArgs
   >(CREATE_BOARD);
 
-  const { register, handleSubmit, formState, watch } = useForm({
+  const { register, handleSubmit, formState, watch, setValue } = useForm({
     resolver: yupResolver(boardWriteNewYupSchema),
     defaultValues: {
       writer: "",
       password: "",
-      title: "",
+      title: "123123",
       contents: "",
       zipcode: "",
       address: "",
       addressDetail: "",
       youtubeUrl: "",
-      images: ["", "", ""],
     },
   });
 
+  const { data } = useQueryFetchBoard();
   useEffect(() => {
-    console.log(watch);
-  }, [watch]);
+    console.log("useEffect");
+    setValue("writer", data?.fetchBoard.title ?? "");
+    setValue("title", data?.fetchBoard.title ?? "");
+    setValue("contents", data?.fetchBoard.title ?? "");
+  }, [data]);
 
-  //   const onCompleteAddressSearch = (data: IDatas): void => {
-  //     setValue("address", data.address);
-  //     setValue("zipcode", data.zonecode);
-  //     toggleIsOpen();
-  //   };
+  // ! 다음 주소 api
+  const onCompleteAddressSearch = (data: {
+    address: string | undefined;
+    zonecode: string | undefined;
+  }): void => {
+    setValue("address", data.address);
+    setValue("zipcode", data.zonecode);
+    toggleIsOpen();
+  };
+
+  // ! 필수 form 데이터 체크
   const onChangeFormItems = () => {
     const checkFormValues = watch([
       "writer",
@@ -73,7 +74,8 @@ export const useBoardNew = () => {
     }
   };
 
-  const onClickSubmit = async (data: IDatas) => {
+  // ! 등록 함수
+  const onClickSubmit = async (data: any): Promise<void> => {
     try {
       const result = await mutation({
         variables: {
@@ -82,6 +84,13 @@ export const useBoardNew = () => {
             password: data.password,
             title: data.title,
             contents: data.contents,
+            youtubeUrl: data.youtubeUrl,
+            boardAddress: {
+              zipcode: data.zipcode,
+              address: data.address,
+              addressDetail: data.addressDetail,
+            },
+            images: fileUrls,
           },
         },
       });
@@ -103,9 +112,12 @@ export const useBoardNew = () => {
     handleSubmit,
     formState,
     watch,
-    // onCompleteAddressSearch,
+    onCompleteAddressSearch,
     onClickSubmit,
     onChangeFormItems,
     buttonState,
+    setValue,
+    fileUrls,
+    setFileUrls,
   };
 };

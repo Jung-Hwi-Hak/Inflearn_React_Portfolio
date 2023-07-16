@@ -1,10 +1,7 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
 import type { IBoardComment } from "../../../../../commons/types/generated/types";
 import { useBoardComment } from "../../../hooks/customs/useBoardComment";
 import { useQueryIdChecker } from "../../../hooks/customs/useQueryIdChecker";
 import * as S from "./CommentsBoardWrite.styles";
-import { yupSchema } from "./CommentsBoardWrite.validation";
 
 interface ICommentsBoardWriteProps {
   isEdit?: boolean;
@@ -16,21 +13,19 @@ export default function CommonetsBoardWrite(
   props: ICommentsBoardWriteProps
 ): JSX.Element {
   const { id: boardId } = useQueryIdChecker("boardId");
-  const { onClickWrite, onClickUpdate } = useBoardComment({
+  const {
+    onClickWrite,
+    onClickUpdate,
+    onChangeStar,
+    register,
+    watch,
+    handleSubmit,
+    starRef,
+  } = useBoardComment({
     boardId,
     boardCommentId: props.el?._id,
     onToggleEdit: props.onToggleEdit,
-  });
-
-  const { register, handleSubmit, watch, reset } = useForm({
-    resolver: yupResolver(yupSchema),
-    mode: "onChange",
-    defaultValues: {
-      writer: props.el?.writer ?? "",
-      password: "",
-      contents: props.isEdit === true ? props.el?.contents : "",
-      star: 3,
-    },
+    el: props.el,
   });
 
   return (
@@ -52,7 +47,7 @@ export default function CommonetsBoardWrite(
           placeholder="비밀번호"
           {...register("password")}
         />
-        <S.Star />
+        <S.Star ref={starRef} onChange={onChangeStar} />
       </S.InputWrapper>
       <S.ContentWrapper>
         <S.Contents
@@ -65,7 +60,7 @@ export default function CommonetsBoardWrite(
           <S.ButtonFlex>
             <S.Button
               onClick={handleSubmit(
-                props.isEdit === true ? onClickUpdate : onClickWrite(reset)
+                props.isEdit === true ? onClickUpdate : onClickWrite
               )}
             >
               {props.isEdit === true ? "수정하기" : "등록하기"}

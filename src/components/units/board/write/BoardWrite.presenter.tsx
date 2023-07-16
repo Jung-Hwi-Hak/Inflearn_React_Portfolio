@@ -1,7 +1,7 @@
 import type { IBoardWriteUIProps } from "./BoardWrite.types";
 import * as S from "./BoardWrite.styles";
 import { v4 as uuidv4 } from "uuid";
-import UploadsImg from "../../../commons/uploads/img01/UploadsImg01.container";
+import UploadsImg from "../../../commons/uploads/img01/UploadsImg01.index";
 export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
   return (
     <>

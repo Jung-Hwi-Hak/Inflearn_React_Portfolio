@@ -1,34 +1,33 @@
 import type { IBoardWriteUIProps } from "./BoardWrite.types";
 import * as S from "./BoardWrite.styles";
-// import { v4 as uuidv4 } from "uuid";
-// import UploadsImg from "../../../commons/uploads/img01/UploadsImg01.container";
-// import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import UploadsImg from "../../../commons/uploads/img01/UploadsImg01.index";
 import { useBoardNew } from "../../../commons/hooks/customs/useBoardNew";
 export default function BoardWriteRepetoring(
   props: IBoardWriteUIProps
 ): JSX.Element {
-  // const [fileUrls, setFileUrls] = useState(["", "", ""]);
-
   const {
     formState,
     handleSubmit,
-    // isOpen,
+    isOpen,
     onClickSubmit,
-    // onCompleteAddressSearch,
+    onCompleteAddressSearch,
     register,
     onChangeFormItems,
     buttonState,
-    // toggleIsOpen,
-    // watch,
+    toggleIsOpen,
+    watch,
+    fileUrls,
+    setFileUrls,
   } = useBoardNew();
 
   return (
     <>
-      {/* {isOpen && (
+      {isOpen && (
         <S.AddressModal open={true} onOk={toggleIsOpen} onCancel={toggleIsOpen}>
           <S.AddressSearchInput onComplete={onCompleteAddressSearch} />
         </S.AddressModal>
-      )} */}
+      )}
       <S.Wrapper>
         <S.Title>{props.isEdit ? "게시글 수정" : "게시글 등록"}</S.Title>
         <S.WriterWrapper>
@@ -39,6 +38,8 @@ export default function BoardWriteRepetoring(
               {...register("writer", {
                 onChange: onChangeFormItems,
               })}
+              defaultValue={watch("writer")}
+              readOnly={props.isEdit}
             />
             <S.Error>{formState.errors.writer?.message}</S.Error>
           </S.InputWrapper>
@@ -55,6 +56,7 @@ export default function BoardWriteRepetoring(
         <S.InputWrapper>
           <S.Label>제목</S.Label>
           <S.Subject
+            type="text"
             placeholder="제목을 작성해주세요."
             {...register("title", { onChange: onChangeFormItems })}
           />
@@ -64,21 +66,19 @@ export default function BoardWriteRepetoring(
           <S.Label>내용</S.Label>
           <S.Contents
             placeholder="내용을 작성해주세요."
-            {...register("contents", { onChange: onChangeFormItems })}
+            // value={props.data?.fetchBoard.title}
+            defaultValue={props.data?.fetchBoard.contents}
+            {...register("contents")}
           />
           <S.Error>{formState.errors.contents?.message}</S.Error>
         </S.InputWrapper>
-        {/* <S.InputWrapper>
+        <S.InputWrapper>
           <S.Label>주소</S.Label>
           <S.ZipcodeWrapper>
             <S.Zipcode
               placeholder="07250"
               readOnly
-              value={
-                props.zipcode !== ""
-                  ? watch("zipcode")
-                  : props.data?.fetchBoard.boardAddress?.zipcode ?? ""
-              }
+              defaultValue={props.data?.fetchBoard.boardAddress?.zipcode ?? ""}
             />
             <S.SearchButton onClick={toggleIsOpen}>
               우편번호 검색
@@ -86,13 +86,14 @@ export default function BoardWriteRepetoring(
           </S.ZipcodeWrapper>
           <S.Address
             readOnly
-            value={
-              props.address !== ""
-                ? watch("address")
-                : props.data?.fetchBoard.boardAddress?.address ?? ""
+            defaultValue={props.data?.fetchBoard.boardAddress?.address ?? ""}
+          />
+          <S.Address
+            {...register("addressDetail")}
+            defaultValue={
+              props.data?.fetchBoard.boardAddress?.addressDetail ?? ""
             }
           />
-          <S.Address {...register("addressDetail")} />
         </S.InputWrapper>
         <S.InputWrapper>
           <S.Label>유튜브</S.Label>
@@ -108,12 +109,13 @@ export default function BoardWriteRepetoring(
               <UploadsImg
                 key={uuidv4()}
                 index={index}
+                fileUrls={fileUrls}
                 fileUrl={el}
-                onChangeFileUrls={props.onChangeFileUrls}
+                setFileUrls={setFileUrls}
               />
             ))}
           </S.UploadImgWrapper>
-        </S.ImageWrapper> */}
+        </S.ImageWrapper>
         <S.ButtonWrapper>
           <S.SubmitButton
             buttonState={buttonState}
