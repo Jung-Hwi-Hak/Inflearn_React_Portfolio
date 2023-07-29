@@ -21,10 +21,9 @@ export const useBoardNew = () => {
   const [buttonState, setButtonState] = useState(false);
 
   // ! 게시글 등록 api
-  const [mutation] = useMutation<
-    Pick<IMutation, "createBoard">,
-    IMutationCreateBoardArgs
-  >(CREATE_BOARD);
+  const [mutation] = useMutation<Pick<IMutation, "createBoard">, IMutationCreateBoardArgs>(
+    CREATE_BOARD
+  );
 
   const { register, handleSubmit, formState, watch, setValue } = useForm({
     resolver: yupResolver(boardWriteNewYupSchema),
@@ -42,7 +41,6 @@ export const useBoardNew = () => {
 
   const { data } = useQueryFetchBoard();
   useEffect(() => {
-    console.log("useEffect");
     setValue("writer", data?.fetchBoard.title ?? "");
     setValue("title", data?.fetchBoard.title ?? "");
     setValue("contents", data?.fetchBoard.title ?? "");
@@ -60,12 +58,9 @@ export const useBoardNew = () => {
 
   // ! 필수 form 데이터 체크
   const onChangeFormItems = () => {
-    const checkFormValues = watch([
-      "writer",
-      "title",
-      "contents",
-      "password",
-    ]).filter((el) => el !== "").length;
+    const checkFormValues = watch(["writer", "title", "contents", "password"]).filter(
+      (el) => el !== ""
+    ).length;
 
     if (checkFormValues === 4) {
       setButtonState(true);

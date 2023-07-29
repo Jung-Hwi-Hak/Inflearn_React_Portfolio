@@ -7,11 +7,10 @@ import { v4 as uuidv4 } from "uuid";
 import type { LayoutBannerUIProps } from "./LayoutBanner.types";
 import { useMoveToPage } from "../../hooks/customs/useMoveToPage";
 
-export default function LayoutBannerUI(
-  props: LayoutBannerUIProps
-): JSX.Element {
+export default function LayoutBannerUI(props: LayoutBannerUIProps): JSX.Element {
   const [drag, setDrag] = useState(false);
   const { onClickMoveToPageToggle } = useMoveToPage();
+  // const { onClickMoveToPageToggle } = useMemo(() => useMoveToPage(), []);
   const handleBeforeChange = (): void => {
     setDrag(true);
   };
@@ -31,18 +30,16 @@ export default function LayoutBannerUI(
     beforeChange: handleBeforeChange,
   };
   const bannerItems = [
-    ["Firebase", "/firebasePage"],
-    ["Public APIs", "/publicApis"],
-    ["Graphql", "/boards"],
+    // ["Firebase", "/firebasePage"],
+    // ["Public APIs", "/publicApis"],
+    ["자유게시판", "/boards"],
+    ["내 정보", "/mypage"],
   ];
   return (
     <Wrapper>
       <Slider {...settings} slide="">
         {bannerItems.map((el) => (
-          <BannerWrapper
-            key={uuidv4()}
-            onClick={onClickMoveToPageToggle(el[1], drag)}
-          >
+          <BannerWrapper key={uuidv4()} onClick={onClickMoveToPageToggle(el[1], drag)}>
             <BannerDiv>{`< ${el[0]} />`}</BannerDiv>
           </BannerWrapper>
         ))}

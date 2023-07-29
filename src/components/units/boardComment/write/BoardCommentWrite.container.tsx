@@ -2,10 +2,7 @@ import { useState } from "react";
 import type { ChangeEvent } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import {
-  CREATE_BOARD_COMMENT,
-  UPDATE_BOARD_COMMENT,
-} from "./BoardCommentWrite.queries";
+import { CREATE_BOARD_COMMENT, UPDATE_BOARD_COMMENT } from "./BoardCommentWrite.queries";
 import type {
   IMutation,
   IMutationCreateBoardCommentArgs,
@@ -16,9 +13,7 @@ import { FETCH_BOARD_COMMENTS } from "../list/BoardCommentList.queries";
 import BoardCommentWriteUI from "./BoardCommentWrite.presenter";
 import type { IBoardCommentWriteProps } from "./BoardCommentWrite.types";
 
-export default function BoardCommentWrite(
-  props: IBoardCommentWriteProps
-): JSX.Element {
+export default function BoardCommentWrite(props: IBoardCommentWriteProps): JSX.Element {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
@@ -47,7 +42,6 @@ export default function BoardCommentWrite(
 
   // Contents STATE 함수
   const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>): void => {
-    console.log(event.target.value);
     setContents(event.target.value);
   };
 

@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Button } from "antd";
+import { CaretDownOutlined } from "@ant-design/icons";
 
 export const Wrapper = styled.div`
   height: 152px;
@@ -34,7 +35,7 @@ export const HeaderButtonLogin = styled.button`
   font-size: 16px;
   font-weight: bold;
   border: none;
-
+  margin-right: 10px;
   cursor: pointer;
   :hover {
     animation: color 0.3s linear;
@@ -73,3 +74,15 @@ export const HeaderButtonSignUp = styled.button`
     }
   }
 `;
+
+export const userProfileWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const userProfileImg = styled.img`
+  margin-right: 5px;
+  max-width: 35px;
+`;
+
+export const userProfileIcon = styled(CaretDownOutlined)``;

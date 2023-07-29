@@ -13,7 +13,6 @@ export const SearchText = styled.span`
 `;
 
 export const SearchInput = styled.input`
-  font-size: 14px;
   width: 40%;
   border: none;
   border-bottom: 2px solid gray;

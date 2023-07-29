@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import LayoutBanner from "./banner/LayoutBanner.container";
 import LayoutHeader from "./header/LayoutHeader.index";
 import LayoutNavigation from "./navigation/LayoutNavigation.index";
+import { memo } from "react";
 
 interface ILayout {
   children: JSX.Element;
@@ -35,7 +36,8 @@ const BackgroundInk = styled.div<{ top: string; left: string }>((props) => ({
   background: 'url("/images/background/ink.png") no-repeat',
 }));
 
-export default function Layout(props: ILayout): JSX.Element {
+function Layout(props: ILayout): JSX.Element {
+  console.log("레이아웃 인덱스");
   return (
     <>
       <BackgroundInk top={"5px"} left={"30px"} />
@@ -48,3 +50,4 @@ export default function Layout(props: ILayout): JSX.Element {
     </>
   );
 }
+export default memo(Layout);

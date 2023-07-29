@@ -12,11 +12,7 @@ export default function FirebaseDetailPage(): JSX.Element {
   useEffect(() => {
     const fetchFirebaseDetailBoard = async (): Promise<void> => {
       const db = getFirestore(firebaseApp);
-      const docRef = doc(
-        db,
-        "firebaseBoard",
-        router.asPath.split("/").reverse()[0]
-      );
+      const docRef = doc(db, "firebaseBoard", router.asPath.split("/").reverse()[0]);
 
       const docSnap = await getDoc(docRef);
       setDetailBoard(docSnap.data());
@@ -30,7 +26,6 @@ export default function FirebaseDetailPage(): JSX.Element {
 
   const onClickEditPage = (): void => {
     if (typeof router.query.firebaseId !== "string") return;
-    console.log(router.query.firebaseId);
     void router.push(`/firebasePage/${router.query.firebaseId}/edit`);
   };
 

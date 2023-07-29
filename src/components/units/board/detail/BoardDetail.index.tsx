@@ -24,16 +24,14 @@ export default function BoardDetail(): JSX.Element {
 
   const { data } = useQueryFetchBoard();
   const { onClickMoveToPage } = useMoveToPage();
+  // const { onClickMoveToPage } = useMemo(() => useMoveToPage(), []);
 
   return (
     <>
       <CardWrapper>
         <BoardDetailHeader data={data} />
         <BoardDetailBody data={data} />
-        <BoardDetailFooter
-          onClickMoveToPage={onClickMoveToPage}
-          router={router}
-        />
+        <BoardDetailFooter onClickMoveToPage={onClickMoveToPage} router={router} />
       </CardWrapper>
     </>
   );

@@ -10,7 +10,6 @@ export default function BoardDetailPage(): JSX.Element {
   const { data, fetchMore } = useQueryFetchBoardComments({ boardId: id });
 
   const onLoadMore = () => {
-    console.log("Teatas");
     if (!data) return;
 
     void fetchMore({
@@ -21,10 +20,7 @@ export default function BoardDetailPage(): JSX.Element {
         if (!fetchMoreResult?.fetchBoardComments)
           return { fetchBoardComments: [...prev.fetchBoardComments] };
         return {
-          fetchBoardComments: [
-            ...prev.fetchBoardComments,
-            ...fetchMoreResult.fetchBoardComments,
-          ],
+          fetchBoardComments: [...prev.fetchBoardComments, ...fetchMoreResult.fetchBoardComments],
         };
       },
     });
@@ -35,10 +31,10 @@ export default function BoardDetailPage(): JSX.Element {
       <BoardDetail />
       <CommonetsBoardWrite />
       <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
-        {data?.fetchBoardComments.map((el) => (
-          <CommentsBoardView key={el._id} el={el} />
-        )) ?? <></>}
+        {data?.fetchBoardComments.map((el) => <CommentsBoardView key={el._id} el={el} />) ?? <></>}
       </InfiniteScroll>
     </>
   );
 }
+
+// export default memo(BoardDetailPage);

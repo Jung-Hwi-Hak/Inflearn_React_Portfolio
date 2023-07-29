@@ -5,9 +5,7 @@ import type { IQuery } from "../../../../commons/types/generated/types";
 
 interface IUsePaginationArgs {
   count: number | undefined;
-  refetch: (
-    variables?: Partial<any> | undefined
-  ) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
+  refetch: (variables?: Partial<any> | undefined) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
 }
 
 export const usePagination = (args: IUsePaginationArgs): any => {

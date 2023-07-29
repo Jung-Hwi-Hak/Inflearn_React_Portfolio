@@ -1,10 +1,4 @@
-import {
-  addDoc,
-  collection,
-  doc,
-  getFirestore,
-  updateDoc,
-} from "firebase/firestore/lite";
+import { addDoc, collection, doc, getFirestore, updateDoc } from "firebase/firestore/lite";
 // import {getFirestore, doc, updateDoc} from "firebase/firestore"
 import { useRouter } from "next/router";
 import { firebaseApp } from "../../../../commons/libraries/firebase";
@@ -15,9 +9,7 @@ import FirebaseWriterUI from "./FirebaseWriter.presenter";
 import { getDateHour } from "../../../../commons/libraries/utils";
 import type { FirebaseWriterPageProps } from "./FirebaseWriter.types";
 
-export default function FirebaseWriterPage(
-  props: FirebaseWriterPageProps
-): JSX.Element {
+export default function FirebaseWriterPage(props: FirebaseWriterPageProps): JSX.Element {
   const writerInputRef = useRef<any>(null);
   const titleInputRef = useRef<any>(null);
   const contentsInputRef = useRef<any>(null);
@@ -29,7 +21,6 @@ export default function FirebaseWriterPage(
 
   // ? 게시물 등록 함수
   const onClickSubmit = async (): Promise<void> => {
-    console.log(writer === undefined, title === undefined, contents === "");
     if (writer === "") {
       alert("작성자를 입력해주세요.");
       writerInputRef.current.focus();
@@ -46,10 +37,7 @@ export default function FirebaseWriterPage(
       return;
     }
     const uuidv4 = uuid();
-    const firebaseBoard = collection(
-      getFirestore(firebaseApp),
-      "firebaseBoard"
-    );
+    const firebaseBoard = collection(getFirestore(firebaseApp), "firebaseBoard");
     await addDoc(firebaseBoard, {
       uuidv4,
       writer,
@@ -67,12 +55,8 @@ export default function FirebaseWriterPage(
   };
 
   const onClickEdit = (): void => {
-    console.log(String(router.query.firebaseId));
     // const firebaseBoard = getFirestore(firebaseApp);
-    const firebaseBoard = collection(
-      getFirestore(firebaseApp),
-      "firebaseBoard"
-    );
+    const firebaseBoard = collection(getFirestore(firebaseApp), "firebaseBoard");
     const docRef = doc(firebaseBoard, String(router.query.firebaseId));
     // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
     type dataType = {
@@ -94,7 +78,7 @@ export default function FirebaseWriterPage(
         console.log("Value of an Existing Document Field has been updated");
       })
       .catch((error) => {
-        console.log(error, "asd");
+        if (error instanceof Error) console.log("");
       });
   };
 
