@@ -1,7 +1,8 @@
 import type { IPaginations01Props } from "./Paginations01.types";
 import * as S from "./Paginations01.styles";
+import { memo } from "react";
 
-export default function Paginations01(props: IPaginations01Props): JSX.Element {
+function Paginations01(props: IPaginations01Props): JSX.Element {
   return (
     <div>
       <S.Page onClick={props.onClickPrevPage}>{`<`}</S.Page>
@@ -22,3 +23,5 @@ export default function Paginations01(props: IPaginations01Props): JSX.Element {
     </div>
   );
 }
+
+export default memo(Paginations01);

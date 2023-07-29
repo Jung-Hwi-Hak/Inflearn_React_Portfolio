@@ -8,18 +8,19 @@ import BoardListHeader from "./header/BoardListHeader";
 import BoardListBody from "./body/BoardListBody";
 import BoardListFooter from "./footer/BoardListFooter";
 import { usePagination } from "../../../commons/hooks/customs/usePagination";
+import BestBoardListIndex from "./bestList/BestBoardList.index";
+import { memo } from "react";
 
-export default function BoardList(): JSX.Element {
+function BoardList(): JSX.Element {
   const { data, refetch } = useQueryFetchBoards();
-  const { data: dataBoardsCount, refetch: refetchBoardsCount } =
-    useQueryFetchBoardsCount();
+  const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQueryFetchBoardsCount();
 
   const paginationArgs = usePagination({
     refetch,
     count: dataBoardsCount?.fetchBoardsCount,
   });
-  console.log(paginationArgs.startPage);
-  const { keyword, onChangeKeyword, refetchEnterSearch } = useSearchBar({
+
+  const { onChangeKeyword, refetchEnterSearch } = useSearchBar({
     refetch,
     refetchCount: refetchBoardsCount,
     setActivePage: paginationArgs.setActivePage,
@@ -28,16 +29,15 @@ export default function BoardList(): JSX.Element {
 
   return (
     <S.Wrapper>
+      <BestBoardListIndex />
       <BoardListHeader>
-        <SearchBar01
-          onChangeKeyword={onChangeKeyword}
-          refetchEnterSearch={refetchEnterSearch}
-        />
+        <SearchBar01 onChangeKeyword={onChangeKeyword} refetchEnterSearch={refetchEnterSearch} />
       </BoardListHeader>
-      <BoardListBody data={data} keyword={keyword} />
+      <BoardListBody data={data} />
       <BoardListFooter>
         <Paginations01 {...paginationArgs} />
       </BoardListFooter>
     </S.Wrapper>
   );
 }
+export default memo(BoardList);

@@ -1,7 +1,7 @@
 import type { IQuery } from "../../../../../commons/types/generated/types";
 
 export interface IBoardListBodyProps {
-  keyword: string;
+  // keyword: string;
   data?: Pick<IQuery, "fetchBoards">;
 }
 

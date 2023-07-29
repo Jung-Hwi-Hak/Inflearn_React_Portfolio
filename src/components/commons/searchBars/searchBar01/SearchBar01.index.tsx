@@ -1,7 +1,8 @@
+import { memo } from "react";
 import * as S from "./SearchBar01.styles";
 import type { SearchBar01Props } from "./SearchBar01.types";
 
-export default function SearchBar01(props: SearchBar01Props): JSX.Element {
+function SearchBar01(props: SearchBar01Props): JSX.Element {
   return (
     <>
       <S.SearchInputWrapper>
@@ -15,3 +16,4 @@ export default function SearchBar01(props: SearchBar01Props): JSX.Element {
     </>
   );
 }
+export default memo(SearchBar01);

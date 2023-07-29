@@ -1,10 +1,9 @@
+import { memo } from "react";
 import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
 import * as S from "./BoardListFooter.styles";
 import type { IBoardListFooterProps } from "./BoardListFooter.types";
 
-export default function BoardListFooter(
-  props: IBoardListFooterProps
-): JSX.Element {
+function BoardListFooter(props: IBoardListFooterProps): JSX.Element {
   const { onClickMoveToPage } = useMoveToPage();
 
   return (
@@ -17,3 +16,4 @@ export default function BoardListFooter(
     </S.Footer>
   );
 }
+export default memo(BoardListFooter);

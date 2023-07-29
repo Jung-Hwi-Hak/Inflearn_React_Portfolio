@@ -1,8 +1,5 @@
 import { type QueryResult, useQuery, gql } from "@apollo/client";
-import type {
-  IQuery,
-  IQueryFetchBoardsArgs,
-} from "../../../../commons/types/generated/types";
+import type { IQuery, IQueryFetchBoardsArgs } from "../../../../commons/types/generated/types";
 
 // graphql fragment 을 이용해 변경해서 사용할수 있음.
 const FETCH_BOARDS = gql`
@@ -21,9 +18,6 @@ export const useQueryFetchBoards = (): QueryResult<
   IQueryFetchBoardsArgs
 > => {
   // ? 게시글 조회 API
-  const result = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(
-    FETCH_BOARDS
-  );
-
+  const result = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(FETCH_BOARDS);
   return result;
 };
