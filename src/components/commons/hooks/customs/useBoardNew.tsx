@@ -10,7 +10,7 @@ import type {
 } from "../../../../commons/types/generated/types";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useQueryFetchBoard } from "../queries/useQueryFetchBoard";
 
 export const useBoardNew = () => {
@@ -70,7 +70,7 @@ export const useBoardNew = () => {
   };
 
   // ! 등록 함수
-  const onClickSubmit = async (data: any): Promise<void> => {
+  const onClickSubmit = useCallback(async (data: any): Promise<void> => {
     try {
       const result = await mutation({
         variables: {
@@ -98,7 +98,7 @@ export const useBoardNew = () => {
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
-  };
+  }, []);
 
   return {
     isOpen,

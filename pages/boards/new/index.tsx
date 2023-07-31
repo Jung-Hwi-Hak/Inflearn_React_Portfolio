@@ -1,5 +1,8 @@
+import { memo } from "react";
 import BoardWriteRepetoring from "../../../src/components/units/board/write-repactoring/BoardWrite.index";
 
-export default function BoardsNewPage(): JSX.Element {
+function BoardsNewPage(): JSX.Element {
   return <BoardWriteRepetoring isEdit={false} />;
 }
+
+export default memo(BoardsNewPage);
