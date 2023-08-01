@@ -22,7 +22,6 @@ const CardWrapper = styled.div`
 function BoardDetail(): JSX.Element {
   const { data } = useQueryFetchBoard();
   const { onClickMoveToPage } = useMoveToPage();
-  console.log(data, "디테일 페이지");
 
   return (
     <>

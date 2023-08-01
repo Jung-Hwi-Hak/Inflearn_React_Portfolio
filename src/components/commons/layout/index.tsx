@@ -37,7 +37,6 @@ const BackgroundInk = styled.div<{ top: string; left: string }>((props) => ({
 }));
 
 function Layout(props: ILayout): JSX.Element {
-  console.log("레이아웃 인덱스");
   return (
     <>
       <BackgroundInk top={"5px"} left={"30px"} />

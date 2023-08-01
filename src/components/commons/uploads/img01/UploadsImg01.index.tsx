@@ -3,7 +3,6 @@ import { useUploadFile } from "../../hooks/customs/useUploadFile";
 import * as S from "./UploadsImg01.styles";
 function UploadsImg(props: any): JSX.Element {
   const { onClickUpload, onChangeFile, fileRef } = useUploadFile();
-  console.log("UploadsImg 업로드이미지페이지");
   return (
     <>
       {props.fileUrl !== "" ? (

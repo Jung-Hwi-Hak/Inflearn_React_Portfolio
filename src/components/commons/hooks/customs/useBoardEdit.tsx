@@ -5,7 +5,7 @@ import { useQueryFetchBoard } from "../queries/useQueryFetchBoard";
 import { useQueryIdChecker } from "./useQueryIdChecker";
 import { useRouter } from "next/router";
 import { Modal } from "antd";
-import type { IBoardWriteYupSchema } from "../../../units/board/write-repactoring/BoardWrite.validation";
+import type { IBoardWriteYupSchema } from "../../../units/board/write/BoardWrite.validation";
 import type { UseFormWatch, UseFormSetValue } from "react-hook-form";
 interface IUseBoardEditArgs {
   setValue: UseFormSetValue<IBoardWriteYupSchema>;

@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {
   type IBoardWriteYupSchema,
   boardWriteNewYupSchema,
-} from "../../../units/board/write-repactoring/BoardWrite.validation";
+} from "../../../units/board/write/BoardWrite.validation";
 import { useForm } from "react-hook-form";
 import type {
   UseFormWatch,

@@ -37,7 +37,7 @@
 //   return <BoardWriteRepetoring isEdit={true} data={data} />;
 // }
 
-import BoardWriteRepetoring from "../../../../src/components/units/board/write-repactoring/BoardWrite.index";
+import BoardWriteRepetoring from "../../../../src/components/units/board/write/BoardWrite.index";
 import { useQueryFetchBoard } from "../../../../src/components/commons/hooks/queries/useQueryFetchBoard";
 
 export default function BoardsEditPage(): JSX.Element {
