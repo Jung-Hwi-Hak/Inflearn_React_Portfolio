@@ -3,9 +3,7 @@ import { getDate } from "../../../../../commons/libraries/utils";
 import * as S from "./BoardDetailHeader.styles";
 import type { IBoardDetailHeaderProps } from "./BoardDetailHeader.types";
 
-export default function BoardDetailHeader(
-  props: IBoardDetailHeaderProps
-): JSX.Element {
+export default function BoardDetailHeader(props: IBoardDetailHeaderProps): JSX.Element {
   return (
     <>
       <S.Header>
@@ -13,9 +11,7 @@ export default function BoardDetailHeader(
           <S.Avatar src="/images/avatar.png" />
           <S.Info>
             <S.Writer>{props.data?.fetchBoard?.writer}</S.Writer>
-            <S.CreatedAt>
-              {getDate(props.data?.fetchBoard?.createdAt)}
-            </S.CreatedAt>
+            <S.CreatedAt>{getDate(props.data?.fetchBoard?.createdAt)}</S.CreatedAt>
           </S.Info>
         </S.AvatarWrapper>
         <S.IconWrapper>

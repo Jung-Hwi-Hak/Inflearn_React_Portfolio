@@ -4,9 +4,7 @@ import * as S from "./BoardDetailBody.styles";
 import type { IBoardDetailBodyProps } from "./BoardDetailBody.types";
 import { v4 as uuidv4 } from "uuid";
 
-export default function BoardDetailBody(
-  props: IBoardDetailBodyProps
-): JSX.Element {
+export default function BoardDetailBody(props: IBoardDetailBodyProps): JSX.Element {
   const { id: boardId } = useQueryIdChecker("boardId");
   const { onClickLike, onClickDisLike } = useBoardLike({
     boardId,
@@ -30,22 +28,17 @@ export default function BoardDetailBody(
           {props.data?.fetchBoard?.images
             ?.filter((el) => el)
             .map((el) => (
-              <S.UploadImage
-                key={uuidv4()}
-                src={`https://storage.googleapis.com/${el}`}
-              />
+              <S.UploadImage key={uuidv4()} src={`https://storage.googleapis.com/${el}`} />
             ))}
         </S.UploadImageWrapper>
         <S.LikeIconWrapper>
           <S.IWrapper>
-            <S.LikeIcon onClick={onClickLike} />
+            <S.LikeIcon rev={undefined} onClick={onClickLike} />
             <S.LikeCount>{props.data?.fetchBoard.likeCount}</S.LikeCount>
           </S.IWrapper>
           <S.IWrapper>
-            <S.DisLikeIcon onClick={onClickDisLike} />
-            <S.DisLikeCount>
-              {props.data?.fetchBoard.dislikeCount}
-            </S.DisLikeCount>
+            <S.DisLikeIcon rev={undefined} onClick={onClickDisLike} />
+            <S.DisLikeCount>{props.data?.fetchBoard.dislikeCount}</S.DisLikeCount>
           </S.IWrapper>
         </S.LikeIconWrapper>
       </S.Body>

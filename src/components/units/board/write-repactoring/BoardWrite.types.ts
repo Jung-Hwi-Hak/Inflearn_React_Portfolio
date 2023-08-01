@@ -4,12 +4,6 @@ export interface IBoardWriteProps {
   data?: Pick<IQuery, "fetchBoard">;
 }
 
-export interface IBoardWriteUIProps {
-  isEdit: boolean;
-  data?: Pick<IQuery, "fetchBoard">;
-}
-
 export interface ISubmitButtonProps {
-  // isActive: boolean;
   buttonState: boolean;
 }

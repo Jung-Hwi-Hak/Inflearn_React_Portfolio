@@ -1,10 +1,10 @@
 import { useQueryFetchBoard } from "../../../commons/hooks/queries/useQueryFetchBoard";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
-import { useRouter } from "next/router";
 import BoardDetailHeader from "./header/BoardDetailHeader";
 import BoardDetailBody from "./body/BoardDetailBody";
 import BoardDetailFooter from "./footer/BoardDetailFooter";
 import styled from "@emotion/styled";
+import { memo } from "react";
 
 const CardWrapper = styled.div`
   border: 1px solid black;
@@ -19,20 +19,19 @@ const CardWrapper = styled.div`
   box-shadow: 0px 0px 10px gray;
 `;
 
-export default function BoardDetail(): JSX.Element {
-  const router = useRouter();
-
+function BoardDetail(): JSX.Element {
   const { data } = useQueryFetchBoard();
   const { onClickMoveToPage } = useMoveToPage();
-  // const { onClickMoveToPage } = useMemo(() => useMoveToPage(), []);
+  console.log(data, "디테일 페이지");
 
   return (
     <>
       <CardWrapper>
         <BoardDetailHeader data={data} />
         <BoardDetailBody data={data} />
-        <BoardDetailFooter onClickMoveToPage={onClickMoveToPage} router={router} />
+        <BoardDetailFooter onClickMoveToPage={onClickMoveToPage} />
       </CardWrapper>
     </>
   );
 }
+export default memo(BoardDetail);

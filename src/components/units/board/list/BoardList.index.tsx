@@ -11,6 +11,7 @@ import { memo } from "react";
 
 function BoardList(): JSX.Element {
   const { data, refetch } = useQueryFetchBoards();
+
   const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQueryFetchBoardsCount();
 
   return (

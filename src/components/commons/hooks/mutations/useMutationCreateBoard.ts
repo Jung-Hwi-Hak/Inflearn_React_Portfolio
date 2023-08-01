@@ -1,4 +1,8 @@
-import { gql } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
+import type {
+  IMutation,
+  IMutationCreateBoardArgs,
+} from "../../../../commons/types/generated/types";
 
 export const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -7,3 +11,11 @@ export const CREATE_BOARD = gql`
     }
   }
 `;
+
+export const useMutationCreateBoard = () => {
+  const mutation = useMutation<Pick<IMutation, "createBoard">, IMutationCreateBoardArgs>(
+    CREATE_BOARD
+  );
+
+  return mutation;
+};
