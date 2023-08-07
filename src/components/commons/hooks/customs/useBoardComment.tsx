@@ -125,7 +125,7 @@ export const useBoardComment = (args: IUseBoardComment) => {
       reset();
       form.resetFields();
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
 

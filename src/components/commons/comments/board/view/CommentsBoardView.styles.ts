@@ -3,7 +3,6 @@ import { Rate, Modal } from "antd";
 
 export const ItemWrapper = styled.div`
   width: 1200px;
-  margin: 0px 100px;
   padding-top: 20px;
   height: 128px;
   border-bottom: 1px solid lightgray;

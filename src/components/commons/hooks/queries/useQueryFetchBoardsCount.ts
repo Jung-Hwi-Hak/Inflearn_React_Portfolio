@@ -7,13 +7,16 @@ const FETCH_BOARDS_COUNT = gql`
   }
 `;
 
-export const useQueryFetchBoardsCount = (): QueryResult<
-  Pick<IQuery, "fetchBoardsCount">,
-  IQueryFetchBoardsCountArgs
-> => {
-  // ? 게시글 갯수 조회 API
+export const useQueryFetchBoardsCount = (
+  searchKeyword: string
+): QueryResult<Pick<IQuery, "fetchBoardsCount">, IQueryFetchBoardsCountArgs> => {
   const query = useQuery<Pick<IQuery, "fetchBoardsCount">, IQueryFetchBoardsCountArgs>(
-    FETCH_BOARDS_COUNT
+    FETCH_BOARDS_COUNT,
+    {
+      variables: {
+        search: searchKeyword,
+      },
+    }
   );
 
   return query;

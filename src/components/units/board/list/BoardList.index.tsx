@@ -8,12 +8,15 @@ import BoardListBody from "./body/BoardListBody";
 import BoardListFooter from "./footer/BoardListFooter";
 import BestBoardListIndex from "./bestList/BestBoardList.index";
 import { memo } from "react";
+import { paginationActivePageState, searchKeywordState } from "../../../../commons/stores";
+import { useRecoilState } from "recoil";
 
 function BoardList(): JSX.Element {
-  const { data, refetch } = useQueryFetchBoards();
-
-  const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQueryFetchBoardsCount();
-
+  const [activePage] = useRecoilState(paginationActivePageState);
+  const [searchKeyword] = useRecoilState(searchKeywordState);
+  const { data, refetch } = useQueryFetchBoards(activePage, searchKeyword);
+  const { data: dataBoardsCount, refetch: refetchBoardsCount } =
+    useQueryFetchBoardsCount(searchKeyword);
   return (
     <S.Wrapper>
       <BestBoardListIndex />
@@ -26,7 +29,11 @@ function BoardList(): JSX.Element {
       </BoardListHeader>
       <BoardListBody data={data} />
       <BoardListFooter>
-        <Paginations01 refetch={refetch} dataBoardsCount={dataBoardsCount?.fetchBoardsCount} />
+        <Paginations01
+          data={data}
+          refetch={refetch}
+          dataBoardsCount={dataBoardsCount?.fetchBoardsCount}
+        />
       </BoardListFooter>
     </S.Wrapper>
   );

@@ -75,14 +75,14 @@ export const HeaderButtonSignUp = styled.button`
   }
 `;
 
-export const userProfileWrapper = styled.div`
+export const UserProfileWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
 
-export const userProfileImg = styled.img`
+export const UserProfileImg = styled.img`
   margin-right: 5px;
   max-width: 35px;
 `;
 
-export const userProfileIcon = styled(CaretDownOutlined)``;
+export const UserProfileIcon = styled(CaretDownOutlined)``;

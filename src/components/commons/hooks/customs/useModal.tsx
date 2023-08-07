@@ -1,31 +1,66 @@
 import { Modal } from "antd";
 import { useRouter } from "next/router";
 
-export const useModal = () => {
-  const router = useRouter();
+interface IUseModalReturn {
+  successModal: (title?: string, content?: string, centered?: boolean, path?: string) => void;
+  warningModal: (title?: string, content?: string, centered?: boolean, path?: string) => void;
+  confirmModal: (
+    onOk: () => Promise<void>,
+    title?: string,
+    content?: string,
+    centered?: boolean,
+    path?: string
+  ) => void;
+}
 
-  const successModal = (content: string, centered: boolean, path?: string) => {
+export const useModal = (): IUseModalReturn => {
+  const router = useRouter();
+  const successModal = (title?: string, content?: string, centered?: boolean, path?: string) => {
     Modal.success({
+      title,
       content,
       centered,
       okText: "확인",
       onOk: () => {
-        if (path !== undefined) {
-          void router.push(path);
-        }
+        if (path === undefined) return;
+        void router.push(path);
       },
     });
   };
-  const warningModal = (content: string, centered: boolean) => {
+  const warningModal = (title?: string, content?: string, centered?: boolean, path?: string) => {
     Modal.warning({
+      title,
       content,
       centered,
       okText: "확인",
+      onOk: () => {
+        if (path === undefined) return;
+        void router.push(path);
+      },
+    });
+  };
+
+  const confirmModal = (
+    onOk: () => Promise<void>,
+    title?: string,
+    content?: string,
+    centered?: boolean,
+    path?: string
+  ) => {
+    Modal.confirm({
+      title,
+      content,
+      centered,
+      onOk,
+      onCancel() {
+        return false;
+      },
     });
   };
 
   return {
     successModal,
     warningModal,
+    confirmModal,
   };
 };

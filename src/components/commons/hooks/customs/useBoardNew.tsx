@@ -1,17 +1,16 @@
-import { Modal } from "antd";
 import { useMutationCreateBoard } from "../mutations/useMutationCreateBoard";
 import { useMutationUploadFile } from "../mutations/useMutationUploadFile";
-import { useRouter } from "next/router";
 
 import { useCallback } from "react";
+import { useModal } from "./useModal";
 interface IUseBoardEditArgs {
   files: File[];
 }
 
 export const useBoardNew = (args: IUseBoardEditArgs) => {
-  const router = useRouter();
   const [mutationCreateBoard] = useMutationCreateBoard();
   const [uploadFileMutation] = useMutationUploadFile();
+  const { successModal, warningModal } = useModal();
 
   const onClickCreateSubmit = useCallback(
     async (data: any): Promise<void> => {
@@ -47,14 +46,15 @@ export const useBoardNew = (args: IUseBoardEditArgs) => {
             });
           },
         });
-        Modal.success({
-          content: "게시글 등록 완료",
-          onOk() {
-            void router.push(`/boards/${String(result.data?.createBoard._id)}`);
-          },
-        });
+        successModal(
+          "게시글 등록",
+          "게시글 등록 완료",
+          true,
+          `/boards/${String(result.data?.createBoard._id)}`
+        );
       } catch (error) {
-        if (error instanceof Error) Modal.warning({ content: error.message });
+        if (error instanceof Error)
+          warningModal("게시글 등록", "게시글 등록 실패", true, undefined);
       }
     },
     [args.files]

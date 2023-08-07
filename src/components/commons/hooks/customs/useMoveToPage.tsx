@@ -23,6 +23,7 @@ export const useMoveToPage = (): IUseMoveToPageReturn => {
     },
     []
   );
+
   return {
     onClickMoveToPage,
     onClickMoveToPageToggle,

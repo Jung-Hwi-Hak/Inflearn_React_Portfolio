@@ -48,13 +48,7 @@ export default function CommentsBoardView(props: ICommentsBoardViewProps) {
           <S.DateString>{props.el?.createdAt}</S.DateString>
         </S.ItemWrapper>
       )}
-      {isEdit && (
-        <CommentsBoardWrite
-          isEdit={true}
-          onToggleEdit={onToggleEdit}
-          el={props.el}
-        />
-      )}
+      {isEdit && <CommentsBoardWrite isEdit={true} onToggleEdit={onToggleEdit} el={props.el} />}
     </>
   );
 }

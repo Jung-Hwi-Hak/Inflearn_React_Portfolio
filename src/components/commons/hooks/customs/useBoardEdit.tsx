@@ -3,10 +3,10 @@ import { useMutationUpdateBoard } from "../mutations/useMutationUpdateBoard";
 import { useMutationUploadFile } from "../mutations/useMutationUploadFile";
 import { useQueryFetchBoard } from "../queries/useQueryFetchBoard";
 import { useQueryIdChecker } from "./useQueryIdChecker";
-import { useRouter } from "next/router";
 import { Modal } from "antd";
 import type { IBoardWriteYupSchema } from "../../../units/board/write/BoardWrite.validation";
 import type { UseFormWatch, UseFormSetValue } from "react-hook-form";
+import { useModal } from "./useModal";
 interface IUseBoardEditArgs {
   setValue: UseFormSetValue<IBoardWriteYupSchema>;
   files: File[];
@@ -14,10 +14,10 @@ interface IUseBoardEditArgs {
 }
 
 export const useBoardEdit = (args: IUseBoardEditArgs) => {
-  const router = useRouter();
   const { id: boardId } = useQueryIdChecker("boardId");
   const [mutationUpdateBoard] = useMutationUpdateBoard();
   const [uploadFileMutation] = useMutationUploadFile();
+  const { successModal } = useModal();
 
   const { data } = useQueryFetchBoard();
   const memoizedWriter = useMemo(() => data?.fetchBoard.writer ?? "", [data]);
@@ -54,12 +54,12 @@ export const useBoardEdit = (args: IUseBoardEditArgs) => {
             },
           },
         });
-        Modal.success({
-          content: "게시글 수정 완료",
-          onOk() {
-            void router.push(`/boards/${String(result.data?.updateBoard._id)}`);
-          },
-        });
+        successModal(
+          "게시글 수정",
+          "게시글 수정 완료",
+          true,
+          `/boards/${String(result.data?.updateBoard._id)}`
+        );
       } catch (error) {
         if (error instanceof Error) Modal.warning({ content: error.message });
       }

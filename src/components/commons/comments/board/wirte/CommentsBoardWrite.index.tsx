@@ -7,26 +7,18 @@ interface ICommentsBoardWriteProps {
   isEdit?: boolean;
   onToggleEdit?: () => void;
   el?: IBoardComment;
+  children?: JSX.Element;
 }
 
-export default function CommonetsBoardWrite(
-  props: ICommentsBoardWriteProps
-): JSX.Element {
+export default function CommonetsBoardWrite(props: ICommentsBoardWriteProps): JSX.Element {
   const { id: boardId } = useQueryIdChecker("boardId");
-  const {
-    onClickWrite,
-    onClickUpdate,
-    onChangeStar,
-    register,
-    watch,
-    handleSubmit,
-    starRef,
-  } = useBoardComment({
-    boardId,
-    boardCommentId: props.el?._id,
-    onToggleEdit: props.onToggleEdit,
-    el: props.el,
-  });
+  const { onClickWrite, onClickUpdate, onChangeStar, register, watch, handleSubmit, starRef } =
+    useBoardComment({
+      boardId,
+      boardCommentId: props.el?._id,
+      onToggleEdit: props.onToggleEdit,
+      el: props.el,
+    });
 
   return (
     <S.Wrapper>
@@ -37,16 +29,8 @@ export default function CommonetsBoardWrite(
         </>
       )}
       <S.InputWrapper>
-        <S.Input
-          placeholder="작성자"
-          {...register("writer")}
-          readOnly={props.isEdit}
-        />
-        <S.Input
-          type="password"
-          placeholder="비밀번호"
-          {...register("password")}
-        />
+        <S.Input placeholder="작성자" {...register("writer")} readOnly={props.isEdit} />
+        <S.Input type="password" placeholder="비밀번호" {...register("password")} />
         <S.Star ref={starRef} onChange={onChangeStar} />
       </S.InputWrapper>
       <S.ContentWrapper>
@@ -58,21 +42,14 @@ export default function CommonetsBoardWrite(
         <S.BottomWrapper>
           <S.ContentsLength>{watch("contents")?.length}/100</S.ContentsLength>
           <S.ButtonFlex>
-            <S.Button
-              onClick={handleSubmit(
-                props.isEdit === true ? onClickUpdate : onClickWrite
-              )}
-            >
+            <S.Button onClick={handleSubmit(props.isEdit === true ? onClickUpdate : onClickWrite)}>
               {props.isEdit === true ? "수정하기" : "등록하기"}
             </S.Button>
-            {props.isEdit === true ? (
-              <S.Button onClick={props.onToggleEdit}>취소</S.Button>
-            ) : (
-              <></>
-            )}
+            {props.isEdit === true ? <S.Button onClick={props.onToggleEdit}>취소</S.Button> : <></>}
           </S.ButtonFlex>
         </S.BottomWrapper>
       </S.ContentWrapper>
+      {props.children}
     </S.Wrapper>
   );
 }

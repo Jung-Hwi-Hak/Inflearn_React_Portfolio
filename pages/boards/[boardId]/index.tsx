@@ -29,10 +29,13 @@ export default function BoardDetailPage(): JSX.Element {
   return (
     <>
       <BoardDetail />
-      <CommonetsBoardWrite />
-      <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
-        {data?.fetchBoardComments.map((el) => <CommentsBoardView key={el._id} el={el} />) ?? <></>}
-      </InfiniteScroll>
+      <CommonetsBoardWrite>
+        <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
+          {data?.fetchBoardComments.map((el) => <CommentsBoardView key={el._id} el={el} />) ?? (
+            <></>
+          )}
+        </InfiniteScroll>
+      </CommonetsBoardWrite>
     </>
   );
 }

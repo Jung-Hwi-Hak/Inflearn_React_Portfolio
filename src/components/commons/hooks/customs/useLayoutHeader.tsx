@@ -3,7 +3,6 @@ import { useQueryFetchUserLoggedIn } from "../queries/useQueryFetchUserLoggedIn"
 import { useQueryLogoutUser } from "../queries/useQueryLogoutUser";
 import styled from "@emotion/styled";
 import { useMoveToPage } from "./useMoveToPage";
-import { useCallback } from "react";
 
 const LogoutButton = styled.button`
   border: none;
@@ -15,13 +14,6 @@ export const useLayoutHeader = () => {
   const { userId } = useQueryFetchUserLoggedIn();
   const [logoutMutation] = useQueryLogoutUser();
   const { onClickMoveToPage } = useMoveToPage();
-
-  const onClickLogout = useCallback(async () => {
-    console.log("로그아웃");
-
-    await logoutMutation();
-    location.reload();
-  }, [userId]);
 
   const items: MenuProps["items"] = [
     {
@@ -36,7 +28,16 @@ export const useLayoutHeader = () => {
       type: "divider",
     },
     {
-      label: <LogoutButton onClick={onClickLogout}>로그아웃</LogoutButton>,
+      label: (
+        <LogoutButton
+          onClick={async () => {
+            await logoutMutation();
+            location.reload();
+          }}
+        >
+          로그아웃
+        </LogoutButton>
+      ),
       key: "3",
     },
   ];

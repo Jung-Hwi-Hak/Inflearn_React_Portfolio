@@ -6,4 +6,5 @@ export interface IPaginations01Props {
     variables?: Partial<IQueryFetchBoardsArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
   dataBoardsCount: number | undefined;
+  data: Pick<IQuery, "fetchBoards"> | undefined;
 }

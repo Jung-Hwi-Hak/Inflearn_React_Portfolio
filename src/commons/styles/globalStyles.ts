@@ -36,9 +36,9 @@ export const globalStyles = css`
   .ant-modal-confirm-success .ant-btn-primary:hover {
     background-color: black;
   }
-  .ant-modal-confirm-success .anticon-check-circle {
+  /* .ant-modal-confirm-success .anticon-check-circle {
     display: none;
-  }
+  } */
 
   // warning modal
   .ant-modal-confirm-warning .ant-btn-primary {
@@ -47,9 +47,9 @@ export const globalStyles = css`
   .ant-modal-confirm-warning .ant-btn-primary:hover {
     background-color: tomato;
   }
-  .anticon-exclamation-circle {
+  /* .anticon-exclamation-circle {
     display: none;
-  }
+  } */
 
   /* Film Animations */
   // Grain

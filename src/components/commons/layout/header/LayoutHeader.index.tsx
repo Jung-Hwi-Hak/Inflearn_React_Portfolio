@@ -19,8 +19,8 @@ function LayoutHeader(): JSX.Element {
             <>
               <Dropdown menu={{ items }} trigger={["click"]}>
                 <Space>
-                  <S.userProfileImg src="../images/profile.png" alt="" />
-                  <S.userProfileIcon />
+                  <S.UserProfileImg src="../images/profile.png" alt="" />
+                  <S.UserProfileIcon rev={""} />
                 </Space>
               </Dropdown>
             </>

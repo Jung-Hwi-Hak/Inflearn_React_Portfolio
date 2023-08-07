@@ -3,7 +3,8 @@ import { Rate } from "antd";
 
 export const Wrapper = styled.div`
   width: 1200px;
-  margin: 0px 100px;
+  display: felx;
+  flex-direction: column;
 `;
 
 export const PencilIcon = styled.img``;

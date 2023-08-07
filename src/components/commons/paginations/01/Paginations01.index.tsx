@@ -8,6 +8,7 @@ function Paginations01(props: IPaginations01Props): JSX.Element {
     refetch: props.refetch,
     count: props.dataBoardsCount,
   });
+  console.log(paginationArgs.startPage, paginationArgs.lastPage);
 
   return (
     <div>
