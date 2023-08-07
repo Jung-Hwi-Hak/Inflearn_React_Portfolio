@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   width: 1200px;
   display: felx;
   flex-direction: column;
+  margin-bottom: 100px;
 `;
 
 export const PencilIcon = styled.img``;

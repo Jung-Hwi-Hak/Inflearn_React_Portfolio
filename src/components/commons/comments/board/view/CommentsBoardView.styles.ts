@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { Rate, Modal } from "antd";
-
 export const ItemWrapper = styled.div`
   width: 1200px;
   padding-top: 20px;
@@ -47,11 +46,23 @@ export const DeleteIcon = styled.img`
   height: 24px;
   cursor: pointer;
 `;
+export const bottomWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  padding-left: 60px;
+`;
 
 export const DateString = styled.div`
   color: lightgray;
-  padding-top: 15px;
-  padding-left: 60px;
+`;
+export const ReplyCommentButton = styled.button`
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: gray;
+  font-weight: bold;
 `;
 
 export const Star = styled(Rate)`

@@ -1,34 +1,63 @@
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, RefObject } from "react";
 import { useRef, useState } from "react";
 import { useMutationCreateBoardComment } from "../mutations/useMutationCreateBoardComment";
 import { FETCH_BOARD_COMMENTS } from "../queries/useQueryFetchBoardComments";
 import { useMutationUpdateBoardComment } from "../mutations/useMutationUpdateBoardComment";
 import { useMutationDeleteBoardComment } from "../mutations/useMutationDeleteBoardComment";
-import { Form, Modal } from "antd";
+import { Modal } from "antd";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { yupSchema } from "../../comments/board/wirte/CommentsBoardWrite.validation";
 import type { IBoardComment } from "../../../../commons/types/generated/types";
 import { useForm } from "react-hook-form";
-
+import type { UseFormWatch, UseFormRegister, UseFormHandleSubmit } from "react-hook-form";
 interface IUpdateBoardCommentInput {
   contents?: string;
   rating?: number;
 }
 
-interface IUseBoardComment {
+interface IUseBoardCommentArgs {
   boardId: string;
   boardCommentId?: string;
   onToggleEdit?: () => void;
   el?: IBoardComment | undefined;
 }
 
-export const useBoardComment = (args: IUseBoardComment) => {
+interface IUseBoardCommentReturn {
+  onClickWrite: (data: any) => Promise<void>;
+  onClickUpdate: (data: any) => Promise<void>;
+  onChangeDeletePassword: (event: ChangeEvent<HTMLInputElement>) => void;
+  onClickDelete: () => Promise<void>;
+  onChangeStar: (value: number) => void;
+  register: UseFormRegister<{
+    writer: string;
+    contents: string;
+    star: number | undefined;
+    password: string;
+  }>;
+  handleSubmit: UseFormHandleSubmit<
+    {
+      writer: string;
+      contents: string;
+      star: number | undefined;
+      password: string;
+    },
+    undefined
+  >;
+  watch: UseFormWatch<{
+    writer: string;
+    contents: string;
+    star: number | undefined;
+    password: string;
+  }>;
+  starRef: RefObject<HTMLInputElement>;
+}
+
+export const useBoardComment = (args: IUseBoardCommentArgs): IUseBoardCommentReturn => {
   const [myPassword, setMyPassword] = useState("");
   const [createBoardComment] = useMutationCreateBoardComment();
   const [updateBoardComment] = useMutationUpdateBoardComment();
   const [deleteBoardComment] = useMutationDeleteBoardComment();
   const starRef = useRef<HTMLInputElement>(null);
-  const [form] = Form.useForm();
   const { register, handleSubmit, watch, reset, setValue } = useForm({
     resolver: yupResolver(yupSchema),
     mode: "onChange",
@@ -123,7 +152,7 @@ export const useBoardComment = (args: IUseBoardComment) => {
         ],
       });
       reset();
-      form.resetFields();
+      // console.log(starRef.current?.count);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }

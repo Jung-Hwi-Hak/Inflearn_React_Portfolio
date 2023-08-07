@@ -5,6 +5,7 @@ import type { ICommentsBoardViewProps } from "./CommentsBoardView.types";
 import { useBoardComment } from "../../../hooks/customs/useBoardComment";
 import { useQueryIdChecker } from "../../../hooks/customs/useQueryIdChecker";
 import CommentsBoardWrite from "../wirte/CommentsBoardWrite.index";
+import { getDate } from "../../../../../commons/libraries/utils";
 
 export default function CommentsBoardView(props: ICommentsBoardViewProps) {
   const { id } = useQueryIdChecker("boardId");
@@ -45,7 +46,10 @@ export default function CommentsBoardView(props: ICommentsBoardViewProps) {
               />
             </S.OptionWrapper>
           </S.FlexWrapper>
-          <S.DateString>{props.el?.createdAt}</S.DateString>
+          <S.bottomWrapper>
+            <S.DateString>{getDate(props.el?.createdAt)}</S.DateString>
+            <S.ReplyCommentButton>답글</S.ReplyCommentButton>
+          </S.bottomWrapper>
         </S.ItemWrapper>
       )}
       {isEdit && <CommentsBoardWrite isEdit={true} onToggleEdit={onToggleEdit} el={props.el} />}

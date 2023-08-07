@@ -31,7 +31,7 @@ export default function CommonetsBoardWrite(props: ICommentsBoardWriteProps): JS
       <S.InputWrapper>
         <S.Input placeholder="작성자" {...register("writer")} readOnly={props.isEdit} />
         <S.Input type="password" placeholder="비밀번호" {...register("password")} />
-        <S.Star ref={starRef} onChange={onChangeStar} />
+        <S.Star className="asdasd" ref={starRef} onChange={onChangeStar} value={watch("star")} />
       </S.InputWrapper>
       <S.ContentWrapper>
         <S.Contents
