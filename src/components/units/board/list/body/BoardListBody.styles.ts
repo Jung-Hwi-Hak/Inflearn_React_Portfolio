@@ -23,9 +23,8 @@ export const Row = styled.div`
   height: 52px;
   line-height: 52px;
   border-bottom: 1px solid gray;
-
-  :hover {
-    color: tomato;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
   }
 `;
 
