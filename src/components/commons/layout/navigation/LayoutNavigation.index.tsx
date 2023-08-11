@@ -8,6 +8,7 @@ const NAVIGATION_MENUS = [
   // { name: "Firebase Boards", page: "/firebasePage" },
   // { name: "Public APIs", page: "/publicApis" },
   { name: "자유게시판", page: "/boards" },
+  { name: "중고마켓", page: "/market" },
   { name: "내 정보", page: "/mypage" },
 ];
 

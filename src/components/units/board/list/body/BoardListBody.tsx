@@ -4,14 +4,12 @@ import type { IBoardListBodyProps } from "./BoardListBody.types";
 import { getDate } from "../../../../../commons/libraries/utils";
 import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
 import { memo } from "react";
-import { useRecoilState } from "recoil";
-import { searchKeywordState } from "../../../../../commons/stores";
 import type { IBoard } from "../../../../../commons/types/generated/types";
 
 const SECRET = "@#$%";
 function BoardListBody(props: IBoardListBodyProps): JSX.Element {
   const { onClickMoveToPage } = useMoveToPage();
-  const [searchKeyword] = useRecoilState(searchKeywordState);
+
   return (
     <>
       <S.TableTop />
@@ -26,10 +24,10 @@ function BoardListBody(props: IBoardListBodyProps): JSX.Element {
           <S.ColumnBasic>{String(el._id).slice(-4).toUpperCase()}</S.ColumnBasic>
           <S.ColumnTitle id={el._id} onClick={onClickMoveToPage(`/boards/${el._id}`)}>
             {(el.title ?? "")
-              .replaceAll(searchKeyword, `${SECRET}${searchKeyword}${SECRET}`)
+              .replaceAll(props.searchKeyword, `${SECRET}${props.searchKeyword}${SECRET}`)
               .split(SECRET)
               .map((el) => (
-                <S.SearchKeyword key={uuidv4()} isMatch={el === searchKeyword}>
+                <S.SearchKeyword key={uuidv4()} isMatch={el === props.searchKeyword}>
                   {el}
                 </S.SearchKeyword>
               ))}

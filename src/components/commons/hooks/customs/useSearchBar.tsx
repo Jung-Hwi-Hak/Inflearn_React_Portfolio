@@ -3,49 +3,46 @@
  */
 
 import type { ApolloQueryResult } from "@apollo/client";
-import { type Dispatch, type ChangeEvent, type KeyboardEvent, useState, useCallback } from "react";
+import { type Dispatch, type ChangeEvent, type KeyboardEvent, useCallback } from "react";
 import type { IQuery } from "../../../../commons/types/generated/types";
-import { useRecoilState } from "recoil";
-import { searchKeywordState } from "../../../../commons/stores";
+import * as _ from "lodash";
 
 interface IUseSearchReturn {
-  // keyword: string;
   onChangeKeyword: (event: ChangeEvent<HTMLInputElement>) => void;
   refetchEnterSearch: (event: KeyboardEvent<HTMLInputElement>) => void;
 }
 
 interface IUseSearchbarArgs {
-  setActivePage: Dispatch<React.SetStateAction<number>>;
-  setStartPage: Dispatch<React.SetStateAction<number>>;
+  setActivePage?: Dispatch<React.SetStateAction<number>>;
+  setStartPage?: Dispatch<React.SetStateAction<number>>;
+  setSearchKeyword: Dispatch<React.SetStateAction<string>>;
+  searchKeyword: string;
   refetch: (variables?: Partial<any> | undefined) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
-  refetchCount: (
+  refetchCount?: (
     variables?: Partial<any> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
 }
 
 export const useSearchBar = (args: IUseSearchbarArgs): IUseSearchReturn => {
-  const [keyword, setKeyword] = useState("");
-  const [, setSearchKeyword] = useRecoilState(searchKeywordState);
-  // ? Change Keyword
-  const onChangeKeyword = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
-    setKeyword(event.target.value);
-  }, []);
-  // ? Enter event - 검색
+  const onChangeKeyword = useCallback(
+    _.debounce((event: ChangeEvent<HTMLInputElement>): void => {
+      args.setSearchKeyword(event.target.value);
+    }, 150),
+    []
+  );
+
   const refetchEnterSearch = useCallback(
     (event: KeyboardEvent<HTMLInputElement>): void => {
       if (event.code !== "Enter") return;
-      void args.refetch({ page: 1, search: keyword });
-      void args.refetchCount({ search: keyword });
-      args.setActivePage(1);
-      args.setStartPage(1);
-      setSearchKeyword(keyword);
+      void args.refetch({ page: 1, search: args.searchKeyword });
+      if (args.refetchCount) void args.refetchCount({ search: args.searchKeyword });
+      if (args.setActivePage) args.setActivePage(1);
+      if (args.setStartPage) args.setStartPage(1);
     },
-    [args, keyword, setSearchKeyword]
+    [args, args.searchKeyword]
   );
 
   return {
-    // keyword,
-    // searchKeyword,
     onChangeKeyword,
     refetchEnterSearch,
   };

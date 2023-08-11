@@ -8,31 +8,36 @@ import BoardListBody from "./body/BoardListBody";
 import BoardListFooter from "./footer/BoardListFooter";
 import BestBoardListIndex from "./bestList/BestBoardList.index";
 import { memo } from "react";
-import { paginationActivePageState, searchKeywordState } from "../../../../commons/stores";
-import { useRecoilState } from "recoil";
+import { useBoardList } from "../../../commons/hooks/customs/useBoardList";
 
 function BoardList(): JSX.Element {
-  const [activePage] = useRecoilState(paginationActivePageState);
-  const [searchKeyword] = useRecoilState(searchKeywordState);
-  const { data, refetch } = useQueryFetchBoards(activePage, searchKeyword);
-  const { data: dataBoardsCount, refetch: refetchBoardsCount } =
-    useQueryFetchBoardsCount(searchKeyword);
+  const { activePage, setActivePage, startPage, setStartPage, searchKeyword, setSearchKeyword } =
+    useBoardList();
+  const { data, refetch } = useQueryFetchBoards();
+  const { data: dataCount, refetch: refetchCount } = useQueryFetchBoardsCount();
+
   return (
     <S.Wrapper>
       <BestBoardListIndex />
       <BoardListHeader>
         <SearchBar01
           refetch={refetch}
-          dataBoardsCount={dataBoardsCount?.fetchBoardsCount}
-          refetchBoardsCount={refetchBoardsCount}
+          refetchCount={refetchCount}
+          searchKeyword={searchKeyword}
+          setSearchKeyword={setSearchKeyword}
+          setActivePage={setActivePage}
+          setStartPage={setStartPage}
         />
       </BoardListHeader>
-      <BoardListBody data={data} />
+      <BoardListBody data={data} searchKeyword={searchKeyword} />
       <BoardListFooter>
         <Paginations01
-          data={data}
           refetch={refetch}
-          dataBoardsCount={dataBoardsCount?.fetchBoardsCount}
+          dataCount={dataCount}
+          startPage={startPage}
+          setStartPage={setStartPage}
+          activePage={activePage}
+          setActivePage={setActivePage}
         />
       </BoardListFooter>
     </S.Wrapper>

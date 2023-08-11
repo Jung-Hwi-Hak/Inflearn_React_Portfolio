@@ -1,10 +1,12 @@
-import type { IQuery, IQueryFetchBoardsArgs } from "../../../../commons/types/generated/types";
+import type { Dispatch, SetStateAction } from "react";
+import type { IQuery } from "../../../../commons/types/generated/types";
 import type { ApolloQueryResult } from "@apollo/client";
 
 export interface IPaginations01Props {
-  refetch: (
-    variables?: Partial<IQueryFetchBoardsArgs> | undefined
-  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
-  dataBoardsCount: number | undefined;
-  data: Pick<IQuery, "fetchBoards"> | undefined;
+  refetch: (variables?: Partial<any> | undefined) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
+  dataCount: Pick<IQuery, any> | undefined;
+  startPage: number;
+  setStartPage: Dispatch<SetStateAction<number>>;
+  activePage: number;
+  setActivePage: Dispatch<SetStateAction<number>>;
 }

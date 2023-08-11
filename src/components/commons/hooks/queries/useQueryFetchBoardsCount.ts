@@ -7,16 +7,12 @@ const FETCH_BOARDS_COUNT = gql`
   }
 `;
 
-export const useQueryFetchBoardsCount = (
-  searchKeyword: string
-): QueryResult<Pick<IQuery, "fetchBoardsCount">, IQueryFetchBoardsCountArgs> => {
+export const useQueryFetchBoardsCount = (): QueryResult<
+  Pick<IQuery, "fetchBoardsCount">,
+  IQueryFetchBoardsCountArgs
+> => {
   const query = useQuery<Pick<IQuery, "fetchBoardsCount">, IQueryFetchBoardsCountArgs>(
-    FETCH_BOARDS_COUNT,
-    {
-      variables: {
-        search: searchKeyword,
-      },
-    }
+    FETCH_BOARDS_COUNT
   );
 
   return query;

@@ -1,16 +1,14 @@
-import type {
-  IQuery,
-  IQueryFetchBoardsArgs,
-  IQueryFetchBoardsCountArgs,
-} from "../../../../commons/types/generated/types";
+import type { Dispatch, SetStateAction } from "react";
+import type { IQuery } from "../../../../commons/types/generated/types";
 import type { ApolloQueryResult } from "@apollo/client";
 
 export interface ISearchbars01Props {
-  refetch: (
-    variables?: Partial<IQueryFetchBoardsArgs> | undefined
-  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
-  dataBoardsCount: number | undefined;
-  refetchBoardsCount: (
-    variables?: Partial<IQueryFetchBoardsCountArgs> | undefined
-  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoardsCount">>>;
+  refetch: (variables?: Partial<any> | undefined) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
+  refetchCount?: (
+    variables?: Partial<any> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
+  searchKeyword: string;
+  setSearchKeyword: Dispatch<SetStateAction<string>>;
+  setActivePage?: Dispatch<SetStateAction<number>>;
+  setStartPage?: Dispatch<SetStateAction<number>>;
 }

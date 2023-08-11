@@ -11,16 +11,10 @@ export const FETCH_BOARDS = gql`
     }
   }
 `;
-
-export const useQueryFetchBoards = (
-  activePage: number,
-  searchKeyword: string
-): QueryResult<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs> => {
-  const result = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(FETCH_BOARDS, {
-    variables: {
-      page: activePage,
-      search: searchKeyword,
-    },
-  });
+export const useQueryFetchBoards = (): QueryResult<
+  Pick<IQuery, "fetchBoards">,
+  IQueryFetchBoardsArgs
+> => {
+  const result = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(FETCH_BOARDS);
   return result;
 };

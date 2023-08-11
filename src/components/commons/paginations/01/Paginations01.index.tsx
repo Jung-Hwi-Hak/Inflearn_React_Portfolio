@@ -6,23 +6,26 @@ import { usePagination } from "../../hooks/customs/usePagination";
 function Paginations01(props: IPaginations01Props): JSX.Element {
   const paginationArgs = usePagination({
     refetch: props.refetch,
-    count: props.dataBoardsCount,
+    count: props.dataCount,
+    startPage: props.startPage,
+    setStartPage: props.setStartPage,
+    activePage: props.activePage,
+    setActivePage: props.setActivePage,
   });
-  console.log(paginationArgs.startPage, paginationArgs.lastPage);
 
   return (
     <div>
       <S.Page onClick={paginationArgs.onClickPrevPage}>{`<`}</S.Page>
       {new Array(10).fill(1).map(
         (_, index) =>
-          paginationArgs.startPage + index <= paginationArgs.lastPage && (
+          Number(props.startPage) + index <= paginationArgs.lastPage && (
             <S.Page
-              key={paginationArgs.startPage + index}
-              id={String(paginationArgs.startPage + index)}
+              key={Number(props.startPage) + index}
+              id={String(Number(props.startPage) + index)}
               onClick={paginationArgs.onClickPage}
-              isActive={paginationArgs.startPage + index === paginationArgs.activePage}
+              isActive={Number(props.startPage) + index === props.activePage}
             >
-              {paginationArgs.startPage + index}
+              {Number(props.startPage) + index}
             </S.Page>
           )
       )}
