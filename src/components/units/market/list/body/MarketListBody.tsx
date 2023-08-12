@@ -32,7 +32,7 @@ function MarketListBody(props: any): JSX.Element {
                 <S.ColumnTitle
                   id={el._id}
                   dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(el.contents ?? "0"),
+                    __html: DOMPurify.sanitize(el.contents ?? ""),
                   }}
                   onClick={onClickMoveToPage(`/boards/${el._id}`)}
                 ></S.ColumnTitle>

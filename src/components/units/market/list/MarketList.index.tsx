@@ -2,7 +2,7 @@ import SearchBar01 from "../../../commons/searchBars/searchBar01/SearchBar01.ind
 import * as S from "./MarketList.styles";
 import BoardListHeader from "./header/BoardListHeader";
 import MarketListBody from "./body/MarketListBody";
-import BestBoardListIndex from "./bestList/BestBoardList.index";
+import BestBoardListIndex from "./bestList/BestMarketList.index";
 import { memo } from "react";
 import { useMarketList } from "../../../commons/hooks/customs/useMarketList";
 

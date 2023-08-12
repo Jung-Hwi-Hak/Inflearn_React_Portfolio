@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { UserOutlined, LikeOutlined } from "@ant-design/icons";
 
-export const BestBoardsSection = styled.section`
+export const BestProductsSection = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@ export const BestBoardsSection = styled.section`
   margin-bottom: 100px;
 `;
 
-export const BestBoardsArticle = styled.article`
+export const BestProductsArticle = styled.article`
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -18,7 +18,7 @@ export const BestBoardsArticle = styled.article`
 `;
 
 export const BestBoardCard = styled.div`
-  width: 20%;
+  width: 250px;
   height: 250px;
   border-radius: 25px;
   position: relative;
@@ -45,7 +45,9 @@ export const BestBoardInfoWrapper = styled.div`
   justify-content: space-between;
   padding: 15px;
 `;
-export const BestBoardInfoTitle = styled.h3``;
+export const BestBoardInfoTitle = styled.h3`
+  overflow: hidden;
+`;
 
 export const InfoSubWrapper = styled.div`
   width: 100%;
