@@ -1,9 +1,32 @@
+// import { useCallback, useEffect, useRef, useState } from "react";
 import { useMarketSidebar } from "../../../../commons/hooks/customs/useMarketSidebar";
 import * as S from "./MarketSidebar.styles";
+// import * as _ from "lodash";
 
 export default function MarketSideBar() {
   const { onClickScrollDown, onClickScrollUp } = useMarketSidebar();
+  // const [scroll, setScroller] = useState(0);
 
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+  // const handleScroll = useCallback(
+  //   _.throttle(() => {
+  //     if (ref.current === null) return;
+  //     if (window.scrollY > 1230) {
+  //       setScroller(window.scrollY - 1230);
+  //       // ref.current.setAttribute("scroll", String(window.scrollY - 1230));
+  //       // console.log(ref.current.getAttribute("scroll"));
+  //     } else {
+  //       setScroller(0);
+  //       // ref.current.setAttribute("scroll", String(0));
+  //     }
+  //   }, 300),
+  //   []
+  // );
   return (
     <>
       <S.SidebarWrapper>

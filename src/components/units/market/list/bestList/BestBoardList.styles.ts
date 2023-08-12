@@ -18,7 +18,7 @@ export const BestBoardsArticle = styled.article`
 `;
 
 export const BestBoardCard = styled.div`
-  width: 250px;
+  width: 20%;
   height: 250px;
   border-radius: 25px;
   position: relative;
