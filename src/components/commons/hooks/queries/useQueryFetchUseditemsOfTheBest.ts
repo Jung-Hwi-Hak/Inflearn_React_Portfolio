@@ -5,6 +5,11 @@ const FETCH_USED_ITEMS_BEST = gql`
   query {
     fetchUseditemsOfTheBest {
       _id
+      name
+      remarks
+      images
+      createdAt
+      pickedCount
     }
   }
 `;

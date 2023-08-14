@@ -13,14 +13,14 @@ const DefaultInfo = gql`
   }
 `;
 
-const FETCH_USED_ITEM = gql`
-  query fetchUseditem($useditemId: ID!) {
-    fetchUseditem(useditemId: $useditemId) {
-      ...defaultInfo
-    }
-  }
-  ${DefaultInfo}
-`;
+// const FETCH_USED_ITEM = gql`
+//   query fetchUseditem($useditemId: ID!) {
+//     fetchUseditem(useditemId: $useditemId) {
+//       ...defaultInfo
+//     }
+//   }
+//   ${DefaultInfo}
+// `;
 
 const FETCH_USED_DETAIL_ITEM = gql`
   query fetchUseditem($useditemId: ID!) {
@@ -36,13 +36,15 @@ const FETCH_USED_DETAIL_ITEM = gql`
   ${DefaultInfo}
 `;
 
-export const useQueryFetchUsedItem = (useditemId: string, isDetail: boolean) => {
-  const GQL = isDetail ? FETCH_USED_DETAIL_ITEM : FETCH_USED_ITEM;
-  const result = useQuery<Pick<IQuery, "fetchUseditem">, IQueryFetchUseditemArgs>(GQL, {
-    variables: {
-      useditemId,
-    },
-  });
+export const useQueryFetchUsedItem = (useditemId: string) => {
+  const result = useQuery<Pick<IQuery, "fetchUseditem">, IQueryFetchUseditemArgs>(
+    FETCH_USED_DETAIL_ITEM,
+    {
+      variables: {
+        useditemId,
+      },
+    }
+  );
   console.log(result, "ASNLKASDN");
   return result;
 };

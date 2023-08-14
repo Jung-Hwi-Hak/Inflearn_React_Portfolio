@@ -9,10 +9,6 @@ import { memo } from "react";
 const CardWrapper = styled.div`
   border: 1px solid black;
   padding: 100px;
-  /* padding-top: 80px; */
-  /* padding-bottom: 100px; */
-  /* padding-left: 102px; */
-  /* padding-right: 102px; */
   display: flex;
   flex-direction: column;
   align-items: center;

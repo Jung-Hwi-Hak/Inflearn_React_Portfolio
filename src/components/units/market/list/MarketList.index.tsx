@@ -12,15 +12,15 @@ function MarketList(): JSX.Element {
 
   return (
     <S.Wrapper>
-      <button onClick={onChangeIsSold}>변경!</button>
       <BestBoardListIndex />
-      <BoardListHeader>
+      <BoardListHeader onChangeIsSold={onChangeIsSold}>
         <SearchBar01
           refetch={refetch}
           searchKeyword={searchKeyword}
           setSearchKeyword={setSearchKeyword}
         />
       </BoardListHeader>
+
       <MarketListBody data={data} onLoadMore={onLoadMore} />
     </S.Wrapper>
   );

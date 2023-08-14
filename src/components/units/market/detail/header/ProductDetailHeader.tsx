@@ -4,7 +4,6 @@ import * as S from "./ProductDetailHeader.styles";
 import type { IProductDetailHeaderProps } from "./ProductDetailHeader.types";
 
 export default function BoardDetailHeader(props: IProductDetailHeaderProps): JSX.Element {
-  console.log(props.data?.fetchUseditem);
   return (
     <>
       <S.Header>

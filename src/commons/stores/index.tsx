@@ -21,20 +21,6 @@ export const loginToggleState = atom({
   default: false,
 });
 
-export const searchKeywordState = atom({
-  key: "searchKeywordState",
-  default: "",
-});
-
-export const paginationStartPageState = atom({
-  key: "paginationStartPageState",
-  default: 1,
-});
-export const paginationActivePageState = atom({
-  key: "paginationActivePageState",
-  default: 1,
-});
-
 export const restoreAccessTokenLoadable = selector({
   key: "restoreAccessTokenLoadable",
   get: async () => {

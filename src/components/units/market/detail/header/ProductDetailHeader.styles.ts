@@ -8,6 +8,7 @@ export const Header = styled.div`
   align-items: center;
   border-bottom: 1px solid #bdbdbd;
   padding-bottom: 20px;
+  margin-bottom: 80px;
 `;
 
 export const AvatarWrapper = styled.div`
@@ -35,4 +36,6 @@ export const IconWrapper = styled.div`
 
 export const LinkIcon = styled.img``;
 
-export const LocationIcon = styled.img``;
+export const LocationIcon = styled.img`
+  margin-right: 20px;
+`;

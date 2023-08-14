@@ -21,7 +21,7 @@ const CardWrapper = styled.div`
 
 function ProductDetail(): JSX.Element {
   const { id } = useQueryIdChecker("productId");
-  const { data } = useQueryFetchUsedItem(id, true);
+  const { data } = useQueryFetchUsedItem(id);
   const { onClickMoveToPage } = useMoveToPage();
 
   return (
