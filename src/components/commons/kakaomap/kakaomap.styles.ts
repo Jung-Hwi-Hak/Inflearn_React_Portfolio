@@ -5,6 +5,8 @@ export const KakaoMapWrapper = styled.div`
   width: 100%;
 `;
 
+export const KakaoMap = styled.div``;
+
 export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
