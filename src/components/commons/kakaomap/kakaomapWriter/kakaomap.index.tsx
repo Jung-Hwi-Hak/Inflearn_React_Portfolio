@@ -1,4 +1,4 @@
-import { useKakaomapWriter } from "../hooks/customs/useKakaomapWriter";
+import { useKakaomapWriter } from "../../hooks/customs/useKakaomapWriter";
 import * as S from "./kakaomap.styles";
 import type { IKakaomapProps } from "./kakaomap.types";
 

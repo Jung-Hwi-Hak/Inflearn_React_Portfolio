@@ -37,6 +37,8 @@ export const useBoardNew = (args: IUseBoardEditArgs) => {
               useditemAddress: {
                 address: data.address,
                 addressDetail: data.addressDetail,
+                lat: parseFloat(data.lat),
+                lng: parseFloat(data.lng),
               },
               images: resultFilesUrl,
             },

@@ -38,6 +38,8 @@ interface IUseBoardWriteCommons {
     tags: string | undefined;
     address: string;
     addressDetail: string;
+    lat: string | undefined;
+    lng: string | undefined;
     images: any[] | undefined;
   }>;
 }
@@ -57,6 +59,8 @@ export const useProductWrite = (): IUseBoardWriteCommons => {
       price: "",
       address: "",
       addressDetail: "",
+      lat: "",
+      lng: "",
     },
   });
 

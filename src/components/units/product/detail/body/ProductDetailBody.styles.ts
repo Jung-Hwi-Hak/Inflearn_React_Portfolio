@@ -5,7 +5,6 @@ interface UploadImgProps {
 }
 
 export const Body = styled.div`
-  position: relative;
   width: 100%;
   min-height: 800px;
 `;
@@ -94,16 +93,14 @@ export const UploadImage = styled.img<UploadImgProps>`
   }
 `;
 export const Tag = styled.span`
-  position: absolute;
   width: 100%;
   display: block;
   color: #bdbdbd;
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 40px;
-  bottom: 0;
 `;
 
 export const Line = styled.hr`
-  margin-top: 20px;
+  margin: 30px 0;
 `;

@@ -8,6 +8,8 @@ export interface IProductWriteYupSchema {
   tags: string | undefined;
   address: string;
   addressDetail: string;
+  lat: string | undefined;
+  lng: string | undefined;
   images: any[] | undefined;
 }
 
@@ -30,5 +32,7 @@ export const productWriteNewYupSchema = yup.object({
     }),
   address: yup.string().required("거래장소를 정해주세요."),
   addressDetail: yup.string().required("거래장소의 상세주소를 입력해주세요."),
+  lat: yup.string(),
+  lng: yup.string(),
   images: yup.array(),
 });

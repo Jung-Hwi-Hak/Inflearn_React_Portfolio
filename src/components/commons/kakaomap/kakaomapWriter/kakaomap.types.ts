@@ -1,4 +1,4 @@
-import type { IProductWriteYupSchema } from "../../units/product/write/ProductWrite.validation";
+import type { IProductWriteYupSchema } from "../../../units/product/write/ProductWrite.validation";
 import type {
   UseFormRegister,
   UseFormSetValue,
@@ -17,6 +17,8 @@ export interface IKakaomapProps {
     tags: string | undefined;
     address: string;
     addressDetail: string;
+    lat: string | undefined;
+    lng: string | undefined;
     images: any[] | undefined;
   }>;
   errors: FieldErrors<IProductWriteYupSchema>;

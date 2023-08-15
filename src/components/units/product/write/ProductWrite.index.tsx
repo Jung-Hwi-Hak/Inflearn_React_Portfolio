@@ -7,7 +7,7 @@ import { useBoardNew } from "../../../commons/hooks/customs/product/useProductNe
 import { useBoardEdit } from "../../../commons/hooks/customs/product/useProductEdit";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
-import KakaoMap from "../../../commons/kakaomap/kakaomap.index";
+import KakaoMap from "../../../commons/kakaomap/kakaomapWriter/kakaomap.index";
 const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
 });

@@ -29,8 +29,9 @@ const FETCH_USED_DETAIL_ITEM = gql`
       ...defaultInfo
       useditemAddress {
         address
-        zipcode
         addressDetail
+        lat
+        lng
       }
     }
   }
@@ -46,5 +47,6 @@ export const useQueryFetchUsedItem = (useditemId: string) => {
       },
     }
   );
+  console.log(result);
   return result;
 };

@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect } from "react";
 import type { ChangeEvent, KeyboardEvent } from "react";
-import type { IKakaomapProps } from "../../kakaomap/kakaomap.types";
+import type { IKakaomapProps } from "../../kakaomap/kakaomapWriter/kakaomap.types";
 
 declare const window: typeof globalThis & {
   kakao: any;
@@ -37,12 +37,18 @@ export const useKakaomapWriter = (props: IKakaomapProps) => {
 
           marker.setPosition(latlng);
           map.setCenter(latlng);
+          map.setLevel(3);
 
           searchAddrFromCoords(mouseEvent.latLng, function (result: any, status: any) {
             if (status === window.kakao.maps.services.Status.OK) {
+              console.log(result);
               setPlaceAddress(result[0].address_name);
               props.setValue("address", result[0].address_name);
+              props.setValue("lat", result[0].y);
+              props.setValue("lng", result[0].x);
               void props.trigger("address");
+              void props.trigger("lat");
+              void props.trigger("lng");
             }
           });
         });
@@ -59,11 +65,17 @@ export const useKakaomapWriter = (props: IKakaomapProps) => {
       geocoder.addressSearch(placeKeyword, function (result: any, status: any) {
         if (status === window.kakao.maps.services.Status.OK) {
           setPlaceAddress(result[0].address_name);
+          console.log(result);
           props.setValue("address", result[0].address_name);
+          props.setValue("lat", result[0].y);
+          props.setValue("lng", result[0].x);
           void props.trigger("address");
+          void props.trigger("lat");
+          void props.trigger("lng");
           const coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
           marker.setPosition(coords);
           map.setCenter(coords);
+          map.setLevel(3);
         }
       });
     },

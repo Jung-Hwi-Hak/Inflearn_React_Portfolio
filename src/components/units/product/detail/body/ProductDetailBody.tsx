@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import Slider from "react-slick";
 import { useProductDetailBody } from "../../../../commons/hooks/customs/useProductDetailBody";
 import { memo } from "react";
+import KakaoMapDetail from "../../../../commons/kakaomap/kakaomapDetail/kakaomap.index";
 
 function BoardDetailBody(props: IProductDetailBodyProps): JSX.Element {
   const { focusImg, settings, onClickPick } = useProductDetailBody();
@@ -56,9 +57,15 @@ function BoardDetailBody(props: IProductDetailBodyProps): JSX.Element {
         ) : (
           <S.Contents></S.Contents>
         )}
-        <S.Tag>
-          {props.data?.fetchUseditem?.tags?.[0]} <S.Line />
-        </S.Tag>
+        <S.Tag>{props.data?.fetchUseditem?.tags?.[0]}</S.Tag>
+        <S.Line />
+        <KakaoMapDetail
+          address={props.data?.fetchUseditem.useditemAddress?.address}
+          addressDetail={props.data?.fetchUseditem.useditemAddress?.addressDetail}
+          lat={props.data?.fetchUseditem.useditemAddress?.lat}
+          lng={props.data?.fetchUseditem.useditemAddress?.lng}
+        />
+        <S.Line />
       </S.Body>
     </>
   );
