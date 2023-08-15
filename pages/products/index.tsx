@@ -1,8 +1,8 @@
 import { memo } from "react";
-import MarketList from "../../src/components/units/market/list/MarketList.index";
+import ProductList from "../../src/components/units/product/list/ProductList.index";
 
-function MarketPage(): JSX.Element {
-  return <MarketList />;
+function ProductPage(): JSX.Element {
+  return <ProductList />;
 }
 
-export default memo(MarketPage);
+export default memo(ProductPage);

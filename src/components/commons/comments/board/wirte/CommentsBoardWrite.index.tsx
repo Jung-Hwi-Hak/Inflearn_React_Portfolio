@@ -1,5 +1,5 @@
 import type { IBoardComment } from "../../../../../commons/types/generated/types";
-import { useBoardComment } from "../../../hooks/customs/useBoardComment";
+import { useBoardComment } from "../../../hooks/customs/board/useBoardComment";
 import { useQueryIdChecker } from "../../../hooks/customs/useQueryIdChecker";
 import * as S from "./CommentsBoardWrite.styles";
 

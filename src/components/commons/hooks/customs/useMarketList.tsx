@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useQueryFetchUsedItems } from "../queries/useQueryFetchUsedItems";
 
-export const useMarketList = () => {
+export const useProductList = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [isSold, setIsSold] = useState(false);
   const { data, refetch, fetchMore } = useQueryFetchUsedItems(isSold);

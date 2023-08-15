@@ -3,7 +3,7 @@
 // import CommonetsBoardWrite from "../../../src/components/commons/comments/board/wirte/CommentsBoardWrite.index";
 // import { useQueryIdChecker } from "../../../src/components/commons/hooks/customs/useQueryIdChecker";
 // import { useQueryFetchBoardComments } from "../../../src/components/commons/hooks/queries/useQueryFetchBoardComments";
-import ProductDetailIndex from "../../../src/components/units/market/detail/ProductDetail.index";
+import ProductDetailIndex from "../../../src/components/units/product/detail/ProductDetail.index";
 
 export default function BoardDetailPage(): JSX.Element {
   // const { id } = useQueryIdChecker("boardId");

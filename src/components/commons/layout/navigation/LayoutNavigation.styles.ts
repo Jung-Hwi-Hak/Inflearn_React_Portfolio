@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   background-color: #252525;
   font-size: 18px;
   color: #fff;
-  margin-bottom: 50px;
+  margin-bottom: 100px;
 `;
 
 export const MenuItem = styled.div`

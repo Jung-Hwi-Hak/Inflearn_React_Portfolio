@@ -27,13 +27,13 @@ function BestBoardList(): JSX.Element {
                 <S.InfoSubWrapper>
                   <S.InfoSubLeftWrapper>
                     <S.WriterWrapper>
-                      <S.WriterIcon />
+                      <S.WriterIcon rev={undefined} />
                       <S.Writer>{result.data?.fetchBoard.writer}</S.Writer>
                       <S.Date>Date: {getDate(result.data?.fetchBoard.createdAt)}</S.Date>
                     </S.WriterWrapper>
                   </S.InfoSubLeftWrapper>
                   <S.InfoSubRightWrapper>
-                    <S.LikeIcon />
+                    <S.LikeIcon rev={undefined} />
                     <S.LikeCount>{result.data?.fetchBoard.likeCount}</S.LikeCount>
                   </S.InfoSubRightWrapper>
                 </S.InfoSubWrapper>

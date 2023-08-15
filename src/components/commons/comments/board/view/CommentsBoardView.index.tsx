@@ -2,7 +2,7 @@ import { Modal } from "antd";
 import * as S from "./CommentsBoardView.styles";
 import { useToggle } from "../../../hooks/customs/useToggle";
 import type { ICommentsBoardViewProps } from "./CommentsBoardView.types";
-import { useBoardComment } from "../../../hooks/customs/useBoardComment";
+import { useBoardComment } from "../../../hooks/customs/board/useBoardComment";
 import { useQueryIdChecker } from "../../../hooks/customs/useQueryIdChecker";
 import CommentsBoardWrite from "../wirte/CommentsBoardWrite.index";
 import { getDate } from "../../../../../commons/libraries/utils";
@@ -48,7 +48,6 @@ export default function CommentsBoardView(props: ICommentsBoardViewProps) {
           </S.FlexWrapper>
           <S.bottomWrapper>
             <S.DateString>{getDate(props.el?.createdAt)}</S.DateString>
-            <S.ReplyCommentButton>답글</S.ReplyCommentButton>
           </S.bottomWrapper>
         </S.ItemWrapper>
       )}

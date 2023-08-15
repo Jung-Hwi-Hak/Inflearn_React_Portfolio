@@ -7,6 +7,7 @@ const DefaultInfo = gql`
     remarks
     contents
     price
+    tags
     images
     pickedCount
     createdAt
@@ -45,6 +46,5 @@ export const useQueryFetchUsedItem = (useditemId: string) => {
       },
     }
   );
-  console.log(result, "ASNLKASDN");
   return result;
 };

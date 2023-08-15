@@ -1,4 +1,4 @@
-import { useBoardDetailFooter } from "../../../../commons/hooks/customs/useBoardDetailFooter";
+import { useBoardDetailFooter } from "../../../../commons/hooks/customs/board/useBoardDetailFooter";
 import { useQueryIdChecker } from "../../../../commons/hooks/customs/useQueryIdChecker";
 import * as S from "./BoardDetailFooter.styles";
 import type { IBoardDetailFooterProps } from "./BoardDetailFooter.types";

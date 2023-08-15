@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
-import type { ITextTokenProps } from "./BoardList.types";
+import type { ITextTokenProps } from "../ProductList.types";
 
 export const Wrapper = styled.div`
   width: 1200px;
-  margin-bottom: 100px;
+  margin: 100px;
 `;
 
 export const TableTop = styled.div`

@@ -2,9 +2,9 @@ import type { IBoardWriteProps } from "./BoardWrite.types";
 import * as S from "./BoardWrite.styles";
 import { v4 as uuidv4 } from "uuid";
 import UploadsImg from "../../../commons/uploads/img01/UploadsImg01.index";
-import { useBoardWrite } from "../../../commons/hooks/customs/useBoardWrite";
-import { useBoardNew } from "../../../commons/hooks/customs/useBoardNew";
-import { useBoardEdit } from "../../../commons/hooks/customs/useBoardEdit";
+import { useBoardWrite } from "../../../commons/hooks/customs/board/useBoardWrite";
+import { useBoardNew } from "../../../commons/hooks/customs/board/useBoardNew";
+import { useBoardEdit } from "../../../commons/hooks/customs/board/useBoardEdit";
 export default function BoardWriteRepetoring(props: IBoardWriteProps): JSX.Element {
   const boardWriteCommonHooks = useBoardWrite();
   const boardWriteHooks: any = props.isEdit

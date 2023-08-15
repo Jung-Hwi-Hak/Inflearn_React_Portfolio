@@ -8,7 +8,7 @@ import BoardListBody from "./body/BoardListBody";
 import BoardListFooter from "./footer/BoardListFooter";
 import BestBoardListIndex from "./bestList/BestBoardList.index";
 import { memo } from "react";
-import { useBoardList } from "../../../commons/hooks/customs/useBoardList";
+import { useBoardList } from "../../../commons/hooks/customs/board/useBoardList";
 
 function BoardList(): JSX.Element {
   const { activePage, setActivePage, startPage, setStartPage, searchKeyword, setSearchKeyword } =

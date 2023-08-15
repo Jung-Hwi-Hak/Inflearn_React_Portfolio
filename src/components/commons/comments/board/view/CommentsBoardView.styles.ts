@@ -57,13 +57,6 @@ export const bottomWrapper = styled.div`
 export const DateString = styled.div`
   color: lightgray;
 `;
-export const ReplyCommentButton = styled.button`
-  outline: none;
-  border: none;
-  cursor: pointer;
-  color: gray;
-  font-weight: bold;
-`;
 
 export const Star = styled(Rate)`
   padding-left: 20px;

@@ -1,4 +1,8 @@
+import { useMoveToPage } from "./useMoveToPage";
+
 export const useMarketSidebar = () => {
+  const { onClickMoveToPage } = useMoveToPage();
+
   const onClickScrollUp = () => {
     // window.scrollTo({ top: 0, behavior: "smooth" });
     const marketListWrapper = document.getElementById("marketListWrapper");
@@ -13,5 +17,6 @@ export const useMarketSidebar = () => {
   return {
     onClickScrollUp,
     onClickScrollDown,
+    onClickMoveToPage,
   };
 };

@@ -4,7 +4,7 @@ export const globalStyles = css`
   * {
     padding: 0;
     margin: 0;
-    z-index: 99;
+    /* z-index: 99; */
     margin: 0px;
     box-sizing: border-box;
     font-family: myFont;
