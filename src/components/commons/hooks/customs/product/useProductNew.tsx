@@ -20,8 +20,9 @@ export const useBoardNew = (args: IUseBoardEditArgs) => {
           .filter((tag: string) => tag !== "")
           .map((tag: string) => `#${tag}`);
 
+        const files = args.files.filter((el) => typeof el === "object");
         const results = await Promise.all(
-          args.files.map(async (el) => await uploadFileMutation({ variables: { file: el } }))
+          files.map(async (el) => await uploadFileMutation({ variables: { file: el } }))
         );
         const resultFilesUrl = results.map((el) => el.data?.uploadFile.url ?? "");
 
