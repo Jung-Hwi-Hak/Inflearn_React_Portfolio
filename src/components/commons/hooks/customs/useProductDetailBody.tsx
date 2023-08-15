@@ -15,8 +15,8 @@ export const useProductDetailBody = () => {
   const [focusImg, setFocusImg] = useState(1);
   const { id: useditemId } = useQueryIdChecker("productId");
   const [pickMutation] = useMutationToggleUseditemPick();
-  const onClickPick = async () => {
-    const result = await pickMutation({
+  const onClickPick = useCallback(async () => {
+    await pickMutation({
       variables: { useditemId },
       update(cache, { data }) {
         cache.modify({
@@ -28,8 +28,7 @@ export const useProductDetailBody = () => {
         });
       },
     });
-    console.log(result);
-  };
+  }, [useditemId]);
 
   const handleAfterChange = useCallback((event: number) => {
     setFocusImg(event + 1);

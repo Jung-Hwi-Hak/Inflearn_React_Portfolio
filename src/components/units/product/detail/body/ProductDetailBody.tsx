@@ -9,7 +9,6 @@ import { memo } from "react";
 function BoardDetailBody(props: IProductDetailBodyProps): JSX.Element {
   const { focusImg, settings, onClickPick } = useProductDetailBody();
 
-  console.log(props.data?.fetchUseditem);
   return (
     <>
       <S.Body>
@@ -22,7 +21,7 @@ function BoardDetailBody(props: IProductDetailBodyProps): JSX.Element {
             <S.PickCount>{props.data?.fetchUseditem.pickedCount}</S.PickCount>
           </S.IWrapper>
         </S.ProductInfoWrapper>
-        {props.data?.fetchUseditem.images?.[0] !== "none" ? (
+        {props.data?.fetchUseditem.images?.[0] !== undefined ? (
           <>
             <Slider {...settings} slide="">
               {props.data?.fetchUseditem?.images
@@ -57,8 +56,9 @@ function BoardDetailBody(props: IProductDetailBodyProps): JSX.Element {
         ) : (
           <S.Contents></S.Contents>
         )}
-        <S.Tag>{props.data?.fetchUseditem?.tags?.[0]}</S.Tag>
-        <S.Line />
+        <S.Tag>
+          {props.data?.fetchUseditem?.tags?.[0]} <S.Line />
+        </S.Tag>
       </S.Body>
     </>
   );
