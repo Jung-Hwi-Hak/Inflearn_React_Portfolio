@@ -40,6 +40,7 @@ function AnswersProductItem(props: IAnswerProductViewProps) {
       )}
       {isEdit && (
         <AnswerProductWrite
+          contents={props.answersData.contents}
           useditemQuestionId={props.useditemQuestionId}
           useditemQuestionAnswerId={props.answersData._id}
           isEdit={true}

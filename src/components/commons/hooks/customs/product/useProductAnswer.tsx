@@ -16,6 +16,7 @@ interface IUpdateUseditemQuestionAnswerInput {
 }
 
 interface IUesProductAnswerArgs {
+  contents?: string | undefined;
   useditemQuestionId?: string;
   useditemQuestionAnswerId?: string;
   onToggleEdit?: () => void;
@@ -30,8 +31,7 @@ export const useProductAnswer = (args: IUesProductAnswerArgs) => {
     resolver: yupResolver(yupSchema),
     mode: "onChange",
     defaultValues: {
-      //   contents: args.el?.contents ?? "",
-      contents: "",
+      contents: args.contents ?? "",
     },
   });
 

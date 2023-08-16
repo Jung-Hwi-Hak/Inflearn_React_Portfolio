@@ -6,6 +6,7 @@ import { useProductAnswer } from "../../../hooks/customs/product/useProductAnswe
 
 function AnswerProductWrite(props: IAnswerProductWriteProps): JSX.Element {
   const { register, watch, handleSubmit, onCreateAnswer, onUpdateAnswer } = useProductAnswer({
+    contents: props.contents ?? "",
     useditemQuestionId: props.useditemQuestionId ?? "",
     useditemQuestionAnswerId: props.useditemQuestionAnswerId ?? "",
     onToggleEdit: props.onToggleEdit ?? undefined,

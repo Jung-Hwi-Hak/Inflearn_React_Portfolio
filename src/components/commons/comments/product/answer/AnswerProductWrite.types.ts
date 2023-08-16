@@ -1,4 +1,5 @@
 export interface IAnswerProductWriteProps {
+  contents: string;
   isEdit?: boolean;
   onToggleAnswer?: () => void;
   onToggleEdit?: () => void;
