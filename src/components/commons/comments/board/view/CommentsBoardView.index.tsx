@@ -6,8 +6,9 @@ import { useBoardComment } from "../../../hooks/customs/board/useBoardComment";
 import { useQueryIdChecker } from "../../../hooks/customs/useQueryIdChecker";
 import CommentsBoardWrite from "../wirte/CommentsBoardWrite.index";
 import { getDate } from "../../../../../commons/libraries/utils";
+import { memo } from "react";
 
-export default function CommentsBoardView(props: ICommentsBoardViewProps) {
+function CommentsBoardView(props: ICommentsBoardViewProps) {
   const { id } = useQueryIdChecker("boardId");
   const [isEdit, onToggleEdit] = useToggle();
   const [isOpen, onToggleModal] = useToggle();
@@ -55,3 +56,5 @@ export default function CommentsBoardView(props: ICommentsBoardViewProps) {
     </>
   );
 }
+
+export default memo(CommentsBoardView);

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { IBoardComment } from "../../../../../commons/types/generated/types";
 import { useBoardComment } from "../../../hooks/customs/board/useBoardComment";
 import { useQueryIdChecker } from "../../../hooks/customs/useQueryIdChecker";
@@ -10,7 +11,7 @@ interface ICommentsBoardWriteProps {
   children?: JSX.Element;
 }
 
-export default function CommonetsBoardWrite(props: ICommentsBoardWriteProps): JSX.Element {
+function CommonetsBoardWrite(props: ICommentsBoardWriteProps): JSX.Element {
   const { id: boardId } = useQueryIdChecker("boardId");
   const { onClickWrite, onClickUpdate, onChangeStar, register, watch, handleSubmit, starRef } =
     useBoardComment({
@@ -53,3 +54,4 @@ export default function CommonetsBoardWrite(props: ICommentsBoardWriteProps): JS
     </S.Wrapper>
   );
 }
+export default memo(CommonetsBoardWrite);
