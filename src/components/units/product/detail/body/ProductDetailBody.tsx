@@ -59,13 +59,19 @@ function BoardDetailBody(props: IProductDetailBodyProps): JSX.Element {
         )}
         <S.Tag>{props.data?.fetchUseditem?.tags?.[0]}</S.Tag>
         <S.Line />
-        <KakaoMapDetail
-          address={props.data?.fetchUseditem.useditemAddress?.address}
-          addressDetail={props.data?.fetchUseditem.useditemAddress?.addressDetail}
-          lat={props.data?.fetchUseditem.useditemAddress?.lat}
-          lng={props.data?.fetchUseditem.useditemAddress?.lng}
-        />
-        <S.Line />
+        {props.data?.fetchUseditem.useditemAddress?.lat ? (
+          <>
+            <KakaoMapDetail
+              address={props.data?.fetchUseditem.useditemAddress?.address}
+              addressDetail={props.data?.fetchUseditem.useditemAddress?.addressDetail}
+              lat={props.data?.fetchUseditem.useditemAddress?.lat}
+              lng={props.data?.fetchUseditem.useditemAddress?.lng}
+            />
+            <S.Line />
+          </>
+        ) : (
+          <></>
+        )}
       </S.Body>
     </>
   );

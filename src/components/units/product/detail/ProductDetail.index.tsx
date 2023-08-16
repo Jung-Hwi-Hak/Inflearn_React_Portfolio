@@ -9,6 +9,7 @@ import { useQueryIdChecker } from "../../../commons/hooks/customs/useQueryIdChec
 
 const CardWrapper = styled.div`
   border: 1px solid black;
+  min-width: 1200px;
   max-width: 1200px;
   padding: 100px;
   display: flex;

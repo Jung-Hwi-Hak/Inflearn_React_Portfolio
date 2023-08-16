@@ -16,13 +16,11 @@ export const FETCH_BOARD_COMMENTS = gql`
   }
 `;
 
-export const useQueryFetchBoardComments = (
-  variables: IQueryFetchBoardCommentsArgs
-) => {
-  const query = useQuery<
-    Pick<IQuery, "fetchBoardComments">,
-    IQueryFetchBoardCommentsArgs
-  >(FETCH_BOARD_COMMENTS, { variables });
+export const useQueryFetchBoardComments = (variables: IQueryFetchBoardCommentsArgs) => {
+  const query = useQuery<Pick<IQuery, "fetchBoardComments">, IQueryFetchBoardCommentsArgs>(
+    FETCH_BOARD_COMMENTS,
+    { variables }
+  );
 
   return query;
 };

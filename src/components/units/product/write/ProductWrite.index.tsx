@@ -8,10 +8,11 @@ import { useBoardEdit } from "../../../commons/hooks/customs/product/useProductE
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import KakaoMap from "../../../commons/kakaomap/kakaomapWriter/kakaomap.index";
+import { memo } from "react";
 const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
 });
-export default function ProductWrite(props: IProductWriteProps): JSX.Element {
+function ProductWrite(props: IProductWriteProps): JSX.Element {
   const productWriteCommonHooks = useProductWrite();
   const productWriteHooks: any = props.isEdit
     ? useBoardEdit({
@@ -114,3 +115,5 @@ export default function ProductWrite(props: IProductWriteProps): JSX.Element {
     </>
   );
 }
+
+export default memo(ProductWrite);

@@ -1,9 +1,10 @@
+import { memo } from "react";
 import { useBoardDetailFooter } from "../../../../commons/hooks/customs/product/useProductDetailFooter";
 import { useQueryIdChecker } from "../../../../commons/hooks/customs/useQueryIdChecker";
 import * as S from "./ProductDetailFooter.styles";
 import type { IProductDetailFooterProps } from "./ProductDetailFooter.types";
 
-export default function BoardDetailFooter(props: IProductDetailFooterProps): JSX.Element {
+function BoardDetailFooter(props: IProductDetailFooterProps): JSX.Element {
   const { id: productId } = useQueryIdChecker("productId");
   const { onClickDeleteBoard } = useBoardDetailFooter();
   return (
@@ -18,3 +19,5 @@ export default function BoardDetailFooter(props: IProductDetailFooterProps): JSX
     </>
   );
 }
+
+export default memo(BoardDetailFooter);

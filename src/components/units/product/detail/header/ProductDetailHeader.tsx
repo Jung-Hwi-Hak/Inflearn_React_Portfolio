@@ -2,8 +2,9 @@ import { Tooltip } from "antd";
 import { getDate } from "../../../../../commons/libraries/utils";
 import * as S from "./ProductDetailHeader.styles";
 import type { IProductDetailHeaderProps } from "./ProductDetailHeader.types";
+import { memo } from "react";
 
-export default function BoardDetailHeader(props: IProductDetailHeaderProps): JSX.Element {
+function BoardDetailHeader(props: IProductDetailHeaderProps): JSX.Element {
   return (
     <>
       <S.Header>
@@ -28,3 +29,5 @@ export default function BoardDetailHeader(props: IProductDetailHeaderProps): JSX
     </>
   );
 }
+
+export default memo(BoardDetailHeader);

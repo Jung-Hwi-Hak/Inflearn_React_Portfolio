@@ -41,7 +41,7 @@ export const useModal = (): IUseModalReturn => {
   };
 
   const confirmModal = (
-    onOk: () => Promise<void>,
+    onOk: () => Promise<void> | void,
     title?: string,
     content?: string,
     centered?: boolean,

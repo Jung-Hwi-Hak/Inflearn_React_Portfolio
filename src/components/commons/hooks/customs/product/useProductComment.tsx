@@ -1,172 +1,180 @@
-import type { ChangeEvent, RefObject } from "react";
-import { useRef, useState } from "react";
-import { useMutationCreateBoardComment } from "../../mutations/useMutationCreateBoardComment";
-import { FETCH_BOARD_COMMENTS } from "../../queries/useQueryFetchBoardComments";
-import { useMutationUpdateBoardComment } from "../../mutations/useMutationUpdateBoardComment";
-import { useMutationDeleteBoardComment } from "../../mutations/useMutationDeleteBoardComment";
+// import type { ChangeEvent, RefObject } from "react";
+// import { FETCH_BOARD_COMMENTS } from "../../../../units/boardComment/list/BoardCommentList.queries";
+import { FETCH_USEDITEM_QUESTIONS } from "../../queries/useQueryFetchUseditemQuestions";
+// import { useMutationUpdateBoardComment } from "../../mutations/useMutationUpdateBoardComment";
+// import { useMutationDeleteBoardComment } from "../../mutations/useMutationDeleteBoardComment";
 import { Modal } from "antd";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { yupSchema } from "../../../comments/board/wirte/CommentsBoardWrite.validation";
-import type { IBoardComment } from "../../../../../commons/types/generated/types";
+import { yupSchema } from "../../../comments/product/wirte/CommentsBoardWrite.validation";
+// import type { IBoardComment } from "../../../../../commons/types/generated/types";
 import { useForm } from "react-hook-form";
-import type { UseFormWatch, UseFormRegister, UseFormHandleSubmit } from "react-hook-form";
-interface IUpdateBoardCommentInput {
-  contents?: string;
-  rating?: number;
+// import type { UseFormWatch, UseFormRegister, UseFormHandleSubmit } from "react-hook-form";
+import { useMutationCreateUseditemQuestion } from "../../mutations/useMutationCreateUseditemQuestion";
+import { deleteUseditemQuestion } from "../../mutations/useMutationDeleteUseditemQuestion";
+import { useModal } from "../useModal";
+import { useCallback } from "react";
+// interface IUpdateBoardCommentInput {
+//   contents?: string;
+//   rating?: number;
+// }
+
+// interface IUseBoardCommentArgs {
+//   productId: string;
+//   boardCommentId?: string;
+//   onToggleEdit?: () => void;
+//   el?: IBoardComment | undefined;
+// }
+
+// interface IUseBoardCommentReturn {
+//   onClickWrite: (data: any) => Promise<void>;
+//   onClickUpdate: (data: any) => Promise<void>;
+//   onClickDelete: () => Promise<void>;
+//   onChangeStar: (value: number) => void;
+//   register: UseFormRegister<{
+//     writer: string;
+//     contents: string;
+//     star: number | undefined;
+//     password: string;
+//   }>;
+//   handleSubmit: UseFormHandleSubmit<
+//     {
+//       writer: string;
+//       contents: string;
+//       star: number | undefined;
+//       password: string;
+//     },
+//     undefined
+//   >;
+//   watch: UseFormWatch<{
+//     writer: string;
+//     contents: string;
+//     star: number | undefined;
+//     password: string;
+//   }>;
+//   starRef: RefObject<HTMLInputElement>;
+// }
+
+interface IPrev {
+  __ref: string;
 }
 
-interface IUseBoardCommentArgs {
-  boardId: string;
-  boardCommentId?: string;
-  onToggleEdit?: () => void;
-  el?: IBoardComment | undefined;
-}
+export const useProductComment = (args: any): any => {
+  const [createProductComment] = useMutationCreateUseditemQuestion();
+  const [deleteProductComment] = deleteUseditemQuestion();
+  const { confirmModal } = useModal();
+  // const [updateBoardComment] = useMutationUpdateBoardComment();
+  // const [deleteBoardComment] = useMutationDeleteBoardComment();
 
-interface IUseBoardCommentReturn {
-  onClickWrite: (data: any) => Promise<void>;
-  onClickUpdate: (data: any) => Promise<void>;
-  onChangeDeletePassword: (event: ChangeEvent<HTMLInputElement>) => void;
-  onClickDelete: () => Promise<void>;
-  onChangeStar: (value: number) => void;
-  register: UseFormRegister<{
-    writer: string;
-    contents: string;
-    star: number | undefined;
-    password: string;
-  }>;
-  handleSubmit: UseFormHandleSubmit<
-    {
-      writer: string;
-      contents: string;
-      star: number | undefined;
-      password: string;
-    },
-    undefined
-  >;
-  watch: UseFormWatch<{
-    writer: string;
-    contents: string;
-    star: number | undefined;
-    password: string;
-  }>;
-  starRef: RefObject<HTMLInputElement>;
-}
-
-export const useBoardComment = (args: IUseBoardCommentArgs): IUseBoardCommentReturn => {
-  const [myPassword, setMyPassword] = useState("");
-  const [createBoardComment] = useMutationCreateBoardComment();
-  const [updateBoardComment] = useMutationUpdateBoardComment();
-  const [deleteBoardComment] = useMutationDeleteBoardComment();
-  const starRef = useRef<HTMLInputElement>(null);
-  const { register, handleSubmit, watch, reset, setValue } = useForm({
+  const { register, handleSubmit, watch, reset } = useForm({
     resolver: yupResolver(yupSchema),
     mode: "onChange",
     defaultValues: {
-      writer: args.el?.writer ?? "",
-      password: "",
       contents: args.el?.contents ?? "",
-      star: 0,
     },
   });
 
-  const onChangeStar = (value: number) => {
-    setValue("star", value);
-  };
-
-  const onChangeDeletePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setMyPassword(event?.target.value);
-  };
-
-  const onClickDelete = async () => {
-    if (!args.boardCommentId) return;
-    try {
-      await deleteBoardComment({
-        variables: {
-          password: myPassword,
-          boardCommentId: args.boardCommentId,
+  const onClickDelete = useCallback(
+    (useditemQuestionId: string) => () => {
+      confirmModal(
+        async (): Promise<void> => {
+          try {
+            await deleteProductComment({
+              variables: {
+                useditemQuestionId,
+              },
+              update(cache, { data }) {
+                cache.modify({
+                  fields: {
+                    fetchUseditemQuestions: (prev, { readField }) => {
+                      const deletedId = data?.deleteUseditemQuestion;
+                      const filteredPrev = prev.filter(
+                        (el: IPrev) => readField("_id", el) !== deletedId
+                      );
+                      return filteredPrev;
+                    },
+                  },
+                });
+              },
+            });
+          } catch (error) {
+            if (error instanceof Error) Modal.error({ content: error.message });
+          }
         },
-        refetchQueries: [
-          {
-            query: FETCH_BOARD_COMMENTS,
-            variables: { boardId: args.boardId },
-          },
-        ],
-      });
-    } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
-    }
-  };
+        "댓글삭제",
+        "댓글을 삭제하시겠습니까?",
+        true
+      );
+    },
+    []
+  );
 
-  const onClickUpdate = async (data: any) => {
-    if (!data.contents) {
-      alert("내용이 수정되지 않았습니다.");
-      return;
-    }
-    if (!data.password) {
-      alert("비밀번호가 입력되지 않았습니다.");
-      return;
-    }
+  // const onClickUpdate = async (data: any) => {
+  //   if (!data.contents) {
+  //     alert("내용이 수정되지 않았습니다.");
+  //     return;
+  //   }
+  //   if (!data.password) {
+  //     alert("비밀번호가 입력되지 않았습니다.");
+  //     return;
+  //   }
 
-    try {
-      const updateBoardCommentInput: IUpdateBoardCommentInput = {};
-      if (data.contents) updateBoardCommentInput.contents = data.contents;
-      if (data.star) updateBoardCommentInput.rating = data.star;
-      if (!args.boardCommentId) return;
+  //   try {
+  //     const updateBoardCommentInput: IUpdateBoardCommentInput = {};
+  //     if (data.contents) updateBoardCommentInput.contents = data.contents;
+  //     if (data.star) updateBoardCommentInput.rating = data.star;
+  //     if (!args.boardCommentId) return;
 
-      await updateBoardComment({
-        variables: {
-          updateBoardCommentInput,
-          password: data.password,
-          boardCommentId: args.boardCommentId,
-        },
-        refetchQueries: [
-          {
-            query: FETCH_BOARD_COMMENTS,
-            variables: { boardId: args.boardId },
-          },
-        ],
-      });
-      if (args.onToggleEdit) args.onToggleEdit();
-    } catch (error) {
-      if (error instanceof Error) alert(error.message);
-    }
-  };
+  //     await updateBoardComment({
+  //       variables: {
+  //         updateBoardCommentInput,
+  //         password: data.password,
+  //         boardCommentId: args.boardCommentId,
+  //       },
+  //       refetchQueries: [
+  //         {
+  //           query: FETCH_USEDITEM_QUESTIONS,
+  //           variables: { boardId: args.productId },
+  //         },
+  //       ],
+  //     });
+  //     if (args.onToggleEdit) args.onToggleEdit();
+  //   } catch (error) {
+  //     if (error instanceof Error) alert(error.message);
+  //   }
+  // };
 
   const onClickWrite = async (data: any) => {
+    console.log("asdasdads");
+
     try {
-      await createBoardComment({
+      const aa = await createProductComment({
         variables: {
-          createBoardCommentInput: {
-            writer: data.writer,
-            password: data.password,
+          createUseditemQuestionInput: {
             contents: data.contents,
-            rating: data.star,
           },
-          boardId: args.boardId,
+          useditemId: args.productId,
         },
         refetchQueries: [
           {
-            query: FETCH_BOARD_COMMENTS,
-            variables: { boardId: args.boardId },
+            query: FETCH_USEDITEM_QUESTIONS,
+            variables: {
+              useditemId: args.productId,
+            },
           },
         ],
       });
+      console.log(aa);
       reset();
-      // console.log(starRef.current?.count);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
 
   return {
-    onClickWrite,
-    onClickUpdate,
-    onChangeDeletePassword,
     onClickDelete,
-    onChangeStar,
+    onClickWrite,
     register,
     handleSubmit,
     watch,
-    starRef,
   };
 };
