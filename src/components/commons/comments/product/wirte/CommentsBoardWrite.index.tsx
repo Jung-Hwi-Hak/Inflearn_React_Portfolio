@@ -1,13 +1,14 @@
+import { memo } from "react";
 import { useProductComment } from "../../../hooks/customs/product/useProductComment";
 import { useQueryIdChecker } from "../../../hooks/customs/useQueryIdChecker";
 import * as S from "./CommentsBoardWrite.styles";
 import type { ICommentsProductWriteProps } from "./CommentsBoardWrite.types";
 
-export default function CommonetsProductWrite(props: ICommentsProductWriteProps): JSX.Element {
+function CommonetsProductWrite(props: ICommentsProductWriteProps): JSX.Element {
   const { id: productId } = useQueryIdChecker("productId");
   const { onClickWrite, onClickUpdate, register, watch, handleSubmit } = useProductComment({
     productId,
-    boardCommentId: props.el?._id,
+    productCommentId: props.el?._id,
     onToggleEdit: props.onToggleEdit,
     el: props.el,
   });
@@ -40,3 +41,4 @@ export default function CommonetsProductWrite(props: ICommentsProductWriteProps)
     </S.Wrapper>
   );
 }
+export default memo(CommonetsProductWrite);

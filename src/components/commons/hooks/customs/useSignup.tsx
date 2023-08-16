@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { SignupYupSchema } from "../../../units/signup/Signup.validation";
 import { useModal } from "./useModal";
 import { useMutationCreateUser } from "../mutations/useMutationCreateUser";
+import { useCallback } from "react";
 
 export const useSignup = () => {
   const { successModal, warningModal } = useModal();
@@ -16,7 +17,7 @@ export const useSignup = () => {
     },
   });
 
-  const onClickSubmit = () => {
+  const onClickSubmit = useCallback(() => {
     try {
       void mutation({
         variables: {
@@ -27,11 +28,11 @@ export const useSignup = () => {
           },
         },
       });
-      successModal("회원가입이 성공했습니다.", true, "/login");
+      successModal("회원가입", "회원가입이 성공했습니다.", true, "/login");
     } catch (error) {
-      warningModal("회원가입이 실패했습니다.", true);
+      warningModal("회원가입", "회원가입이 실패했습니다.", true);
     }
-  };
+  }, [watch]);
 
   return {
     register,

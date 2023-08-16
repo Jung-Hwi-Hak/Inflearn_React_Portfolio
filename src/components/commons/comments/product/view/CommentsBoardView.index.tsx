@@ -6,8 +6,9 @@ import { getDate } from "../../../../../commons/libraries/utils";
 import { useRecoilState } from "recoil";
 import { userIDState } from "../../../../../commons/stores";
 import { useProductComment } from "../../../hooks/customs/product/useProductComment";
+import { memo } from "react";
 
-export default function CommentsProductView(props: ICommentsBoardViewProps) {
+function CommentsProductView(props: ICommentsBoardViewProps) {
   const [isEdit, onToggleEdit] = useToggle();
   const [userId] = useRecoilState(userIDState);
   const { onClickDelete } = useProductComment(props.el);
@@ -48,3 +49,4 @@ export default function CommentsProductView(props: ICommentsBoardViewProps) {
     </>
   );
 }
+export default memo(CommentsProductView);
