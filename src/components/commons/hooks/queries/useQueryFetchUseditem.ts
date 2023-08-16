@@ -47,6 +47,5 @@ export const useQueryFetchUsedItem = (useditemId: string) => {
       },
     }
   );
-  console.log(result);
   return result;
 };

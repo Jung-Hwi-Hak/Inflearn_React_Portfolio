@@ -1,18 +1,21 @@
-import * as S from "./CommentsBoardView.styles";
+import * as S from "./CommentsProductView.styles";
 import { useToggle } from "../../../hooks/customs/useToggle";
-import type { ICommentsBoardViewProps } from "./CommentsBoardView.types";
-import CommentsBoardWrite from "../wirte/CommentsBoardWrite.index";
+import type { ICommentsProductViewProps } from "./CommentsProductView.types";
+import CommentsProductWrite from "../wirte/CommentsProductWrite.index";
 import { getDate } from "../../../../../commons/libraries/utils";
 import { useRecoilState } from "recoil";
 import { userIDState } from "../../../../../commons/stores";
 import { useProductComment } from "../../../hooks/customs/product/useProductComment";
 import { memo } from "react";
-
-function CommentsProductView(props: ICommentsBoardViewProps) {
+import AnswerProductWrite from "../answer/AnswerProductWrite.index";
+import { useQueryFetchUseditemQuestionAnswers } from "../../../hooks/queries/useQueryFetchUseditemQuestionAnswers";
+import AnswersProductItem from "../answerview/AnswersProductView.index";
+function CommentsProductView(props: ICommentsProductViewProps) {
   const [isEdit, onToggleEdit] = useToggle();
+  const [isAnswer, onToggleAnswer] = useToggle();
   const [userId] = useRecoilState(userIDState);
   const { onClickDelete } = useProductComment(props.el);
-
+  const { data: answersData } = useQueryFetchUseditemQuestionAnswers(props.el._id);
   return (
     <>
       {!isEdit && (
@@ -35,17 +38,28 @@ function CommentsProductView(props: ICommentsBoardViewProps) {
                   src="/images/boardComment/list/option_delete_icon.png/"
                   onClick={onClickDelete(props.el._id)}
                 />
+                <S.AnswerIcon src="/images/answer.svg/" onClick={onToggleAnswer} />
               </S.OptionWrapper>
             ) : (
-              <></>
+              <S.AnswerIcon src="/images/answer.svg/" onClick={onToggleAnswer} />
             )}
           </S.FlexWrapper>
           <S.bottomWrapper>
             <S.DateString>{getDate(props.el?.createdAt)}</S.DateString>
+            {answersData?.fetchUseditemQuestionAnswers.map((el) => (
+              <AnswersProductItem key={el._id} answersData={el} useditemQuestionId={props.el._id} />
+            ))}
+            {isAnswer && (
+              <AnswerProductWrite
+                useditemQuestionId={props.el._id}
+                isEdit={false}
+                onToggleAnswer={onToggleAnswer}
+              />
+            )}
           </S.bottomWrapper>
         </S.ItemWrapper>
       )}
-      {isEdit && <CommentsBoardWrite isEdit={true} onToggleEdit={onToggleEdit} el={props.el} />}
+      {isEdit && <CommentsProductWrite isEdit={true} onToggleEdit={onToggleEdit} el={props.el} />}
     </>
   );
 }

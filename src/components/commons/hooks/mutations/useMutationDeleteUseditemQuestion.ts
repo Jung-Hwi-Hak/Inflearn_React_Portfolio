@@ -7,7 +7,7 @@ const DELETE_USEDITEM_QUESTION = gql`
   }
 `;
 
-export const deleteUseditemQuestion = () => {
+export const useMutationDeleteUseditemQuestion = () => {
   const mutation = useMutation<Pick<IMutation, "deleteUseditemQuestion">>(DELETE_USEDITEM_QUESTION);
   return mutation;
 };

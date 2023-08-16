@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
 import { Rate, Modal } from "antd";
 export const ItemWrapper = styled.div`
-  width: 1200px;
   padding-top: 20px;
-  height: 128px;
+  min-height: 128px;
   border-bottom: 1px solid lightgray;
+  margin: 20px 0;
+  background-color: lightgray;
 `;
 
 export const FlexWrapper = styled.div`
@@ -49,17 +50,19 @@ export const DeleteIcon = styled.img`
   height: 24px;
   cursor: pointer;
 `;
+export const AnswerIcon = styled.img`
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+`;
 export const bottomWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   padding-top: 15px;
   padding-left: 60px;
 `;
 
-export const DateString = styled.div`
-  color: lightgray;
-`;
+export const DateString = styled.div``;
 
 export const Star = styled(Rate)`
   padding-left: 20px;

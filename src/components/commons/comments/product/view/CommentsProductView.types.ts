@@ -1,5 +1,5 @@
 import type { IUseditemQuestion } from "../../../../../commons/types/generated/types";
 
-export interface ICommentsBoardViewProps {
+export interface ICommentsProductViewProps {
   el: IUseditemQuestion;
 }

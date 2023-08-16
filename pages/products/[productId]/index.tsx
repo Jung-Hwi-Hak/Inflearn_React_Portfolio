@@ -1,14 +1,14 @@
 import InfiniteScroll from "react-infinite-scroller";
-import CommentsProductView from "../../../src/components/commons/comments/product/view/CommentsBoardView.index";
-import CommonetsProductWrite from "../../../src/components/commons/comments/product/wirte/CommentsBoardWrite.index";
+import CommentsProductView from "../../../src/components/commons/comments/product/view/CommentsProductView.index";
+import CommonetsProductWrite from "../../../src/components/commons/comments/product/wirte/CommentsProductWrite.index";
 import { useQueryIdChecker } from "../../../src/components/commons/hooks/customs/useQueryIdChecker";
 import ProductDetailIndex from "../../../src/components/units/product/detail/ProductDetail.index";
 import { useQueryFetchUseditemQuestions } from "../../../src/components/commons/hooks/queries/useQueryFetchUseditemQuestions";
+import { memo } from "react";
 
-export default function BoardDetailPage(): JSX.Element {
+function ProductDetailPage(): JSX.Element {
   const { id } = useQueryIdChecker("productId");
   const { data, fetchMore } = useQueryFetchUseditemQuestions(id);
-
   const onLoadMore = () => {
     if (!data) return;
 
@@ -43,4 +43,4 @@ export default function BoardDetailPage(): JSX.Element {
   );
 }
 
-// export default memo(BoardDetailPage);
+export default memo(ProductDetailPage);

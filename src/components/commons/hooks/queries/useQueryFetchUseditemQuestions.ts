@@ -29,6 +29,5 @@ export const useQueryFetchUseditemQuestions = (useditemId: string) => {
       },
     }
   );
-  console.log(result, "asdknalskdnlks");
   return result;
 };
