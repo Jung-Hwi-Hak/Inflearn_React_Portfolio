@@ -3,7 +3,7 @@ import type { IProductDetailBodyProps } from "./ProductDetailBody.types";
 import DOMPurify from "dompurify";
 import { v4 as uuidv4 } from "uuid";
 import Slider from "react-slick";
-import { useProductDetailBody } from "../../../../commons/hooks/customs/useProductDetailBody";
+import { useProductDetailBody } from "../../../../commons/hooks/customs/product/useProductDetailBody";
 import { memo } from "react";
 import KakaoMapDetail from "../../../../commons/kakaomap/kakaomapDetail/kakaomap.index";
 

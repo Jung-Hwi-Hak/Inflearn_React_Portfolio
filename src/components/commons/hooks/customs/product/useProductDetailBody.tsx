@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
-import { useMutationToggleUseditemPick } from "../mutations/useMutationToggleUseditemsPick";
-import { useQueryIdChecker } from "./useQueryIdChecker";
+import { useMutationToggleUseditemPick } from "../../mutations/useMutationToggleUseditemsPick";
+import { useQueryIdChecker } from "../useQueryIdChecker";
 
 // const FETCH_USEDITEMS_COUNT_PICKED = gql`
 //   query {
