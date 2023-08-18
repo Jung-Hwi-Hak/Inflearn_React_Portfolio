@@ -7,7 +7,7 @@ export const globalStyles = css`
     /* z-index: 99; */
     margin: 0px;
     box-sizing: border-box;
-    font-family: myFont;
+    font-family: Noto Sans CJK KR;
     background-color: transparent;
   }
   html,
@@ -16,10 +16,10 @@ export const globalStyles = css`
     width: 100%;
     height: 100%;
   }
-  @font-face {
+  /* @font-face {
     font-family: "myFont";
     src: url("/fonts/NanumGothicCoding-Regular.ttf");
-  }
+  } */
 
   // antd design
   :where(.css-dev-only-do-not-override-15coxvv).ant-modal .ant-modal-content {

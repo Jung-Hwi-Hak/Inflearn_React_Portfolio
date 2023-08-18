@@ -12,7 +12,6 @@ export const Wrapper = styled.div`
 export const SidebarWrapper = styled.div`
   display: flex;
   width: 100%;
-  height: 500px;
   list-style: none;
   flex-direction: column;
   justify-content: space-between;
@@ -24,11 +23,13 @@ export const SidebarWrapper = styled.div`
 export const ScrollUpButton = styled(CaretUpOutlined)`
   width: 100%;
   padding: 15px;
+  text-align: center;
 `;
 
 export const ScrollDownButton = styled(CaretDownOutlined)`
   width: 100%;
   padding: 15px;
+  text-align: center;
 `;
 
 export const CreateButton = styled.button`

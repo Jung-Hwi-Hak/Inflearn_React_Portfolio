@@ -14,15 +14,18 @@ function BoardDetailBody(props: IProductDetailBodyProps): JSX.Element {
     <>
       <S.Body>
         <S.ProductInfoWrapper>
-          <S.Remarks>{props.data?.fetchUseditem?.remarks}</S.Remarks>
-          <S.Name>{props.data?.fetchUseditem?.name}</S.Name>
-          <S.Price>{props.data?.fetchUseditem?.price?.toLocaleString("ko-KR")}원</S.Price>
+          <S.ProductInfoSubWrapper>
+            <S.Remarks>{props.data?.fetchUseditem?.remarks}</S.Remarks>
+            <S.Name>{props.data?.fetchUseditem?.name}</S.Name>
+            <S.Price>{props.data?.fetchUseditem?.price?.toLocaleString("ko-KR")}원</S.Price>
+          </S.ProductInfoSubWrapper>
           <S.IWrapper>
             <S.PickIcon rev={undefined} onClick={onClickPick} />
             <S.PickCount>{props.data?.fetchUseditem.pickedCount}</S.PickCount>
           </S.IWrapper>
         </S.ProductInfoWrapper>
-        {props.data?.fetchUseditem.images?.[0] !== undefined ? (
+        {props.data?.fetchUseditem.images?.[0] !== undefined &&
+        props.data?.fetchUseditem.images?.[0] !== "none" ? (
           <>
             <Slider {...settings} slide="">
               {props.data?.fetchUseditem?.images

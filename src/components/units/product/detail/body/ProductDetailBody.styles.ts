@@ -6,50 +6,65 @@ interface UploadImgProps {
 
 export const Body = styled.div`
   width: 100%;
-  min-height: 800px;
+  /* min-height: 800px; */
 `;
 
 export const ProductInfoWrapper = styled.div`
   position: relative;
   height: 150px;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   margin-bottom: 80px;
 `;
-
+export const ProductInfoSubWrapper = styled.div`
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+`;
 export const Remarks = styled.span`
   color: #bdbdbd;
   font-size: 18px;
   font-weight: 500;
+  line-height: 26.64px;
+  margin-bottom: 4px;
 `;
 
 export const Name = styled.h2`
   color: #4f4f4f;
   font-weight: bold;
+  margin-bottom: 15px;
+  line-height: 35.52px;
 `;
 
-export const Price = styled.h1``;
+export const Price = styled.h1`
+  font-family: Noto Sans CJK KR;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 53px;
+  letter-spacing: 0em;
+  text-align: left;
+`;
 
 export const Contents = styled.div`
   font-size: 18px;
   font-weight: 500;
+  line-height: 26.64px;
   margin-bottom: 40px;
   min-height: 150px;
 `;
 
 export const IWrapper = styled.div`
-  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
-  right: 20px;
+  margin-right: 20px;
   top: 0;
   color: #ffd700;
 `;
 
 export const PickIcon = styled(ShoppingOutlined)`
   font-size: 36px;
+
   cursor: pointer;
 `;
 

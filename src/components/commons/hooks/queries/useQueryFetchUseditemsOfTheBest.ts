@@ -10,6 +10,9 @@ const FETCH_USED_ITEMS_BEST = gql`
       images
       createdAt
       pickedCount
+      seller {
+        name
+      }
     }
   }
 `;

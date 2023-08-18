@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import type { QueryResult } from "@apollo/client";
 import type { IQuery, IQueryFetchUseditemArgs } from "../../../../commons/types/generated/types";
 const DefaultInfo = gql`
   fragment defaultInfo on Useditem {
@@ -49,7 +50,9 @@ export const FETCH_USED_DETAIL_ITEM = gql`
   ${UseditemAddress}
 `;
 
-export const useQueryFetchUsedItem = (useditemId: string) => {
+export const useQueryFetchUsedItem = (
+  useditemId: string
+): QueryResult<Pick<IQuery, "fetchUseditem">, IQueryFetchUseditemArgs> => {
   const result = useQuery<Pick<IQuery, "fetchUseditem">, IQueryFetchUseditemArgs>(
     FETCH_USED_DETAIL_ITEM,
     {
@@ -58,6 +61,5 @@ export const useQueryFetchUsedItem = (useditemId: string) => {
       },
     }
   );
-  console.log(result);
   return result;
 };

@@ -70,18 +70,6 @@ export const useProductWrite = (args: IUseProductWriteArgs): IUseBoardWriteCommo
       images: args.data?.fetchUseditem.images ?? ["", "", ""],
     },
   });
-
-  // useEffect(() => {
-  //   if (args.data?.fetchUseditem.images === null || args.data?.fetchUseditem.images === undefined)
-  //     return;
-  //   const tempImages = args.data?.fetchUseditem.images.map(
-  //     (el, index) => `https://storage.googleapis.com/${String(el)}`
-  //   );
-  //   tempImages.forEach((url, index) => {
-  //     fileUrls[index] = url ?? "asdasd";
-  //   });
-  //   setFileUrls([...fileUrls]);
-  // }, []);
   const onChangeContents = useCallback((value: string): void => {
     setValue("contents", value === "<p><br></p>" ? "" : value);
     void trigger("contents");

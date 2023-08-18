@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { UserOutlined, ShoppingOutlined } from "@ant-design/icons";
+import { ShoppingOutlined } from "@ant-design/icons";
 
 export const BestProductsSection = styled.section`
   width: 100%;
@@ -45,8 +45,18 @@ export const BestProductInfoWrapper = styled.div`
   justify-content: space-between;
   padding: 15px;
 `;
-export const BestProductInfoTitle = styled.h3`
+export const BestProductName = styled.h3`
   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
+export const BestProductRemarks = styled.span`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  font-weight: 500;
+  color: #4f4f4f;
 `;
 
 export const InfoSubWrapper = styled.div`
@@ -57,11 +67,9 @@ export const InfoSubLeftWrapper = styled.div`
   width: 80%;
   text-align: left;
 `;
-export const WriterWrapper = styled.div``;
-export const WriterIcon = styled(UserOutlined)`
-  text-align: left;
-  width: 17%;
-  margin-right: 3%;
+export const WriterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 export const Writer = styled.span`
   display: inline-block;

@@ -4,8 +4,7 @@ import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
 import { memo, useCallback } from "react";
 import type { IUseditem } from "../../../../../commons/types/generated/types";
 import InfiniteScroll from "react-infinite-scroller";
-import ProductSideBar from "../sidebar";
-import DOMPurify from "dompurify";
+import ProductSideBar from "../sidebar/ProductSidebar.index";
 
 function ProductListBody(props: any): JSX.Element {
   const { onClickMoveToPage } = useMoveToPage();
@@ -18,7 +17,7 @@ function ProductListBody(props: any): JSX.Element {
         {/* <link rel="preload" href="./images/no_image.png" /> */}
         <InfiniteScroll pageStart={0} loadMore={props.onLoadMore} hasMore={true} useWindow={false}>
           {props.data?.fetchUseditems.map((el: IUseditem, index: number) => (
-            <S.ItemCard key={el._id ?? index}>
+            <S.ItemWrapper key={el._id ?? index} onClick={onClickMoveToPage(`/products/${el._id}`)}>
               <S.ItemImage
                 src={
                   el.images?.[0]
@@ -28,21 +27,23 @@ function ProductListBody(props: any): JSX.Element {
                 onError={handleImgError}
                 alt="상품이미지"
               />
-              {typeof window !== "undefined" ? (
-                <S.ColumnTitle
-                  id={el._id}
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(el.contents ?? ""),
-                  }}
-                  onClick={onClickMoveToPage(`/products/${el._id}`)}
-                ></S.ColumnTitle>
-              ) : (
-                <S.ColumnTitle></S.ColumnTitle>
-              )}
+              <S.ItemInfoWrapper>
+                <S.ItenName>{el.name}</S.ItenName>
+                <S.ItemRemarks>{el.remarks}</S.ItemRemarks>
+                <S.ItemTags>{el.tags}</S.ItemTags>
 
-              <S.ColumnBasic>{el.seller?.name}</S.ColumnBasic>
-              <S.ColumnBasic>{getDate(el.createdAt)}</S.ColumnBasic>
-            </S.ItemCard>
+                <S.ItemInfoFooter>
+                  <S.SellerName>{el.seller?.name}</S.SellerName>
+                  <S.SellerDate>{getDate(el.createdAt)}</S.SellerDate>
+                  <S.PickIcon rev={undefined} />
+                  <S.PickCount>{el.pickedCount}</S.PickCount>
+                </S.ItemInfoFooter>
+              </S.ItemInfoWrapper>
+              <S.ItemInfoRight>
+                <S.ItemPriceIcon src="./images/buyIcon.png" />
+                <S.ItemPrice>{el.price?.toLocaleString("ko-KR")}원</S.ItemPrice>
+              </S.ItemInfoRight>
+            </S.ItemWrapper>
           )) ?? <></>}
         </InfiniteScroll>
       </S.Section>

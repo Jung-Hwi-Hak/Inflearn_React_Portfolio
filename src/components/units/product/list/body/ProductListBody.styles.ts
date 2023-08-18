@@ -1,15 +1,16 @@
 import styled from "@emotion/styled";
-// import type { ITextTokenProps } from "../MarketList.types";
+import { ShoppingOutlined } from "@ant-design/icons";
 
 export const Wrapper = styled.div`
-  position: relative;
+  /* position: relative; */
   display: flex;
+  margin-top: 20px;
 `;
 
 export const Section = styled.section`
   overflow: hidden scroll;
-  width: 70%;
-  height: 600px;
+  width: 80%;
+  height: 700px;
   scroll-behavior: auto;
 
   ::-webkit-scrollbar {
@@ -23,7 +24,7 @@ export const Section = styled.section`
   }
 `;
 
-export const ItemCard = styled.div`
+export const ItemWrapper = styled.div`
   display: flex;
   flex-direction: row;
   height: 200px;
@@ -35,21 +36,64 @@ export const ItemCard = styled.div`
 `;
 
 export const ItemImage = styled.img`
-  width: 350px;
+  width: 160px;
 `;
 
-export const ColumnBasic = styled.div`
-  width: 15%;
-  text-align: center;
+export const ItemInfoWrapper = styled.div`
+  width: 60%;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
 `;
-
-export const ColumnTitle = styled.div`
-  width: 50%;
-  text-align: center;
-  cursor: pointer;
+export const ItenName = styled.h3`
   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
+export const ItemRemarks = styled.span`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  font-weight: 500;
+  color: #4f4f4f;
+`;
+export const ItemTags = styled.span`
+  font-size: 16px;
+  font-weight: 500;
+  color: #bdbdbd;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
-// export const SearchKeyword = styled.span`
-//   color: ${(props: ITextTokenProps) => (props.isMatch ? "tomato" : "black")};
-// `;
+export const ItemInfoFooter = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+export const SellerName = styled.span`
+  text-align: center;
+`;
+
+export const SellerDate = styled.span`
+  margin-left: 15px;
+  text-align: center;
+`;
+export const PickIcon = styled(ShoppingOutlined)`
+  margin-left: 10px;
+`;
+export const PickCount = styled.span``;
+
+export const ItemInfoRight = styled.div`
+  display: flex;
+  align-items: center;
+`;
+export const ItemPriceIcon = styled.img`
+  width: 24px;
+`;
+export const ItemPrice = styled.span`
+  margin-left: 10px;
+  font-size: 24px;
+  font-weight: 700;
+`;

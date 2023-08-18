@@ -4,7 +4,6 @@ import type { IUseditem } from "../../../../../commons/types/generated/types";
 import * as S from "./BestProductList.styles";
 import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
 import { useQueryFetchUseditemsOfTheBest } from "../../../../commons/hooks/queries/useQueryFetchUseditemsOfTheBest";
-import DOMPurify from "dompurify";
 
 function BestProductList(): JSX.Element {
   const { data: dataProducsData } = useQueryFetchUseditemsOfTheBest();
@@ -26,21 +25,12 @@ function BestProductList(): JSX.Element {
                   alt="베스트 상품 이미지"
                 />
                 <S.BestProductInfoWrapper>
-                  {typeof window !== "undefined" ? (
-                    <S.BestProductInfoTitle
-                      dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(el.remarks ?? ""),
-                      }}
-                    ></S.BestProductInfoTitle>
-                  ) : (
-                    <S.BestProductInfoTitle></S.BestProductInfoTitle>
-                  )}
-
+                  <S.BestProductName>{el.name}</S.BestProductName>
+                  <S.BestProductRemarks>{el.remarks}</S.BestProductRemarks>
                   <S.InfoSubWrapper>
                     <S.InfoSubLeftWrapper>
                       <S.WriterWrapper>
-                        <S.WriterIcon rev={""} />
-                        <S.Writer>{el.name}</S.Writer>
+                        <S.Writer>{el.seller?.name}</S.Writer>
                         <S.Date>Date: {getDate(el.createdAt)}</S.Date>
                       </S.WriterWrapper>
                     </S.InfoSubLeftWrapper>
