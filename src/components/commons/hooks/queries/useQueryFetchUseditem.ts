@@ -14,28 +14,39 @@ const DefaultInfo = gql`
   }
 `;
 
-// const FETCH_USED_ITEM = gql`
-//   query fetchUseditem($useditemId: ID!) {
-//     fetchUseditem(useditemId: $useditemId) {
-//       ...defaultInfo
-//     }
-//   }
-//   ${DefaultInfo}
-// `;
+const Seller = gql`
+  fragment seller on User {
+    _id
+    email
+    name
+    picture
+  }
+`;
+
+const UseditemAddress = gql`
+  fragment useditemAddress on UseditemAddress {
+    address
+    addressDetail
+    lat
+    lng
+  }
+`;
 
 export const FETCH_USED_DETAIL_ITEM = gql`
   query fetchUseditem($useditemId: ID!) {
     fetchUseditem(useditemId: $useditemId) {
       ...defaultInfo
       useditemAddress {
-        address
-        addressDetail
-        lat
-        lng
+        ...useditemAddress
+      }
+      seller {
+        ...seller
       }
     }
   }
   ${DefaultInfo}
+  ${Seller}
+  ${UseditemAddress}
 `;
 
 export const useQueryFetchUsedItem = (useditemId: string) => {
@@ -47,5 +58,6 @@ export const useQueryFetchUsedItem = (useditemId: string) => {
       },
     }
   );
+  console.log(result);
   return result;
 };

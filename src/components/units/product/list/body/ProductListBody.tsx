@@ -15,7 +15,7 @@ function ProductListBody(props: any): JSX.Element {
   return (
     <S.Wrapper>
       <S.Section id={"marketListWrapper"}>
-        <link rel="preload" href="./images/no_image.png" />
+        {/* <link rel="preload" href="./images/no_image.png" /> */}
         <InfiniteScroll pageStart={0} loadMore={props.onLoadMore} hasMore={true} useWindow={false}>
           {props.data?.fetchUseditems.map((el: IUseditem, index: number) => (
             <S.ItemCard key={el._id ?? index}>

@@ -11,7 +11,7 @@ function BoardDetailHeader(props: IProductDetailHeaderProps): JSX.Element {
         <S.AvatarWrapper>
           <S.Avatar src="/images/avatar.png" />
           <S.Info>
-            <S.Writer>{props.data?.fetchUseditem?.name}</S.Writer>
+            <S.Writer>{props.data?.fetchUseditem?.seller?.name}</S.Writer>
             <S.CreatedAt>{getDate(props.data?.fetchUseditem?.createdAt)}</S.CreatedAt>
           </S.Info>
         </S.AvatarWrapper>
