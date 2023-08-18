@@ -13,7 +13,7 @@ const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
 });
 function ProductWrite(props: IProductWriteProps): JSX.Element {
-  const productWriteCommonHooks = useProductWrite();
+  const productWriteCommonHooks = useProductWrite({ data: props.data });
   const productWriteHooks: any = props.isEdit
     ? useBoardEdit({
         setValue: productWriteCommonHooks.setValue,
@@ -54,6 +54,7 @@ function ProductWrite(props: IProductWriteProps): JSX.Element {
           <S.Label>상품설명</S.Label>
           <ReactQuill
             onChange={productWriteCommonHooks.onChangeContents}
+            defaultValue={props.data?.fetchUseditem.contents}
             style={{ height: "300px", marginBottom: "20px" }}
           />
 
@@ -78,6 +79,7 @@ function ProductWrite(props: IProductWriteProps): JSX.Element {
           <S.Error>{errors.tags?.message}</S.Error>
         </S.InputWrapper>
         <KakaoMap
+          data={props.data}
           register={productWriteCommonHooks.register}
           setValue={productWriteCommonHooks.setValue}
           trigger={productWriteCommonHooks.trigger}
@@ -89,6 +91,7 @@ function ProductWrite(props: IProductWriteProps): JSX.Element {
             {productWriteCommonHooks.fileUrls.map((el, index) => (
               <UploadsImg
                 key={uuidv4()}
+                isEdit={props.isEdit}
                 index={index}
                 files={productWriteCommonHooks.files}
                 setFiles={productWriteCommonHooks.setFiles}

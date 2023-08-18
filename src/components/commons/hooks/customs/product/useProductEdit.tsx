@@ -1,12 +1,16 @@
-import { useCallback, useEffect, useMemo } from "react";
-import { useMutationUpdateBoard } from "../../mutations/useMutationUpdateBoard";
+import { useCallback } from "react";
 import { useMutationUploadFile } from "../../mutations/useMutationUploadFile";
-import { useQueryFetchBoard } from "../../queries/useQueryFetchBoard";
 import { useQueryIdChecker } from "../useQueryIdChecker";
 import { Modal } from "antd";
 import type { IProductWriteYupSchema } from "../../../../units/product/write/ProductWrite.validation";
 import type { UseFormWatch, UseFormSetValue } from "react-hook-form";
 import { useModal } from "../useModal";
+import { useMutationUpdateUseditem } from "../../mutations/useMutationUpdateUseditem";
+import type {
+  IUpdateUseditemInput,
+  IUseditemAddressInput,
+} from "../../../../../commons/types/generated/types";
+import { FETCH_USED_DETAIL_ITEM } from "../../queries/useQueryFetchUseditem";
 interface IUseBoardEditArgs {
   setValue: UseFormSetValue<IProductWriteYupSchema>;
   files: File[];
@@ -14,50 +18,58 @@ interface IUseBoardEditArgs {
 }
 
 export const useBoardEdit = (args: IUseBoardEditArgs) => {
-  const { id: boardId } = useQueryIdChecker("boardId");
-  const [mutationUpdateBoard] = useMutationUpdateBoard();
+  const { id: useditemId } = useQueryIdChecker("productId");
+  const [mutationUpdateProduct] = useMutationUpdateUseditem();
   const [uploadFileMutation] = useMutationUploadFile();
   const { successModal } = useModal();
-
-  const { data } = useQueryFetchBoard();
-  const memoizedWriter = useMemo(() => data?.fetchBoard.writer ?? "", [data]);
-  const memoizedTitle = useMemo(() => data?.fetchBoard.title ?? "", [data]);
-  const memoizedContents = useMemo(() => data?.fetchBoard.contents ?? "", [data]);
-
-  useEffect(() => {
-    args.setValue("name", memoizedWriter);
-    args.setValue("remarks", memoizedTitle);
-    args.setValue("contents", memoizedContents);
-  }, [memoizedWriter, memoizedTitle, memoizedContents, args.setValue]);
 
   const onClickUpdateSubmit = useCallback(
     async (data: any) => {
       try {
-        const results = await Promise.all(
-          args.files.map(async (el) => await uploadFileMutation({ variables: { file: el } }))
-        );
-        const resultFilesUrl = results.map((el) => el.data?.uploadFile.url ?? "");
-        const result = await mutationUpdateBoard({
+        const updateUseditemInput: IUpdateUseditemInput = {};
+        if (data.contents) updateUseditemInput.contents = data.contents;
+        if (data.name) updateUseditemInput.name = data.name;
+        if (data.price) updateUseditemInput.price = Number(data.price);
+        if (data.tags) updateUseditemInput.tags = data.tags;
+        if (data.remarks) updateUseditemInput.remarks = data.remarks;
+        if (args.files.length > 0) {
+          const promiseReulst = await Promise.all(
+            args.files.map(async (el) => await uploadFileMutation({ variables: { file: el } }))
+          );
+          const resultFilesUrl = promiseReulst.map((el) => el.data?.uploadFile.url ?? "");
+
+          if (resultFilesUrl) updateUseditemInput.images = resultFilesUrl;
+        }
+        const useditemAddress: IUseditemAddressInput = {};
+        console.log(data.lat, data.lng);
+        if (data.address) useditemAddress.address = data.address;
+        if (data.addressDetail) useditemAddress.addressDetail = data.addressDetail;
+        if (data.lat) useditemAddress.lat = parseFloat(data.lat);
+        if (data.lng) useditemAddress.lng = parseFloat(data.lng);
+        if (useditemAddress) updateUseditemInput.useditemAddress = useditemAddress;
+
+        const result = await mutationUpdateProduct({
           variables: {
-            boardId,
-            updateBoardInput: {
-              title: data.title,
-              contents: data.contents,
-              youtubeUrl: data.youtubeUrl,
-              boardAddress: {
-                zipcode: data.zipcode,
-                address: data.address,
-                addressDetail: data.addressDetail,
+            useditemId,
+            updateUseditemInput,
+          },
+          update(cache, { data }) {
+            cache.writeQuery({
+              query: FETCH_USED_DETAIL_ITEM,
+              variables: { useditemId },
+              data: {
+                fetchUseditem: {
+                  useditemId: data?.updateUseditem._id,
+                },
               },
-              images: resultFilesUrl,
-            },
+            });
           },
         });
         successModal(
           "게시글 수정",
           "게시글 수정 완료",
           true,
-          `/boards/${String(result.data?.updateBoard._id)}`
+          `/products/${String(result.data?.updateUseditem._id)}`
         );
       } catch (error) {
         if (error instanceof Error) Modal.warning({ content: error.message });

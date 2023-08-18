@@ -23,7 +23,7 @@ const DefaultInfo = gql`
 //   ${DefaultInfo}
 // `;
 
-const FETCH_USED_DETAIL_ITEM = gql`
+export const FETCH_USED_DETAIL_ITEM = gql`
   query fetchUseditem($useditemId: ID!) {
     fetchUseditem(useditemId: $useditemId) {
       ...defaultInfo

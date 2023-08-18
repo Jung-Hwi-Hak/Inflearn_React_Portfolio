@@ -5,8 +5,11 @@ import { getDate } from "../../../../../commons/libraries/utils";
 import { memo } from "react";
 import { useProductAnswer } from "../../../hooks/customs/product/useProductAnswer";
 import AnswerProductWrite from "../answer/AnswerProductWrite.index";
+import { useRecoilState } from "recoil";
+import { userIDState } from "../../../../../commons/stores";
 
 function AnswersProductItem(props: IAnswerProductViewProps) {
+  const [userId] = useRecoilState(userIDState);
   const [isEdit, onToggleEdit] = useToggle();
   const { onDeleteAnswer } = useProductAnswer({});
   return (
@@ -22,16 +25,20 @@ function AnswersProductItem(props: IAnswerProductViewProps) {
               </S.WriterWrapper>
             </S.MainWrapper>
 
-            <S.OptionWrapper>
-              <S.UpdateIcon
-                src="/images/boardComment/list/option_update_icon.png/"
-                onClick={onToggleEdit}
-              />
-              <S.DeleteIcon
-                src="/images/boardComment/list/option_delete_icon.png/"
-                onClick={onDeleteAnswer(props.answersData._id)}
-              />
-            </S.OptionWrapper>
+            {props.answersData.user.email === userId ? (
+              <S.OptionWrapper>
+                <S.UpdateIcon
+                  src="/images/boardComment/list/option_update_icon.png/"
+                  onClick={onToggleEdit}
+                />
+                <S.DeleteIcon
+                  src="/images/boardComment/list/option_delete_icon.png/"
+                  onClick={onDeleteAnswer(props.answersData._id)}
+                />
+              </S.OptionWrapper>
+            ) : (
+              <></>
+            )}
           </S.FlexWrapper>
           <S.bottomWrapper>
             <S.DateString>{getDate(props.answersData.createdAt)}</S.DateString>

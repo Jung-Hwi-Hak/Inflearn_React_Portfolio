@@ -50,9 +50,10 @@ export const DeleteIcon = styled.img`
   cursor: pointer;
 `;
 export const AnswerIcon = styled.img`
-  width: 24px;
+  width: 18px;
   height: 24px;
   cursor: pointer;
+  margin-left: 15px;
 `;
 export const bottomWrapper = styled.div`
   display: flex;

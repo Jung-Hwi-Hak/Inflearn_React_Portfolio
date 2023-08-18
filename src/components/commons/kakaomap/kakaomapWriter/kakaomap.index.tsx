@@ -1,8 +1,9 @@
+import { memo } from "react";
 import { useKakaomapWriter } from "../../hooks/customs/useKakaomapWriter";
 import * as S from "./kakaomap.styles";
 import type { IKakaomapProps } from "./kakaomap.types";
 
-export default function KakaoMap(props: IKakaomapProps): JSX.Element {
+function KakaoMap(props: IKakaomapProps): JSX.Element {
   const { onChangePlaceKeyword, placeAddress, searchPlace } = useKakaomapWriter(props);
 
   return (
@@ -33,3 +34,4 @@ export default function KakaoMap(props: IKakaomapProps): JSX.Element {
     </S.KakaoMapWrapper>
   );
 }
+export default memo(KakaoMap);

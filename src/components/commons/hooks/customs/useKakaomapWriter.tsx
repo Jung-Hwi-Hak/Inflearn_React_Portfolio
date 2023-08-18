@@ -13,6 +13,7 @@ export const useKakaomapWriter = (props: IKakaomapProps) => {
   const [placeAddress, setPlaceAddress] = useState("");
   useEffect(() => {
     const script = document.createElement("script");
+
     script.src =
       "//dapi.kakao.com/v2/maps/sdk.js?appkey=512ea35caeeaa67365f5a84914ff3e7d&libraries=services&autoload=false";
     document.head.appendChild(script);
@@ -20,12 +21,19 @@ export const useKakaomapWriter = (props: IKakaomapProps) => {
     script.onload = () => {
       window.kakao.maps.load(function () {
         const container = document.getElementById("map");
+        const lat = props.data?.fetchUseditem.useditemAddress?.lat ?? 33.450701;
+        const lng = props.data?.fetchUseditem.useditemAddress?.lng ?? 126.570667;
+        const address = props.data?.fetchUseditem.useditemAddress?.address ?? "";
         geocoder = new window.kakao.maps.services.Geocoder();
         const options = {
-          center: new window.kakao.maps.LatLng(33.450701, 126.570667),
+          center: new window.kakao.maps.LatLng(lat, lng),
           level: 3,
         };
-
+        if (address !== "") {
+          setPlaceAddress(address);
+          props.setValue("address", address);
+          void props.trigger("address");
+        }
         map = new window.kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
         marker = new window.kakao.maps.Marker({
           position: map.getCenter(),
@@ -38,17 +46,17 @@ export const useKakaomapWriter = (props: IKakaomapProps) => {
           marker.setPosition(latlng);
           map.setCenter(latlng);
           map.setLevel(3);
+          console.log(mouseEvent);
 
+          props.setValue("lat", latlng.getLat());
+          props.setValue("lng", latlng.getLng());
+          void props.trigger("lat");
+          void props.trigger("lng");
           searchAddrFromCoords(mouseEvent.latLng, function (result: any, status: any) {
             if (status === window.kakao.maps.services.Status.OK) {
-              console.log(result);
               setPlaceAddress(result[0].address_name);
               props.setValue("address", result[0].address_name);
-              props.setValue("lat", result[0].y);
-              props.setValue("lng", result[0].x);
               void props.trigger("address");
-              void props.trigger("lat");
-              void props.trigger("lng");
             }
           });
         });
@@ -65,7 +73,6 @@ export const useKakaomapWriter = (props: IKakaomapProps) => {
       geocoder.addressSearch(placeKeyword, function (result: any, status: any) {
         if (status === window.kakao.maps.services.Status.OK) {
           setPlaceAddress(result[0].address_name);
-          console.log(result);
           props.setValue("address", result[0].address_name);
           props.setValue("lat", result[0].y);
           props.setValue("lng", result[0].x);
