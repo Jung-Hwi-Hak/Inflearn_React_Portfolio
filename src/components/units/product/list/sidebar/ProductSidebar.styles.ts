@@ -4,9 +4,15 @@ import { CaretUpOutlined, CaretDownOutlined } from "@ant-design/icons";
 export const Wrapper = styled.div`
   position: relative;
   display: flex;
+  min-width: 200px;
   flex-direction: column;
-  max-width: 200px;
   margin-left: 50px;
+`;
+
+export const Title = styled.span`
+  padding-top: 15px;
+  font-size: 18px;
+  font-weight: 700;
 `;
 
 export const SidebarWrapper = styled.div`
@@ -20,7 +26,6 @@ export const SidebarWrapper = styled.div`
 `;
 
 export const ScrollUpButton = styled(CaretUpOutlined)`
-  width: 100%;
   padding: 15px;
   margin: 0 auto;
   display: block;
@@ -28,7 +33,6 @@ export const ScrollUpButton = styled(CaretUpOutlined)`
 
 export const ScrollDownButton = styled(CaretDownOutlined)`
   display: block;
-  width: 100%;
   padding: 15px;
   margin: 0 auto;
 `;

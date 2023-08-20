@@ -33,6 +33,7 @@ export default function LayoutBannerUI(props: LayoutBannerUIProps): JSX.Element 
     // ["Firebase", "/firebasePage"],
     // ["Public APIs", "/publicApis"],
     ["자유게시판", "/boards"],
+    ["중고마켓", "/products"],
     ["내 정보", "/mypage"],
   ];
   return (
