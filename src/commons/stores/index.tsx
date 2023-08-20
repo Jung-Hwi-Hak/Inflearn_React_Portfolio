@@ -20,6 +20,10 @@ export const loginToggleState = atom({
   key: "loginToggleState",
   default: false,
 });
+export const productIsSoldState = atom({
+  key: "productIsSoldState",
+  default: false,
+});
 
 export const restoreAccessTokenLoadable = selector({
   key: "restoreAccessTokenLoadable",

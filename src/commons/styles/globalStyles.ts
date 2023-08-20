@@ -4,7 +4,6 @@ export const globalStyles = css`
   * {
     padding: 0;
     margin: 0;
-    /* z-index: 99; */
     margin: 0px;
     box-sizing: border-box;
     font-family: Noto Sans CJK KR;
@@ -36,9 +35,6 @@ export const globalStyles = css`
   .ant-modal-confirm-success .ant-btn-primary:hover {
     background-color: black;
   }
-  /* .ant-modal-confirm-success .anticon-check-circle {
-    display: none;
-  } */
 
   // warning modal
   .ant-modal-confirm-warning .ant-btn-primary {
@@ -47,9 +43,6 @@ export const globalStyles = css`
   .ant-modal-confirm-warning .ant-btn-primary:hover {
     background-color: tomato;
   }
-  /* .anticon-exclamation-circle {
-    display: none;
-  } */
 
   /* Film Animations */
   // Grain

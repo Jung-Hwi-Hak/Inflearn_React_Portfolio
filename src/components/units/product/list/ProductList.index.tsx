@@ -7,13 +7,12 @@ import { memo } from "react";
 import { useProductList } from "../../../commons/hooks/customs/useMarketList";
 
 function ProductList(): JSX.Element {
-  const { data, refetch, onLoadMore, onChangeIsSold, searchKeyword, setSearchKeyword } =
-    useProductList();
+  const { data, refetch, onLoadMore, searchKeyword, setSearchKeyword } = useProductList();
 
   return (
     <S.Wrapper>
       <BestProductListIndex />
-      <ProductListHeader onChangeIsSold={onChangeIsSold}>
+      <ProductListHeader>
         <SearchBar01
           refetch={refetch}
           searchKeyword={searchKeyword}

@@ -1,13 +1,26 @@
 import { useCallback, useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { useQueryFetchUsedItems } from "../queries/useQueryFetchUsedItems";
+import type { IQuery, IQueryFetchUseditemsArgs } from "../../../../commons/types/generated/types";
+import type { ApolloQueryResult } from "@apollo/client";
+import { useRecoilState } from "recoil";
+import { productIsSoldState } from "../../../../commons/stores";
 
-export const useProductList = () => {
+interface IUseProductListReturn {
+  data: Pick<IQuery, "fetchUseditems"> | undefined;
+  refetch: (
+    variables?: Partial<IQueryFetchUseditemsArgs> | undefined
+  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchUseditems">>>;
+  onLoadMore: () => void;
+  searchKeyword: string;
+  setSearchKeyword: Dispatch<SetStateAction<string>>;
+}
+
+export const useProductList = (): IUseProductListReturn => {
   const [searchKeyword, setSearchKeyword] = useState("");
-  const [isSold, setIsSold] = useState(false);
+  // const [isSold, setIsSold] = useState(false);
+  const [isSold] = useRecoilState(productIsSoldState);
   const { data, refetch, fetchMore } = useQueryFetchUsedItems(isSold);
-  const onChangeIsSold = useCallback(() => {
-    setIsSold((prev) => !prev);
-  }, []);
 
   const onLoadMore = useCallback(() => {
     if (data === undefined) return;
@@ -28,7 +41,6 @@ export const useProductList = () => {
     data,
     refetch,
     onLoadMore,
-    onChangeIsSold,
     searchKeyword,
     setSearchKeyword,
   };

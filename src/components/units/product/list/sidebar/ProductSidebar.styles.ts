@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 200px;
+  max-width: 200px;
   margin-left: 50px;
 `;
 
@@ -14,7 +14,6 @@ export const SidebarWrapper = styled.div`
   width: 100%;
   list-style: none;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   background-color: rgba(100, 100, 100, 0.05);
   border-radius: 15px;
@@ -23,13 +22,11 @@ export const SidebarWrapper = styled.div`
 export const ScrollUpButton = styled(CaretUpOutlined)`
   width: 100%;
   padding: 15px;
-  text-align: center;
 `;
 
 export const ScrollDownButton = styled(CaretDownOutlined)`
   width: 100%;
   padding: 15px;
-  text-align: center;
 `;
 
 export const CreateButton = styled.button`
