@@ -38,9 +38,12 @@ export const CreateButton = styled.button`
   padding: 15px;
   border-radius: 15px;
   position: absolute;
+  background-color: #000;
+  color: #fff;
   bottom: 0;
-  :hover {
+  cursor: pointer;
+  /* :hover {
     border: 2px solid tomato;
     background-color: rgba(100, 100, 100, 0.05);
-  }
+  } */
 `;

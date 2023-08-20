@@ -18,6 +18,6 @@ export const IsSoldSpan = styled.span`
   margin-bottom: 15px;
   cursor: pointer;
   &:not(:nth-of-type(1)) {
-    margin-left: 10px;
+    margin-left: 20px;
   }
 `;

@@ -5,11 +5,9 @@ import { memo, useCallback } from "react";
 import type { IUseditem } from "../../../../../commons/types/generated/types";
 import InfiniteScroll from "react-infinite-scroller";
 import ProductSideBar from "../sidebar/ProductSidebar.index";
-import { useProductListBody } from "../../../../commons/hooks/customs/product/useProductListBody";
 
 function ProductListBody(props: any): JSX.Element {
   const { onClickMoveToPage } = useMoveToPage();
-  const { onMouseOver } = useProductListBody();
   const handleImgError = useCallback((e: any): void => {
     e.target.src = "./images/no_image.png";
   }, []);
@@ -23,7 +21,6 @@ function ProductListBody(props: any): JSX.Element {
               key={el._id ?? index}
               id={el._id}
               onClick={onClickMoveToPage(`/products/${el._id}`)}
-              onMouseOver={onMouseOver}
             >
               <S.ItemImage
                 src={

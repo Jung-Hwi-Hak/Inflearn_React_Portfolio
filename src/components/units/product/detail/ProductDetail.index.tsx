@@ -27,21 +27,21 @@ function ProductDetail(): JSX.Element {
   const { onClickMoveToPage } = useMoveToPage();
   console.log(data);
   useEffect(() => {
-    const baskets = JSON.parse(localStorage.getItem("baskets") ?? "[]");
-    const temp = baskets.filter(
+    const recentProducts = JSON.parse(localStorage.getItem("recentProducts") ?? "[]");
+    const temp = recentProducts.filter(
       (el: Pick<IQuery, "fetchUseditem">) => el.fetchUseditem?._id === id
     );
     if (temp.length > 0) {
       return;
     }
     if (data === undefined) return;
-    if (baskets.length === 2) {
-      baskets.shift();
+    if (recentProducts.length === 2) {
+      recentProducts.shift();
     }
 
-    baskets.push(data);
+    recentProducts.push(data);
 
-    localStorage.setItem("baskets", JSON.stringify(baskets));
+    localStorage.setItem("recentProducts", JSON.stringify(recentProducts));
   }, [data]);
 
   return (

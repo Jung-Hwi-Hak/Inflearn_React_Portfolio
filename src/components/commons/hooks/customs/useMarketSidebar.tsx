@@ -5,8 +5,9 @@ export const useMarketSidebar = () => {
   const { onClickMoveToPage } = useMoveToPage();
   const [recentProduct, setRecentProduct] = useState([]);
   useEffect(() => {
-    const baskets = JSON.parse(localStorage.getItem("baskets") ?? "[]");
-    setRecentProduct(baskets);
+    const recentProducts = JSON.parse(localStorage.getItem("recentProducts") ?? '["",""]');
+    if (recentProducts.length < 2) recentProducts.push("");
+    setRecentProduct(recentProducts);
   }, []);
   const onClickScrollUp = () => {
     const marketListWrapper = document.getElementById("marketListWrapper");

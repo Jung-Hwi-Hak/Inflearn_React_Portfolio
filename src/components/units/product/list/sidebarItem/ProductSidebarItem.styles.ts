@@ -17,6 +17,7 @@ export const ItemImg = styled.img`
 export const ItemInfoWrapper = styled.div``;
 
 export const ItemName = styled.div`
+  min-height: 17.76px;
   font-size: 12px;
   font-weight: 500;
   line-height: 17.76px;
@@ -25,6 +26,7 @@ export const ItemName = styled.div`
   text-overflow: ellipsis;
 `;
 export const ItemRemarks = styled.div`
+  min-height: 17.76px;
   font-size: 12px;
   font-weight: 400;
   line-height: 17.76px;
@@ -33,6 +35,7 @@ export const ItemRemarks = styled.div`
   text-overflow: ellipsis;
 `;
 export const ItemPrice = styled.div`
+  min-height: 23.68px;
   font-size: 16px;
   font-weight: 700;
   line-height: 23.68px;

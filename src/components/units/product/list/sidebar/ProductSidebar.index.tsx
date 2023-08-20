@@ -7,12 +7,16 @@ export default function ProductSideBar() {
   const { onClickScrollDown, onClickScrollUp, onClickMoveToPage, recentProduct } =
     useMarketSidebar();
 
+  console.log(recentProduct.length);
   return (
     <S.Wrapper>
       <S.SidebarWrapper>
         <S.ScrollUpButton rev={""} onClick={onClickScrollUp} />
-        {recentProduct.map((el: Pick<IQuery, "fetchUseditem">) => (
-          <ProductSidebarItem key={el.fetchUseditem._id} data={el.fetchUseditem} />
+        {recentProduct.map((el: Pick<IQuery, "fetchUseditem">, index) => (
+          <ProductSidebarItem
+            key={el.fetchUseditem?._id ?? index}
+            data={el.fetchUseditem ?? undefined}
+          />
         ))}
         <S.ScrollDownButton rev={""} onClick={onClickScrollDown} />
       </S.SidebarWrapper>
