@@ -89,9 +89,7 @@ export const ItemInfoRight = styled.div`
   display: flex;
   align-items: center;
 `;
-export const ItemPriceIcon = styled.img`
-  width: 24px;
-`;
+
 export const ItemPrice = styled.span`
   margin-left: 10px;
   font-size: 24px;

@@ -22,11 +22,15 @@ export const SidebarWrapper = styled.div`
 export const ScrollUpButton = styled(CaretUpOutlined)`
   width: 100%;
   padding: 15px;
+  margin: 0 auto;
+  display: block;
 `;
 
 export const ScrollDownButton = styled(CaretDownOutlined)`
+  display: block;
   width: 100%;
   padding: 15px;
+  margin: 0 auto;
 `;
 
 export const CreateButton = styled.button`

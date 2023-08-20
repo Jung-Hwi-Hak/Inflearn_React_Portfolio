@@ -2,7 +2,7 @@ import type { Dispatch, SetStateAction } from "react";
 import type { IQuery } from "../../../../commons/types/generated/types";
 import type { ApolloQueryResult } from "@apollo/client";
 
-export interface ISearchbars01Props {
+export interface ISearchbars02Props {
   refetch: (variables?: Partial<any> | undefined) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
   refetchCount?: (
     variables?: Partial<any> | undefined

@@ -4,6 +4,10 @@ interface IIsActiveProps {
   isActive: boolean;
 }
 
+export const Wrapper = styled.div`
+  width: 80%;
+`;
+
 export const IsSoldSpan = styled.span`
   display: inline-block;
   font-size: 18px;

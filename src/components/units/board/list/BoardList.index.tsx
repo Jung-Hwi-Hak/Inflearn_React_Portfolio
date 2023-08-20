@@ -11,8 +11,16 @@ import { memo } from "react";
 import { useBoardList } from "../../../commons/hooks/customs/board/useBoardList";
 
 function BoardList(): JSX.Element {
-  const { activePage, setActivePage, startPage, setStartPage, searchKeyword, setSearchKeyword } =
-    useBoardList();
+  const {
+    activePage,
+    setActivePage,
+    startPage,
+    setStartPage,
+    searchKeyword,
+    setSearchKeyword,
+    searchDate,
+    setSearchDate,
+  } = useBoardList();
   const { data, refetch } = useQueryFetchBoards();
   const { data: dataCount, refetch: refetchCount } = useQueryFetchBoardsCount();
 
@@ -27,6 +35,8 @@ function BoardList(): JSX.Element {
           setSearchKeyword={setSearchKeyword}
           setActivePage={setActivePage}
           setStartPage={setStartPage}
+          searchDate={searchDate}
+          setSearchDate={setSearchDate}
         />
       </BoardListHeader>
       <BoardListBody data={data} searchKeyword={searchKeyword} />

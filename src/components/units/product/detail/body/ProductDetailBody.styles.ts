@@ -82,6 +82,9 @@ export const SlideUploadImage = styled.img`
   max-height: 300px;
   min-height: 300px;
   margin: 15px 0;
+  padding: 4px;
+  border: 3px solid #ffd700;
+  border-radius: 15px;
 `;
 
 export const UploadImageWrapper = styled.div`

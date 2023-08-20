@@ -3,13 +3,19 @@
  */
 
 import type { ApolloQueryResult } from "@apollo/client";
-import { type Dispatch, type ChangeEvent, type KeyboardEvent, useCallback } from "react";
+import {
+  type Dispatch,
+  type ChangeEvent,
+  type KeyboardEvent,
+  useCallback,
+  type MouseEvent,
+} from "react";
 import type { IQuery } from "../../../../commons/types/generated/types";
 import * as _ from "lodash";
 
 interface IUseSearchReturn {
   onChangeKeyword: (event: ChangeEvent<HTMLInputElement>) => void;
-  refetchEnterSearch: (event: KeyboardEvent<HTMLInputElement>) => void;
+  refetchSearch: (event: KeyboardEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>) => void;
 }
 
 interface IUseSearchbarArgs {
@@ -23,7 +29,7 @@ interface IUseSearchbarArgs {
   ) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
 }
 
-export const useSearchBar = (args: IUseSearchbarArgs): IUseSearchReturn => {
+export const useSearchBar02 = (args: IUseSearchbarArgs): IUseSearchReturn => {
   const onChangeKeyword = useCallback(
     _.debounce((event: ChangeEvent<HTMLInputElement>): void => {
       args.setSearchKeyword(event.target.value);
@@ -31,11 +37,17 @@ export const useSearchBar = (args: IUseSearchbarArgs): IUseSearchReturn => {
     []
   );
 
-  const refetchEnterSearch = useCallback(
-    (event: KeyboardEvent<HTMLInputElement>): void => {
-      if (event.code !== "Enter") return;
-      void args.refetch({ page: 1, search: args.searchKeyword });
-      if (args.refetchCount) void args.refetchCount({ search: args.searchKeyword });
+  const refetchSearch = useCallback(
+    (event: KeyboardEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>): void => {
+      if ("code" in event && event.code !== "Enter") return;
+      void args.refetch({
+        page: 1,
+        search: args.searchKeyword,
+      });
+      if (args.refetchCount)
+        void args.refetchCount({
+          search: args.searchKeyword,
+        });
       if (args.setActivePage) args.setActivePage(1);
       if (args.setStartPage) args.setStartPage(1);
     },
@@ -44,6 +56,6 @@ export const useSearchBar = (args: IUseSearchbarArgs): IUseSearchReturn => {
 
   return {
     onChangeKeyword,
-    refetchEnterSearch,
+    refetchSearch,
   };
 };

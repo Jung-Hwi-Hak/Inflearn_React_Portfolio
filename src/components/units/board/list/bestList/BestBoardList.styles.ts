@@ -32,7 +32,7 @@ export const BestBoardImage = styled.img`
   border-radius: 25px 25px 0 0;
   left: 0;
   top: 0;
-  z-index: -1;
+  /* z-index: -1; */
 `;
 
 export const BestBoardInfoWrapper = styled.div`

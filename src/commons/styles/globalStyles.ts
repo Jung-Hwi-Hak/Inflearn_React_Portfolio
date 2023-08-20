@@ -44,6 +44,60 @@ export const globalStyles = css`
     background-color: tomato;
   }
 
+  // date picker
+  .dateRangePicker.ant-calendar-picker-input.ant-input:hover {
+    border-color: gray !important;
+    outline: 0 !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .dateRangePicker:hover {
+    border-color: gray !important;
+  }
+
+  .dateRangePicker.ant-picker-focused {
+    border-color: gray !important;
+    outline: 0 !important;
+  }
+
+  .dateRangePicker .ant-picker-active-bar {
+    background-color: tomato !important;
+  }
+
+  .dateRangePicker .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner {
+    background-color: tomato !important;
+  }
+
+  .dateRangePicker .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+    background-color: tomato !important;
+  }
+
+  .dateRangePicker .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+    border-color: tomato !important;
+  }
+
+  .dateRangePicker
+    .ant-picker-cell-in-view.ant-picker-cell-range-start:not(
+      .ant-picker-cell-range-start-single
+    )::before,
+  .dateRangePicker .ant-picker-cell-in-view.ant-picker-cell-in-range::before,
+  .dateRangePicker
+    .ant-picker-cell-in-view.ant-picker-cell-range-end:not(
+      .ant-picker-cell-range-end-single
+    )::before,
+  .dateRangePicker
+    .ant-picker-time-panel-column
+    > li.ant-picker-time-panel-cell-selected
+    .ant-picker-time-panel-cell-inner {
+    background: #e6ffe8 !important;
+  }
+
+  .dateRangePicker .ant-btn-primary {
+    background-color: tomato !important;
+    border-color: tomato !important;
+  }
+
   /* Film Animations */
   // Grain
   @keyframes grain {

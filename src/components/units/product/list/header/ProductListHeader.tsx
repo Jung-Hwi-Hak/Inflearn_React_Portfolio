@@ -5,7 +5,7 @@ import * as S from "./ProductListHeader.styles";
 function ProductListHeader(props: IProductListHeaderProps): JSX.Element {
   const { onChangeIsSold, isSold } = useProductListHeader();
   return (
-    <>
+    <S.Wrapper>
       <S.IsSoldSpan isActive={!isSold} onClick={onChangeIsSold(false)}>
         판매중
       </S.IsSoldSpan>
@@ -13,7 +13,7 @@ function ProductListHeader(props: IProductListHeaderProps): JSX.Element {
         판매완료
       </S.IsSoldSpan>
       {props.children}
-    </>
+    </S.Wrapper>
   );
 }
 export default memo(ProductListHeader);
