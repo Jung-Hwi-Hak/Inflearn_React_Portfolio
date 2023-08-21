@@ -23,7 +23,7 @@ export const useProductComment = (args: any): any => {
   const [updateProductComment] = useMutationUseditemQuestion();
   const [deleteProductComment] = useMutationDeleteUseditemQuestion();
   // const [createProductAnswer] = useMutationCreateUseditemQuestionAnswer();
-  const { confirmModal } = useModal();
+  const { confirmModal, warningModal } = useModal();
 
   const { register, handleSubmit, watch, reset } = useForm({
     resolver: yupResolver(yupSchema),
@@ -122,7 +122,7 @@ export const useProductComment = (args: any): any => {
         });
         reset();
       } catch (error) {
-        if (error instanceof Error) Modal.error({ content: error.message });
+        warningModal("로그인", "로그인후 이용이 가능합니다.", true);
       }
     },
     [args.productId]

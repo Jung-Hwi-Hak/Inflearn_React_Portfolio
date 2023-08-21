@@ -7,7 +7,7 @@ const LOGOUT_USER = gql`
   }
 `;
 
-export const useQueryLogoutUser = () => {
+export const useMutationLogoutUser = () => {
   const mutation = useMutation<Pick<IMutation, "logoutUser">>(LOGOUT_USER);
   return mutation;
 };

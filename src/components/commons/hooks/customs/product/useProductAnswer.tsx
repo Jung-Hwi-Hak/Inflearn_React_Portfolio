@@ -7,6 +7,7 @@ import { Modal } from "antd";
 import { useMutationDeleteUseditemQuestionAnswer } from "../../mutations/useMutationDeleteUseditemQuestionAnswer";
 import { useMutationUpdateUseditemQuestionAnswer } from "../../mutations/useMutationUpdateUseditemQuestionAnswer";
 import { FETCH_USEDITEM_QUESTION_ANSWERS } from "../../queries/useQueryFetchUseditemQuestionAnswers";
+import { useModal } from "../useModal";
 
 interface ICreateUseditemQuestionAnswerInput {
   contents: string;
@@ -27,6 +28,7 @@ export const useProductAnswer = (args: IUesProductAnswerArgs) => {
   const [createProductAnswer] = useMutationCreateUseditemQuestionAnswer();
   const [deleteProductAnswer] = useMutationDeleteUseditemQuestionAnswer();
   const [updateProductAnswer] = useMutationUpdateUseditemQuestionAnswer();
+  const { warningModal } = useModal();
   const { register, handleSubmit, watch, reset } = useForm({
     resolver: yupResolver(yupSchema),
     mode: "onChange",
@@ -60,7 +62,7 @@ export const useProductAnswer = (args: IUesProductAnswerArgs) => {
       if (args.onToggleAnswer === undefined) return;
       args.onToggleAnswer();
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
+      warningModal("로그인", "로그인후 이용이 가능합니다.", true);
     }
   }, []);
 

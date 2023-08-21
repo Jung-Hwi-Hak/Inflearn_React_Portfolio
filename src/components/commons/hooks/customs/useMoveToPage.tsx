@@ -11,6 +11,7 @@ export const useMoveToPage = (): IUseMoveToPageReturn => {
 
   const onClickMoveToPage = useCallback(
     (path: string) => () => {
+      event?.preventDefault();
       void router.push(path);
     },
     []
@@ -19,6 +20,7 @@ export const useMoveToPage = (): IUseMoveToPageReturn => {
   const onClickMoveToPageToggle = useCallback(
     (path: string, boolean: boolean) => () => {
       if (boolean) return;
+      event?.preventDefault();
       void router.push(String(path));
     },
     []

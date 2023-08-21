@@ -29,7 +29,6 @@ export const useLogin = () => {
       setAccessToken(result.data?.loginUser.accessToken ?? "");
       setUserId(data.userId);
       setUserPw(data.userPw);
-
       successModal("로그인", "로그인 성공", true, "/boards");
     } catch (error) {
       warningModal("로그인", "로그인 실패", true);

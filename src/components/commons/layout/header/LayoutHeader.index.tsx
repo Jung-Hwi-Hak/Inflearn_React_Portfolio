@@ -1,15 +1,12 @@
 import * as S from "./LayoutHeader.styles";
 import { useMoveToPage } from "../../hooks/customs/useMoveToPage";
-import { useQueryFetchUserLoggedIn } from "../../hooks/queries/useQueryFetchUserLoggedIn";
 import { Dropdown, Space } from "antd";
 import { memo } from "react";
 import { useLayoutHeader } from "../../hooks/customs/useLayoutHeader";
 
 function LayoutHeader(): JSX.Element {
   const { onClickMoveToPage } = useMoveToPage();
-  const { fetchLoggedIn, userId } = useQueryFetchUserLoggedIn();
-  const { items } = useLayoutHeader();
-  void fetchLoggedIn();
+  const { items, userId } = useLayoutHeader();
   return (
     <S.Wrapper>
       <S.InnerWrapper>

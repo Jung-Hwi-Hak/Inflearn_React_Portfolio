@@ -1,36 +1,36 @@
-import { gql, useApolloClient } from "@apollo/client";
-import { useRecoilState } from "recoil";
-import { userIDState } from "../../../../commons/stores";
+import { gql, useQuery } from "@apollo/client";
+import type { IQuery } from "../../../../commons/types/generated/types";
 
-const FETCH_USER_LOGGEDIN = gql`
+export const FETCH_USER_LOGGEDIN = gql`
   query {
     fetchUserLoggedIn {
       email
       name
+      userPoint {
+        amount
+      }
     }
   }
 `;
 
 export const useQueryFetchUserLoggedIn = () => {
-  const [userId, setUserId] = useRecoilState(userIDState);
-
-  const fetchLoggedIn = async () => {
-    const client = useApolloClient();
-    const result = await client
-      .query({
-        query: FETCH_USER_LOGGEDIN,
-      })
-      .catch((error) => {
-        if (error instanceof Error) {
-          console.log("");
-        }
-      });
-    if (result !== undefined) {
-      setUserId(result.data.fetchUserLoggedIn.email);
-    }
-  };
-  return {
-    fetchLoggedIn,
-    userId,
-  };
+  const result = useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGEDIN);
+  console.log(result, "useQueryFetchUserLoggedIn");
+  // const fetchLoggedIn = async () => {
+  //   const client = useApolloClient();
+  //   const result = await client
+  //     .query({
+  //       query: FETCH_USER_LOGGEDIN,
+  //     })
+  //     .catch((error) => {
+  //       if (error instanceof Error) {
+  //         console.log("");
+  //       }
+  //     });
+  //   if (result !== undefined) {
+  //     setUserId(result.data.fetchUserLoggedIn.email);
+  //     return result;
+  //   }
+  // };
+  return result;
 };

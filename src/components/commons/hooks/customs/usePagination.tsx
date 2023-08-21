@@ -20,7 +20,6 @@ interface IUsePaginationReturns {
 }
 
 export const usePagination = (args: IUsePaginationArgs): IUsePaginationReturns => {
-  console.log("usePagination", args);
   const lastPage = useMemo(
     () =>
       Math.ceil(

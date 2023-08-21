@@ -1,34 +1,19 @@
-import { useEffect, Fragment, memo } from "react";
-import { useRouter } from "next/router";
+import { Fragment, memo } from "react";
 
 import * as S from "./LayoutNavigation.styles";
 import { useMoveToPage } from "../../hooks/customs/useMoveToPage";
+import { useLayoutNavigation } from "../../hooks/customs/useLayoutNavigation";
 
 const NAVIGATION_MENUS = [
-  // { name: "Firebase Boards", page: "/firebasePage" },
-  // { name: "Public APIs", page: "/publicApis" },
   { name: "자유게시판", page: "/boards" },
   { name: "중고마켓", page: "/products" },
   { name: "내 정보", page: "/mypage" },
 ];
 
 function LayoutNavigation(): JSX.Element {
-  const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();
-  // const { onClickMoveToPage } = useMemo(() => useMoveToPage(), []);
-  useEffect(() => {
-    const changeFocusNavigation = (): void => {
-      const path = router.asPath.split("/")[1];
-      if (path === null) return;
-      const navigation = document.getElementById(`/${path}`);
-      const navigationFocus = document.querySelectorAll(".focus");
-      navigationFocus.forEach((el) => {
-        el.classList.remove("focus");
-      });
-      navigation?.classList.add("focus");
-    };
-    changeFocusNavigation();
-  }, [router.asPath]);
+  useLayoutNavigation();
+
   return (
     <>
       <S.Wrapper>

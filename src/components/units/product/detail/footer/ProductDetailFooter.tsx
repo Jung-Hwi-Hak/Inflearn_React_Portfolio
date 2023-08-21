@@ -5,17 +5,19 @@ import * as S from "./ProductDetailFooter.styles";
 import type { IProductDetailFooterProps } from "./ProductDetailFooter.types";
 import { useRecoilState } from "recoil";
 import { userIDState } from "../../../../../commons/stores";
+import { usePayment } from "../../../../commons/hooks/customs/usePayment";
 
 function BoardDetailFooter(props: IProductDetailFooterProps): JSX.Element {
   const { id: productId } = useQueryIdChecker("productId");
   const [userId] = useRecoilState(userIDState);
   const { onClickDeleteProduct } = useProductDetailFooter();
+  const { onClickPayment } = usePayment();
   return (
     <>
       {props.data?.fetchUseditem.seller?.email !== userId ? (
         <S.BottomWrapper>
           <S.Button onClick={props.onClickMoveToPage(`/products`)}>목록으로</S.Button>
-          <S.Button>구매하기</S.Button>
+          <S.Button onClick={onClickPayment}>구매하기</S.Button>
         </S.BottomWrapper>
       ) : (
         <S.BottomWrapper>
