@@ -12,6 +12,7 @@ const DefaultInfo = gql`
     images
     pickedCount
     createdAt
+    soldAt
   }
 `;
 

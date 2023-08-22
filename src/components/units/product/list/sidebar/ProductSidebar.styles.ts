@@ -3,6 +3,7 @@ import { CaretUpOutlined, CaretDownOutlined } from "@ant-design/icons";
 
 export const Wrapper = styled.div`
   position: relative;
+  max-width: 20%;
   display: flex;
   min-width: 200px;
   flex-direction: column;

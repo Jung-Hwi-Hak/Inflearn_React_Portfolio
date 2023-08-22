@@ -75,7 +75,6 @@ export default function FirebaseWriterPage(props: FirebaseWriterPageProps): JSX.
     updateDoc(docRef, data)
       .then((docRef) => {
         void router.push(`/firebasePage/${String(router.query.firebaseId)}`);
-        console.log("Value of an Existing Document Field has been updated");
       })
       .catch((error) => {
         if (error instanceof Error) console.log("");

@@ -15,7 +15,6 @@ export const FETCH_USER_LOGGEDIN = gql`
 
 export const useQueryFetchUserLoggedIn = () => {
   const result = useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGEDIN);
-  console.log(result, "useQueryFetchUserLoggedIn");
   // const fetchLoggedIn = async () => {
   //   const client = useApolloClient();
   //   const result = await client

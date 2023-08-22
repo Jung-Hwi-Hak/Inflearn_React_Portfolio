@@ -15,7 +15,7 @@ import { useEffect } from "react";
 const GLOBAL_STATE = new InMemoryCache();
 
 interface IApolloSettingProps {
-  children: JSX.Element;
+  children: JSX.Element[];
 }
 export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);

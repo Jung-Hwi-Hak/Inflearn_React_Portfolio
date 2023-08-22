@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { DatePicker } from "antd";
 
 export const Wrapper = styled.div`
-  width: 100%;
+  width: 80%;
   display: flex;
   align-items: center;
 `;

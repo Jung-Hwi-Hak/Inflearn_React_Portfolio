@@ -56,7 +56,6 @@ export const useBoardWrite = (): IUseBoardWriteCommons => {
 
   const onCompleteAddressSearch = useCallback(
     (data: { address: string | undefined; zonecode: string | undefined }): void => {
-      console.log(data);
       setValue("address", data.address);
       setValue("zipcode", data.zonecode);
       toggleIsOpen();

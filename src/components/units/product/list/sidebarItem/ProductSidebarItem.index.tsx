@@ -1,18 +1,15 @@
 import type { IProductSidebarItemProps } from "./ProductSidebarItem.types";
 import * as S from "./ProductSidebarItem.styles";
-import { useCallback } from "react";
-import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
+import { memo, useCallback } from "react";
+import { useMyProductsBody } from "../../../../commons/hooks/customs/mypage/useMyProductsBody";
 
-export default function ProductSidebarItem(props: IProductSidebarItemProps): JSX.Element {
-  const { onClickMoveToPage } = useMoveToPage();
+function ProductSidebarItem(props: IProductSidebarItemProps): JSX.Element {
+  const { checkDeleted } = useMyProductsBody();
   const handleImgError = useCallback((e: any): void => {
     e.target.src = "./images/no_image.png";
   }, []);
   return (
-    <S.ItemWrapper
-      className="sidebar__item__wrapper"
-      onClick={props.data ? onClickMoveToPage(`/products/${props.data._id}`) : () => {}}
-    >
+    <S.ItemWrapper className="sidebar__item__wrapper" onClick={checkDeleted(props.data?._id ?? "")}>
       <S.ItemImg
         src={
           props.data?.images?.[0]
@@ -37,3 +34,5 @@ export default function ProductSidebarItem(props: IProductSidebarItemProps): JSX
     </S.ItemWrapper>
   );
 }
+
+export default memo(ProductSidebarItem);

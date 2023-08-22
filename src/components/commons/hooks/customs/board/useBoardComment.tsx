@@ -152,7 +152,6 @@ export const useBoardComment = (args: IUseBoardCommentArgs): IUseBoardCommentRet
         ],
       });
       reset();
-      // console.log(starRef.current?.count);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }

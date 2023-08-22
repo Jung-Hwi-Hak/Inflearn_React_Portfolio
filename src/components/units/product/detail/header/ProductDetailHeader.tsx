@@ -4,7 +4,7 @@ import * as S from "./ProductDetailHeader.styles";
 import type { IProductDetailHeaderProps } from "./ProductDetailHeader.types";
 import { memo } from "react";
 
-function BoardDetailHeader(props: IProductDetailHeaderProps): JSX.Element {
+function ProductDetailHeader(props: IProductDetailHeaderProps): JSX.Element {
   return (
     <>
       <S.Header>
@@ -18,9 +18,8 @@ function BoardDetailHeader(props: IProductDetailHeaderProps): JSX.Element {
         <S.IconWrapper>
           <Tooltip
             placement="topRight"
-            title={`${props.data?.fetchUseditem.useditemAddress?.address ?? ""}(${
-              props.data?.fetchUseditem.useditemAddress?.addressDetail ?? ""
-            })`}
+            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+            title={`${props.data?.fetchUseditem?.useditemAddress?.address}(${props.data?.fetchUseditem?.useditemAddress?.addressDetail})`}
           >
             <S.LocationIcon src="/images/board/detail/location.png" />
           </Tooltip>
@@ -30,4 +29,4 @@ function BoardDetailHeader(props: IProductDetailHeaderProps): JSX.Element {
   );
 }
 
-export default memo(BoardDetailHeader);
+export default memo(ProductDetailHeader);

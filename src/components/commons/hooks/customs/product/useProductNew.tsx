@@ -49,6 +49,12 @@ export const useBoardNew = (args: IUseBoardEditArgs) => {
                 fetchUseditems: (prev) => {
                   return [data?.createUseditem, ...prev];
                 },
+                fetchUseditemsISold: (prev) => {
+                  return [data?.createUseditem, ...prev];
+                },
+                fetchUseditemsCountISold: (prev) => {
+                  return Number(prev) + 1;
+                },
               },
             });
           },

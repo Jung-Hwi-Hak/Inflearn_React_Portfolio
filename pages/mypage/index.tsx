@@ -1,9 +1,6 @@
 import { useAuth } from "../../src/components/commons/hooks/customs/useAuth";
-import { useQueryFetchUseditemsIPicked } from "../../src/components/commons/hooks/queries/useQueryFetchUseditemsIPicked";
-
+import MyPageIndex from "../../src/components/units/mypage/MyPage.index";
 function MyPage(): JSX.Element {
-  const { data } = useQueryFetchUseditemsIPicked();
-  console.log(data);
-  return <></>;
+  return <MyPageIndex />;
 }
 export default useAuth(MyPage);

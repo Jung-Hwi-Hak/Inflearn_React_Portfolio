@@ -4,7 +4,7 @@ import type { Dispatch, MouseEvent, SetStateAction } from "react";
 import type { IQuery } from "../../../../commons/types/generated/types";
 
 interface IUsePaginationArgs {
-  count: Pick<IQuery, any> | undefined;
+  count: number;
   refetch: (variables?: Partial<any> | undefined) => Promise<ApolloQueryResult<Pick<IQuery, any>>>;
   startPage: number;
   setStartPage: Dispatch<SetStateAction<number>>;
@@ -21,10 +21,7 @@ interface IUsePaginationReturns {
 
 export const usePagination = (args: IUsePaginationArgs): IUsePaginationReturns => {
   const lastPage = useMemo(
-    () =>
-      Math.ceil(
-        (args.count?.fetchBoardsCount === 0 ? 10 : args.count?.fetchBoardsCount ?? 10) / 10
-      ),
+    () => Math.ceil((args.count === 0 ? 10 : args.count ?? 10) / 10),
     [args.count]
   );
 

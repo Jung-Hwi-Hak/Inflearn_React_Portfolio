@@ -15,6 +15,8 @@ export const HeaderRow = styled.div`
   height: 52px;
   line-height: 52px;
   border-bottom: 1px solid gray;
+  justify-content: space-evenly;
+  font-weight: 700;
 `;
 
 export const Row = styled.div`
@@ -23,28 +25,33 @@ export const Row = styled.div`
   height: 52px;
   line-height: 52px;
   border-bottom: 1px solid gray;
+  justify-content: space-evenly;
   &:hover {
     background-color: rgba(0, 0, 0, 0.05);
+  }
+  & * {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 `;
 
 export const ColumnHeaderBasic = styled.div`
-  width: 10%;
+  width: 20%;
   text-align: center;
 `;
 
 export const ColumnHeaderTitle = styled.div`
-  width: 70%;
+  width: 20%;
   text-align: center;
 `;
 
 export const ColumnBasic = styled.div`
-  width: 10%;
+  width: 20%;
   text-align: center;
 `;
-
 export const ColumnTitle = styled.div`
-  width: 70%;
+  width: 20%;
   text-align: center;
   cursor: pointer;
 `;

@@ -4,16 +4,16 @@ import type {
   IQueryFetchUseditemsIPickedArgs,
 } from "../../../../commons/types/generated/types";
 
-const FETCH_USEDITEMS_IPICKED = gql`
-  query fetchUseditemsIPicked($search: String) {
-    fetchUseditemsIPicked(search: $search) {
+export const FETCH_USEDITEMS_IPICKED = gql`
+  query fetchUseditemsIPicked($search: String, $page: Int) {
+    fetchUseditemsIPicked(search: $search, page: $page) {
       _id
       name
       remarks
       contents
       price
+      createdAt
       seller {
-        _id
         name
       }
     }

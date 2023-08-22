@@ -41,7 +41,6 @@ export const useBoardEdit = (args: IUseBoardEditArgs) => {
           if (resultFilesUrl) updateUseditemInput.images = resultFilesUrl;
         }
         const useditemAddress: IUseditemAddressInput = {};
-        console.log(data.lat, data.lng);
         if (data.address) useditemAddress.address = data.address;
         if (data.addressDetail) useditemAddress.addressDetail = data.addressDetail;
         if (data.lat) useditemAddress.lat = parseFloat(data.lat);
@@ -53,17 +52,8 @@ export const useBoardEdit = (args: IUseBoardEditArgs) => {
             useditemId,
             updateUseditemInput,
           },
-          update(cache, { data }) {
-            cache.writeQuery({
-              query: FETCH_USED_DETAIL_ITEM,
-              variables: { useditemId },
-              data: {
-                fetchUseditem: {
-                  useditemId: data?.updateUseditem._id,
-                },
-              },
-            });
-          },
+
+          refetchQueries: [{ query: FETCH_USED_DETAIL_ITEM, variables: { useditemId } }],
         });
         successModal(
           "게시글 수정",

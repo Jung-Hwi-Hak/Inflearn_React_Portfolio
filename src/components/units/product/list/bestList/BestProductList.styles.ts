@@ -44,16 +44,14 @@ export const BestProductInfoWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 15px;
+  & * {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 `;
-export const BestProductName = styled.h3`
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-`;
+export const BestProductName = styled.h3``;
 export const BestProductRemarks = styled.span`
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   font-size: 16px;
   font-weight: 500;
   color: #4f4f4f;

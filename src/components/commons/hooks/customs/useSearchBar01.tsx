@@ -64,7 +64,6 @@ export const useSearchBar01 = (args: IUseSearchbarArgs): IUseSearchReturn => {
 
   const onChangeDate = useCallback((data) => {
     if (!args.setSearchDate) return;
-    console.log(data);
     if (data === null) {
       args.setSearchDate([""]);
       return;

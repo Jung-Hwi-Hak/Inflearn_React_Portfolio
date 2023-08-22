@@ -46,7 +46,6 @@ export const useKakaomapWriter = (props: IKakaomapProps) => {
           marker.setPosition(latlng);
           map.setCenter(latlng);
           map.setLevel(3);
-          console.log(mouseEvent);
 
           props.setValue("lat", latlng.getLat());
           props.setValue("lng", latlng.getLng());

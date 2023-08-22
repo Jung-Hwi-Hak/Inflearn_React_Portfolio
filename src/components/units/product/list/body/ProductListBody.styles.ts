@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   /* position: relative; */
   display: flex;
   margin-top: 20px;
+  width: 100%;
 `;
 
 export const Section = styled.section`
@@ -44,16 +45,14 @@ export const ItemInfoWrapper = styled.div`
   padding: 0 15px;
   display: flex;
   flex-direction: column;
+  & * {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 `;
-export const ItenName = styled.h3`
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-`;
+export const ItenName = styled.h3``;
 export const ItemRemarks = styled.span`
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   font-size: 16px;
   font-weight: 500;
   color: #4f4f4f;
@@ -62,9 +61,6 @@ export const ItemTags = styled.span`
   font-size: 16px;
   font-weight: 500;
   color: #bdbdbd;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 `;
 
 export const ItemInfoFooter = styled.div`

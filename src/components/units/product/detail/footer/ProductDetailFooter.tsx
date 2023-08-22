@@ -14,7 +14,7 @@ function BoardDetailFooter(props: IProductDetailFooterProps): JSX.Element {
   const { onClickPayment } = usePayment();
   return (
     <>
-      {props.data?.fetchUseditem.seller?.email !== userId ? (
+      {props.data?.fetchUseditem?.seller?.email !== userId ? (
         <S.BottomWrapper>
           <S.Button onClick={props.onClickMoveToPage(`/products`)}>목록으로</S.Button>
           <S.Button onClick={onClickPayment}>구매하기</S.Button>
@@ -22,10 +22,16 @@ function BoardDetailFooter(props: IProductDetailFooterProps): JSX.Element {
       ) : (
         <S.BottomWrapper>
           <S.Button onClick={props.onClickMoveToPage(`/products`)}>목록으로</S.Button>
-          <S.Button onClick={props.onClickMoveToPage(`/products/${String(productId)}/edit`)}>
-            수정하기
-          </S.Button>
-          <S.Button onClick={onClickDeleteProduct}>삭제하기</S.Button>
+          {props.data.fetchUseditem.soldAt ? (
+            <></>
+          ) : (
+            <>
+              <S.Button onClick={props.onClickMoveToPage(`/products/${String(productId)}/edit`)}>
+                수정하기
+              </S.Button>
+              <S.Button onClick={onClickDeleteProduct}>삭제하기</S.Button>
+            </>
+          )}
         </S.BottomWrapper>
       )}
     </>

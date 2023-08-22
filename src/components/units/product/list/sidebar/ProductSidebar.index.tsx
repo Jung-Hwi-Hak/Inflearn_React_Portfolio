@@ -2,8 +2,9 @@ import { useMarketSidebar } from "../../../../commons/hooks/customs/useMarketSid
 import * as S from "./ProductSidebar.styles";
 import type { IQuery } from "../../../../../commons/types/generated/types";
 import ProductSidebarItem from "../sidebarItem/ProductSidebarItem.index";
+import { memo } from "react";
 
-export default function ProductSideBar() {
+function ProductSideBar() {
   const { onClickScrollDown, onClickScrollUp, onClickMoveToPage, recentProduct } =
     useMarketSidebar();
 
@@ -24,3 +25,5 @@ export default function ProductSideBar() {
     </S.Wrapper>
   );
 }
+
+export default memo(ProductSideBar);

@@ -43,7 +43,7 @@ function BoardList(): JSX.Element {
       <BoardListFooter>
         <Paginations01
           refetch={refetch}
-          dataCount={dataCount}
+          dataCount={dataCount?.fetchBoardsCount ?? 0}
           startPage={startPage}
           setStartPage={setStartPage}
           activePage={activePage}
