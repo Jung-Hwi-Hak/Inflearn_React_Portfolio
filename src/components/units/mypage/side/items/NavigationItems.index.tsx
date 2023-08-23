@@ -1,4 +1,4 @@
-import { useState, type MouseEvent, useCallback } from "react";
+import { useState, type MouseEvent, useCallback, memo } from "react";
 import * as S from "./NavigationItems.styles";
 import type { INavigationItemsProps } from "./NavigationItems.types";
 const NAVIGATION_LIST = [
@@ -6,7 +6,7 @@ const NAVIGATION_LIST = [
   { name: "내 포인트", page: "myPoint", img: "point.svg" },
   { name: "내 프로필", page: "myProfile", img: "profile.svg" },
 ];
-export default function NavigationItems(props: INavigationItemsProps): JSX.Element {
+function NavigationItems(props: INavigationItemsProps): JSX.Element {
   const [isFocus, setIsFocus] = useState(0);
   const changeFocusNavigation = useCallback(
     (index: number, name: string) =>
@@ -30,3 +30,4 @@ export default function NavigationItems(props: INavigationItemsProps): JSX.Eleme
     </>
   );
 }
+export default memo(NavigationItems);

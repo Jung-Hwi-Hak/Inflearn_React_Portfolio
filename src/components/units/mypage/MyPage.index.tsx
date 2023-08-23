@@ -1,8 +1,9 @@
 import * as S from "./MyPage.styles";
 import MyPageSide from "./side/MyPageSide.index";
-import MyProductsPage from "./myProducts/MyProductsPage.index";
+import MyProducts from "./myProducts/MyProducts.index";
 import { useState } from "react";
-import MyPointPage from "./myPoint/MyPoint.index";
+import MyPoint from "./myPoint/MyPoint.index";
+import MyProfile from "./myProfile/MyProfile.index";
 export default function MyPageIndex(): JSX.Element {
   const [page, setPage] = useState("myProducts");
 
@@ -10,13 +11,13 @@ export default function MyPageIndex(): JSX.Element {
 
   switch (page) {
     case "myProducts":
-      contentComponent = <MyProductsPage />;
+      contentComponent = <MyProducts />;
       break;
     case "myPoint":
-      contentComponent = <MyPointPage />;
+      contentComponent = <MyPoint />;
       break;
     case "myProfile":
-      contentComponent = <MyProductsPage />;
+      contentComponent = <MyProfile />;
       break;
     default:
       contentComponent = <></>;

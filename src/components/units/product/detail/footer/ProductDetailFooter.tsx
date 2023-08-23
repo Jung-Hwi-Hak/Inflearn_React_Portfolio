@@ -17,7 +17,7 @@ function ProductDetailFooter(props: IProductDetailFooterProps): JSX.Element {
       {props.data?.fetchUseditem?.seller?.email !== userId ? (
         <S.BottomWrapper>
           <S.Button onClick={props.onClickMoveToPage(`/products`)}>목록으로</S.Button>
-          {props.data?.fetchUseditem.soldAt ? (
+          {props.data?.fetchUseditem?.soldAt ? (
             <></>
           ) : (
             <S.Button
@@ -34,7 +34,7 @@ function ProductDetailFooter(props: IProductDetailFooterProps): JSX.Element {
       ) : (
         <S.BottomWrapper>
           <S.Button onClick={props.onClickMoveToPage(`/products`)}>목록으로</S.Button>
-          {props.data?.fetchUseditem.soldAt ? (
+          {props.data?.fetchUseditem?.soldAt ? (
             <></>
           ) : (
             <>

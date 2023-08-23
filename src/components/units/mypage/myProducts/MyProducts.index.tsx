@@ -6,7 +6,7 @@ import MyPageFooter from "./footer/MyProductsFooter";
 import { useMyProductsPage } from "../../../commons/hooks/customs/mypage/useMyProductsPage";
 import MyPageHeader01 from "../../../commons/mypage/header/01/MyPageHeader01.index";
 
-function MyProductsPage(props: any) {
+function MyProducts(props: any) {
   const {
     isFocus,
     setIsFocus,
@@ -47,4 +47,4 @@ function MyProductsPage(props: any) {
   );
 }
 
-export default memo(MyProductsPage);
+export default memo(MyProducts);

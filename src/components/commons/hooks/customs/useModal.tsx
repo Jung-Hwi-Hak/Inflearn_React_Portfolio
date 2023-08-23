@@ -15,10 +15,23 @@ interface IUseModalReturn {
 
 export const useModal = (): IUseModalReturn => {
   const router = useRouter();
+
+  const splitedContentFun = (content: string | undefined) => {
+    const splitedContent = (
+      <div>
+        {content?.split("</br>").map((el, index) => (
+          <p key={index}>{el}</p>
+        ))}
+      </div>
+    );
+    return splitedContent;
+  };
+
   const successModal = (title?: string, content?: string, centered?: boolean, path?: string) => {
+    const splitedContent = splitedContentFun(content);
     Modal.success({
       title,
-      content,
+      content: splitedContent,
       centered,
       okText: "확인",
       onOk: () => {
@@ -28,9 +41,10 @@ export const useModal = (): IUseModalReturn => {
     });
   };
   const warningModal = (title?: string, content?: string, centered?: boolean, path?: string) => {
+    const splitedContent = splitedContentFun(content);
     Modal.warning({
       title,
-      content,
+      content: splitedContent,
       centered,
       okText: "확인",
       onOk: () => {
@@ -47,9 +61,11 @@ export const useModal = (): IUseModalReturn => {
     centered?: boolean,
     path?: string
   ) => {
+    const splitedContent = splitedContentFun(content);
+
     Modal.confirm({
       title,
-      content,
+      content: splitedContent,
       centered,
       onOk,
       onCancel() {

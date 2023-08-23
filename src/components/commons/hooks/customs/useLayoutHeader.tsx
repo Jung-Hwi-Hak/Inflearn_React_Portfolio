@@ -46,7 +46,7 @@ export const useLayoutHeader = () => {
       type: "divider",
     },
     {
-      label: <Button onClick={onClickMoveToPage("/mypage")}>내 정보</Button>,
+      label: <Button onClick={onClickMoveToPage("/mypage")}>마이페이지</Button>,
       key: "1",
     },
     {

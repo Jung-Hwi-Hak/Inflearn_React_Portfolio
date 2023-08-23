@@ -6,6 +6,7 @@ export const FETCH_USER_LOGGEDIN = gql`
     fetchUserLoggedIn {
       email
       name
+      picture
       userPoint {
         amount
       }

@@ -7,7 +7,7 @@ import { useLayoutNavigation } from "../../hooks/customs/useLayoutNavigation";
 const NAVIGATION_MENUS = [
   { name: "자유게시판", page: "/boards" },
   { name: "중고마켓", page: "/products" },
-  { name: "내 정보", page: "/mypage" },
+  { name: "마이페이지", page: "/mypage" },
 ];
 
 function LayoutNavigation(): JSX.Element {

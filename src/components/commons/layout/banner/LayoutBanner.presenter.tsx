@@ -34,7 +34,7 @@ export default function LayoutBannerUI(props: LayoutBannerUIProps): JSX.Element 
     // ["Public APIs", "/publicApis"],
     ["자유게시판", "/boards"],
     ["중고마켓", "/products"],
-    ["내 정보", "/mypage"],
+    ["마이페이지", "/mypage"],
   ];
   return (
     <Wrapper>
