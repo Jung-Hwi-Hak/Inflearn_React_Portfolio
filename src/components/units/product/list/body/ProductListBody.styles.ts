@@ -79,7 +79,9 @@ export const SellerDate = styled.span`
 export const PickIcon = styled(ShoppingOutlined)`
   margin-left: 10px;
 `;
-export const PickCount = styled.span``;
+export const PickCount = styled.span`
+  margin-left: 5px;
+`;
 
 export const ItemInfoRight = styled.div`
   display: flex;

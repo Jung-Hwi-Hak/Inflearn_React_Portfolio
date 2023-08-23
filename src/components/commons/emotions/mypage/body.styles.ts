@@ -58,9 +58,7 @@ export const HeaderColumnHistory = styled.div`
 export const HeaderColumnAmount = styled.div`
   width: 20%;
 `;
-export const HeaderColumnSellerName = styled.div`
-  width: 10%;
-`;
+
 export const HeaderColumnBalance = styled.div`
   width: 20%;
 `;
@@ -85,9 +83,12 @@ export const ColumnHistory = styled.div`
 export const ColumnAmount = styled.div`
   width: 20%;
 `;
-export const ColumnSellerName = styled.div`
-  width: 10%;
-`;
+
 export const ColumnBalance = styled.div`
   width: 20%;
+`;
+
+export const PaginationWrapper = styled.div`
+  margin-top: 20px;
+  text-align: center;
 `;

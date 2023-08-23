@@ -7,22 +7,34 @@ import { useRecoilState } from "recoil";
 import { userIDState } from "../../../../../commons/stores";
 import { usePayment } from "../../../../commons/hooks/customs/usePayment";
 
-function BoardDetailFooter(props: IProductDetailFooterProps): JSX.Element {
+function ProductDetailFooter(props: IProductDetailFooterProps): JSX.Element {
   const { id: productId } = useQueryIdChecker("productId");
   const [userId] = useRecoilState(userIDState);
   const { onClickDeleteProduct } = useProductDetailFooter();
-  const { onClickPayment } = usePayment();
+  const { onClickBuyPayment } = usePayment();
   return (
     <>
       {props.data?.fetchUseditem?.seller?.email !== userId ? (
         <S.BottomWrapper>
           <S.Button onClick={props.onClickMoveToPage(`/products`)}>목록으로</S.Button>
-          <S.Button onClick={onClickPayment}>구매하기</S.Button>
+          {props.data?.fetchUseditem.soldAt ? (
+            <></>
+          ) : (
+            <S.Button
+              onClick={
+                props.data
+                  ? onClickBuyPayment({ buyData: props.data.fetchUseditem }, productId)
+                  : () => {}
+              }
+            >
+              구매하기
+            </S.Button>
+          )}
         </S.BottomWrapper>
       ) : (
         <S.BottomWrapper>
           <S.Button onClick={props.onClickMoveToPage(`/products`)}>목록으로</S.Button>
-          {props.data.fetchUseditem.soldAt ? (
+          {props.data?.fetchUseditem.soldAt ? (
             <></>
           ) : (
             <>
@@ -38,4 +50,4 @@ function BoardDetailFooter(props: IProductDetailFooterProps): JSX.Element {
   );
 }
 
-export default memo(BoardDetailFooter);
+export default memo(ProductDetailFooter);

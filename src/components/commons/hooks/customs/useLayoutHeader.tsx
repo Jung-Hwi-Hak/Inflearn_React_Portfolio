@@ -5,7 +5,7 @@ import { useMoveToPage } from "./useMoveToPage";
 import { useQueryFetchUserLoggedIn } from "../queries/useQueryFetchUserLoggedIn";
 import LayoutHeaderDetail from "../../layout/header/detail/LayoutHeaderDetail.index";
 import { useEffect, useCallback } from "react";
-import { userIDState } from "../../../../commons/stores";
+import { userIDState, userNameState } from "../../../../commons/stores";
 import { useRecoilState } from "recoil";
 
 const Button = styled.button`
@@ -23,6 +23,7 @@ const Button = styled.button`
 export const useLayoutHeader = () => {
   const { data } = useQueryFetchUserLoggedIn();
   const [, setUserId] = useRecoilState(userIDState);
+  const [, setUserName] = useRecoilState(userNameState);
   const [logoutMutation] = useMutationLogoutUser();
   const { onClickMoveToPage } = useMoveToPage();
 
@@ -33,6 +34,7 @@ export const useLayoutHeader = () => {
 
   useEffect(() => {
     setUserId(data?.fetchUserLoggedIn.email ?? "");
+    setUserName(data?.fetchUserLoggedIn.name ?? "");
   }, [data?.fetchUserLoggedIn.email, setUserId]);
 
   const items: MenuProps["items"] = [

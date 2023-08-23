@@ -1,7 +1,7 @@
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
-import BoardDetailHeader from "./header/ProductDetailHeader";
-import BoardDetailBody from "./body/ProductDetailBody";
-import BoardDetailFooter from "./footer/ProductDetailFooter";
+import ProductDetailHeader from "./header/ProductDetailHeader";
+import ProductDetailBody from "./body/ProductDetailBody";
+import ProductDetailFooter from "./footer/ProductDetailFooter";
 import styled from "@emotion/styled";
 import { memo } from "react";
 import { useProductDetail } from "../../../commons/hooks/customs/product/useProductDetail";
@@ -26,9 +26,9 @@ function ProductDetail(): JSX.Element {
   return (
     <>
       <CardWrapper>
-        <BoardDetailHeader data={data} />
-        <BoardDetailBody data={data} />
-        <BoardDetailFooter data={data} onClickMoveToPage={onClickMoveToPage} />
+        <ProductDetailHeader data={data} />
+        <ProductDetailBody data={data} />
+        <ProductDetailFooter data={data} onClickMoveToPage={onClickMoveToPage} />
       </CardWrapper>
     </>
   );

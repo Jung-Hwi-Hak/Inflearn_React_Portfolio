@@ -34,7 +34,7 @@ export default function MyPointPage(): JSX.Element {
       <MyPageHeader01Index
         isFocus={isFocus}
         setIsFocus={setIsFocus}
-        listNames={["판매내역", "충전내역", "구매내역", "판매내역"]}
+        listNames={["전체내역", "충전내역", "구매내역", "판매내역"]}
       />
       {contentComponent}
     </>

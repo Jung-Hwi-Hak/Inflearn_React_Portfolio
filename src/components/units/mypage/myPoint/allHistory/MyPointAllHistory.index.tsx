@@ -19,7 +19,7 @@ function MyPointAllHistory(): JSX.Element {
             <S.ColumnDate>{getDate(el?.createdAt)}</S.ColumnDate>
             <S.ColumnTitle status={el?.status === "구매"}>{el.status}</S.ColumnTitle>
             <S.ColumnHistory status={el?.status === "구매"}>
-              {el?.status === "구매" ? "-" : "+"}
+              {el?.status === "구매" ? "" : "+"}
               {`${el?.amount?.toLocaleString("ko-KR")}원`}
             </S.ColumnHistory>
             <S.ColumnAmount>{`${el?.balance?.toLocaleString("ko-KR")}원`}</S.ColumnAmount>

@@ -5,7 +5,7 @@ import type {
 } from "../../../../commons/types/generated/types";
 
 // 날짜, 내용, 거래 및 충전 내역, 잔액
-const FETCH_POINT_TRANSACTIONS = gql`
+export const FETCH_POINT_TRANSACTIONS = gql`
   query fetchPointTransactions {
     fetchPointTransactions {
       amount

@@ -1,5 +1,4 @@
 import * as S from "./ProductListBody.styles";
-import { getDate } from "../../../../../commons/libraries/utils";
 import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
 import { memo, useCallback } from "react";
 import type { IUseditem } from "../../../../../commons/types/generated/types";
@@ -37,7 +36,6 @@ function ProductListBody(props: any): JSX.Element {
 
                 <S.ItemInfoFooter>
                   <S.SellerName>{el.seller?.name}</S.SellerName>
-                  <S.SellerDate>{getDate(el.createdAt)}</S.SellerDate>
                   <S.PickIcon rev={undefined} />
                   <S.PickCount>{el.pickedCount}</S.PickCount>
                 </S.ItemInfoFooter>

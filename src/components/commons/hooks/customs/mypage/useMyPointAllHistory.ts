@@ -7,7 +7,6 @@ interface IUseMyPointAllHistoryReturns {
 
 export const useMyPointAllHistory = (): IUseMyPointAllHistoryReturns => {
   const { data } = useQueryFetchPointTransactions();
-
   return {
     data,
   };

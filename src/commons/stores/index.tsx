@@ -11,6 +11,11 @@ export const userIDState = atom({
   default: "",
 });
 
+export const userNameState = atom({
+  key: "userNameState",
+  default: "",
+});
+
 export const userPWState = atom({
   key: "userPWState",
   default: "",

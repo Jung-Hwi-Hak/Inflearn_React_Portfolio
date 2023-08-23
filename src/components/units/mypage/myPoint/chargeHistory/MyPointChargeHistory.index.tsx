@@ -3,8 +3,10 @@ import * as S from "../../../../commons/emotions/mypage/body.styles";
 import type { IPointTransaction } from "../../../../../commons/types/generated/types";
 import { getDate } from "../../../../../commons/libraries/utils";
 import { useMyPointChargeHistory } from "../../../../commons/hooks/customs/mypage/useMyPointChargeHistory";
-function MyPointAllHistory(): JSX.Element {
-  const { data } = useMyPointChargeHistory();
+import Paginations01Index from "../../../../commons/paginations/01/Paginations01.index";
+function MyPointChargeHistory(): JSX.Element {
+  const { data, refetch, countData, startPage, setStartPage, activePage, setActivePage } =
+    useMyPointChargeHistory();
   return (
     <>
       <S.HeaderRow>
@@ -19,15 +21,25 @@ function MyPointAllHistory(): JSX.Element {
             <S.ColumnDate>{getDate(el.createdAt)}</S.ColumnDate>
             <S.ColumnChargeID>{el.impUid}</S.ColumnChargeID>
             <S.ColumnHistory status={el.status === "구매"}>
-              {el.status === "구매" ? "-" : "+"}
+              {el.status === "구매" ? "" : "+"}
               {`${el.amount?.toLocaleString("ko-KR")}원`}
             </S.ColumnHistory>
             <S.ColumnAmount>{`${el.balance?.toLocaleString("ko-KR")}원`}</S.ColumnAmount>
           </S.Row>
         )
       )}
+      <S.PaginationWrapper>
+        <Paginations01Index
+          refetch={refetch}
+          dataCount={countData?.fetchPointTransactionsCountOfLoading ?? 0}
+          startPage={startPage}
+          setStartPage={setStartPage}
+          activePage={activePage}
+          setActivePage={setActivePage}
+        />
+      </S.PaginationWrapper>
     </>
   );
 }
 
-export default memo(MyPointAllHistory);
+export default memo(MyPointChargeHistory);
