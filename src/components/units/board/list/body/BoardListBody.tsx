@@ -1,4 +1,5 @@
-import * as S from "./BoardListBody.styles";
+// import * as S from "./BoardListBody.styles";
+import * as S from "../../../../commons/emotions/commonsListStyle";
 import { v4 as uuidv4 } from "uuid";
 import type { IBoardListBodyProps } from "./BoardListBody.types";
 import { getDate } from "../../../../../commons/libraries/utils";
@@ -12,16 +13,15 @@ function BoardListBody(props: IBoardListBodyProps): JSX.Element {
 
   return (
     <>
-      <S.TableTop />
       <S.HeaderRow>
-        <S.ColumnHeaderBasic>ID</S.ColumnHeaderBasic>
-        <S.ColumnHeaderTitle>제목</S.ColumnHeaderTitle>
-        <S.ColumnHeaderBasic>작성자</S.ColumnHeaderBasic>
-        <S.ColumnHeaderBasic>날짜</S.ColumnHeaderBasic>
+        <S.ColumnId>ID</S.ColumnId>
+        <S.ColumnTitle>제목</S.ColumnTitle>
+        <S.ColunmSellerName>작성자</S.ColunmSellerName>
+        <S.ColunmDate>날짜</S.ColunmDate>
       </S.HeaderRow>
       {(props.data?.fetchBoards ?? new Array(10).fill(1)).map((el: IBoard, index: number) => (
         <S.Row key={el._id ?? index}>
-          <S.ColumnBasic>{String(el._id).slice(-4).toUpperCase()}</S.ColumnBasic>
+          <S.ColumnId>{String(el._id).slice(-4).toUpperCase()}</S.ColumnId>
           <S.ColumnTitle id={el._id} onClick={onClickMoveToPage(`/boards/${el._id}`)}>
             {(el.title ?? "")
               .replaceAll(props.searchKeyword, `${SECRET}${props.searchKeyword}${SECRET}`)
@@ -32,11 +32,10 @@ function BoardListBody(props: IBoardListBodyProps): JSX.Element {
                 </S.SearchKeyword>
               ))}
           </S.ColumnTitle>
-          <S.ColumnBasic>{el.writer}</S.ColumnBasic>
-          <S.ColumnBasic>{getDate(el.createdAt)}</S.ColumnBasic>
+          <S.ColunmSellerName>{el.writer}</S.ColunmSellerName>
+          <S.ColunmDate>{getDate(el.createdAt)}</S.ColunmDate>
         </S.Row>
       ))}
-      <S.TableBottom />
     </>
   );
 }

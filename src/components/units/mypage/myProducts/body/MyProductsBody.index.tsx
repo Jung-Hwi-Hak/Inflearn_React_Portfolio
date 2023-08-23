@@ -1,34 +1,44 @@
 import { memo } from "react";
-import * as S from "../../../board/list/body/BoardListBody.styles";
+import * as S from "../../../../commons/emotions/commonsListStyle";
 import type { IBoardListBodyProps } from "./MyProductsBody.types";
 import { getDate } from "../../../../../commons/libraries/utils";
 import type { IUseditem } from "../../../../../commons/types/generated/types";
 import { useMyProductsBody } from "../../../../commons/hooks/customs/mypage/useMyProductsBody";
 function MyPageBody(props: IBoardListBodyProps): JSX.Element {
   const { checkDeleted } = useMyProductsBody();
+
   return (
     <>
-      <S.TableTop />
       <S.HeaderRow>
-        <S.ColumnHeaderBasic>ID</S.ColumnHeaderBasic>
-        <S.ColumnHeaderTitle>제목</S.ColumnHeaderTitle>
-        {props.isFocus ? <S.ColumnBasic>판매자</S.ColumnBasic> : ""}
-        <S.ColumnHeaderBasic>판매가격</S.ColumnHeaderBasic>
-        <S.ColumnHeaderBasic>날짜</S.ColumnHeaderBasic>
+        <S.ColumnId>ID</S.ColumnId>
+        <S.ColumnTitle>제목</S.ColumnTitle>
+        <S.SoldOut></S.SoldOut>
+        {props.isFocus ? (
+          <S.ColunmSellerName>판매자</S.ColunmSellerName>
+        ) : (
+          <S.ColunmSellerName></S.ColunmSellerName>
+        )}
+        <S.ColunmPrice>판매가격</S.ColunmPrice>
+        <S.ColunmDate>날짜</S.ColunmDate>
       </S.HeaderRow>
-      {(props.iSoldData ?? new Array(10).fill(1)).map((el: IUseditem, index: number) => (
+      {(props.data ?? new Array(10).fill(1)).map((el: IUseditem, index: number) => (
         <S.Row key={el._id ?? index}>
-          <S.ColumnBasic>{String(el._id).slice(-4).toUpperCase()}</S.ColumnBasic>
-          <S.ColumnTitle id={el._id} onClick={checkDeleted(el._id)}>
+          <S.ColumnId>{String(el._id).slice(-4).toUpperCase()}</S.ColumnId>
+          <S.ColumnTitle title={el.name} id={el._id} onClick={checkDeleted(el._id)}>
             {el.name}
           </S.ColumnTitle>
-
-          {props.isFocus ? <S.ColumnBasic>{el.seller?.name}</S.ColumnBasic> : ""}
-          <S.ColumnBasic>&#x20a9;{el.price?.toLocaleString("ko-KR")}</S.ColumnBasic>
-          <S.ColumnBasic>{getDate(el.createdAt)}</S.ColumnBasic>
+          {el.soldAt ? <S.SoldOut>판매완료</S.SoldOut> : <S.SoldOut></S.SoldOut>}
+          {props.isFocus ? (
+            <S.ColunmSellerName>{el.seller?.name}</S.ColunmSellerName>
+          ) : (
+            <S.ColunmSellerName></S.ColunmSellerName>
+          )}
+          <S.ColunmPrice title={`${String(el.price?.toLocaleString("ko-KR"))}원`}>
+            &#x20a9;{el.price?.toLocaleString("ko-KR")}
+          </S.ColunmPrice>
+          <S.ColunmDate>{getDate(el.createdAt)}</S.ColunmDate>
         </S.Row>
       ))}
-      <S.TableBottom />
     </>
   );
 }

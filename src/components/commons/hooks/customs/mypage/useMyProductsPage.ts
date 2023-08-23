@@ -7,7 +7,7 @@ import { useQueryFetchUseditemsCountIPicked } from "../../queries/useQueryFetchU
 export const useMyProductsPage = () => {
   const [activePage, setActivePage] = useState(1);
   const [startPage, setStartPage] = useState(1);
-  const [isFocus, setIsFocus] = useState(false);
+  const [isFocus, setIsFocus] = useState(0);
   const [searchKeyword, setSearchKeyword] = useState("");
 
   const iSoldQueries = useQueryFetchUseditemsISold();

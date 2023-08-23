@@ -13,6 +13,7 @@ export const FETCH_USEDITEMS_IPICKED = gql`
       contents
       price
       createdAt
+      soldAt
       seller {
         name
       }

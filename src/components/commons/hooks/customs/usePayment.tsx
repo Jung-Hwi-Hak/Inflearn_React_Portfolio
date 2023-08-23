@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useMutationCreatePointTransactionOfLoading } from "../mutations/useMutationCreatePointTransactionOfLoading";
-import { useApolloClient } from "@apollo/client";
 import { FETCH_USER_LOGGEDIN } from "../queries/useQueryFetchUserLoggedIn";
 
 declare const window: typeof globalThis & {
@@ -10,7 +9,6 @@ declare const window: typeof globalThis & {
 export const usePayment = () => {
   const [mutation] = useMutationCreatePointTransactionOfLoading();
   //   const {data, refetch} = useQueryFetchUserLoggedIn();
-  const client = useApolloClient();
 
   useEffect(() => {
     <script src="https://cdn.iamport.kr/v1/iamport.js"></script>;
@@ -48,7 +46,7 @@ export const usePayment = () => {
             refetchQueries: [{ query: FETCH_USER_LOGGEDIN }],
           });
 
-          await client.refetchQueries({});
+          // await client.refetchQueries({});
         } else {
           console.log(rsp);
           // 결제 실패 시 로직,

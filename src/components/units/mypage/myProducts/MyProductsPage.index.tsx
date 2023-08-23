@@ -3,8 +3,8 @@ import Paginations01Index from "../../../commons/paginations/01/Paginations01.in
 // import SearchBar02Index from "../../../commons/searchBars/searchBar02/SearchBar02.index";
 import MyPageBodyIndex from "./body/MyProductsBody.index";
 import MyPageFooter from "./footer/MyProductsFooter";
-import MyPageHeader from "./header/MyProductsHeader.index";
 import { useMyProductsPage } from "../../../commons/hooks/customs/mypage/useMyProductsPage";
+import MyPageHeader01 from "../../../commons/mypage/header/01/MyPageHeader01.index";
 
 function MyProductsPage(props: any) {
   const {
@@ -20,7 +20,11 @@ function MyProductsPage(props: any) {
   } = useMyProductsPage();
   return (
     <>
-      <MyPageHeader isFocus={isFocus} setIsFocus={setIsFocus} />
+      <MyPageHeader01
+        listNames={["나의 상품", "마이찜"]}
+        isFocus={isFocus}
+        setIsFocus={setIsFocus}
+      />
       {/* <SearchBar02Index
           refetch={iSoldRefetch}
           refetchCount={iSoldCountRefetch}
@@ -28,7 +32,7 @@ function MyProductsPage(props: any) {
           setSearchKeyword={setSearchKeyword}
         /> */}
       {/* </MyPageHeader> */}
-      <MyPageBodyIndex iSoldData={data} isFocus={isFocus} />
+      <MyPageBodyIndex data={data} isFocus={isFocus} />
       <MyPageFooter>
         <Paginations01Index
           refetch={refetch}
