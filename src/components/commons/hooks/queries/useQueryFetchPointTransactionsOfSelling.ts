@@ -4,7 +4,7 @@ import type {
   IQueryFetchPointTransactionsOfSellingArgs,
 } from "../../../../commons/types/generated/types";
 
-const FETCH_POINT_TRANSACTIONS_SELLING = gql`
+export const FETCH_POINT_TRANSACTIONS_SELLING = gql`
   query fetchPointTransactionsOfSelling {
     fetchPointTransactionsOfSelling {
       balance
