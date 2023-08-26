@@ -10,7 +10,9 @@ function MyPageSide(props: IMyPageSideProps): JSX.Element {
   return (
     <S.Wrapper>
       <S.Title>MYPAGE</S.Title>
-      <S.UserImg src="./images/profile.png" />
+      <S.UserImg
+        src={`https://storage.googleapis.com/${String(data?.fetchUserLoggedIn.picture)}`}
+      />
       <S.UserName>{data?.fetchUserLoggedIn.name ?? ""}</S.UserName>
       <S.UserPointWrapper>
         <S.UserPointImg src="./images/point.svg" />

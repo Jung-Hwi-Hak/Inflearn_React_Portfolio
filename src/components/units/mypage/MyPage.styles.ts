@@ -5,12 +5,12 @@ export const Wrapper = styled.div`
   width: 1200px;
   align-items: start;
   justify-content: space-between;
-  height: 1000px;
+  padding-bottom: 100px;
 `;
 
 export const Section = styled.section`
   width: 80%;
-  height: 1000px;
+  height: 100vh;
   border-left: 2px solid #4f4f4f;
   margin-left: 80px;
   padding-left: 40px;

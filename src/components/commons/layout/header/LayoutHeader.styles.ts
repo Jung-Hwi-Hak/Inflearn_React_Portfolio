@@ -84,7 +84,9 @@ export const UserProfileWrapper = styled.div`
 
 export const UserProfileImg = styled.img`
   margin-right: 5px;
-  max-width: 35px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50px;
 `;
 
 export const UserProfileIcon = styled(CaretDownOutlined)``;

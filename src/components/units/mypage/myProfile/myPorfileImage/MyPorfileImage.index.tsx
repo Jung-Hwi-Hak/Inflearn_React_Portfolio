@@ -36,7 +36,7 @@ function MyPorfileImage(): JSX.Element {
       </S.ImgWrapper>
       <S.ImgInput type="file" ref={userImgRef} onChange={onChangeImage} />
       <S.ImgUpdateButton onClick={onClickUploadImg} isChange={userImgFile !== undefined}>
-        클릭하면 업데이트
+        프로필 사진 변경
       </S.ImgUpdateButton>
     </S.Wrapper>
   );

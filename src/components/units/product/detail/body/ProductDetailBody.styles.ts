@@ -6,7 +6,6 @@ interface UploadImgProps {
 
 export const Body = styled.div`
   width: 100%;
-  /* min-height: 800px; */
 `;
 
 export const ProductInfoWrapper = styled.div`

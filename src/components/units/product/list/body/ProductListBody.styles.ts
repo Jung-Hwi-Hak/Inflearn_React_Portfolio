@@ -68,8 +68,15 @@ export const ItemInfoFooter = styled.div`
   flex-direction: row;
   align-items: center;
 `;
+export const SellerImg = styled.img`
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+`;
 export const SellerName = styled.span`
   text-align: center;
+  margin-left: 5px;
+  font-weight: 700;
 `;
 
 export const SellerDate = styled.span`

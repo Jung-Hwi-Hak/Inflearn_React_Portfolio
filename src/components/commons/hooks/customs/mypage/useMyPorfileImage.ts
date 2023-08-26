@@ -3,7 +3,10 @@ import type { ChangeEvent, RefObject } from "react";
 import { checkValidationImage } from "../../../../../commons/libraries/validation/checkValidationImage";
 import { useMutationUploadFile } from "../../mutations/useMutationUploadFile";
 import { useMutationUpdateUser } from "../../mutations/useMutationUpdateUser";
-import { useQueryFetchUserLoggedIn } from "../../queries/useQueryFetchUserLoggedIn";
+import {
+  FETCH_USER_LOGGEDIN,
+  useQueryFetchUserLoggedIn,
+} from "../../queries/useQueryFetchUserLoggedIn";
 import { useModal } from "../useModal";
 
 export const useMyPorfileImage = () => {
@@ -14,6 +17,7 @@ export const useMyPorfileImage = () => {
   const [updateImgMutation] = useMutationUpdateUser();
   const { data: userData } = useQueryFetchUserLoggedIn();
   const { confirmModal, warningModal, successModal } = useModal();
+
   const handleImgError = useCallback((e: any): void => {
     e.target.src = "./images/profile.png";
   }, []);
@@ -49,6 +53,7 @@ export const useMyPorfileImage = () => {
           const resultFilesUrl = result.data?.uploadFile.url ?? "";
           await updateImgMutation({
             variables: { updateUserInput: { picture: resultFilesUrl } },
+            refetchQueries: [{ query: FETCH_USER_LOGGEDIN }],
           });
           successModal("프로필 사진 변경", "프로필 사진 변경이 성공했습니다.", true);
         } catch (error) {

@@ -16,6 +16,8 @@ export const Title = styled.h3`
 
 export const UserImg = styled.img`
   width: 96px;
+  height: 96px;
+  border-radius: 50%;
   margin-bottom: 20px;
 `;
 

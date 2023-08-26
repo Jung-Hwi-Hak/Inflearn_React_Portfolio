@@ -6,7 +6,9 @@ export default function LayoutHeaderDetail(props: ULayoutHeaderDetail): JSX.Elem
   const { onClickMoveToPage } = useMoveToPage();
   return (
     <S.Wrapper onClick={onClickMoveToPage("/mypage")}>
-      <S.Icon src="./images/profile.png" />
+      <S.Icon
+        src={`https://storage.googleapis.com/${String(props.data?.fetchUserLoggedIn.picture)}`}
+      />
       <S.UserInfoWrapper>
         <S.UserName>{props.data?.fetchUserLoggedIn.name}</S.UserName>
         <S.UserPoint>

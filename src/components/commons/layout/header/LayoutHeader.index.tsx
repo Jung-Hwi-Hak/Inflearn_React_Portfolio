@@ -3,10 +3,12 @@ import { useMoveToPage } from "../../hooks/customs/useMoveToPage";
 import { Dropdown, Space } from "antd";
 import { memo } from "react";
 import { useLayoutHeader } from "../../hooks/customs/useLayoutHeader";
+import { useQueryFetchUserLoggedIn } from "../../hooks/queries/useQueryFetchUserLoggedIn";
 
 function LayoutHeader(): JSX.Element {
   const { onClickMoveToPage } = useMoveToPage();
   const { items, userId } = useLayoutHeader();
+  const { data } = useQueryFetchUserLoggedIn();
   return (
     <S.Wrapper>
       <S.InnerWrapper>
@@ -16,7 +18,13 @@ function LayoutHeader(): JSX.Element {
             <>
               <Dropdown menu={{ items }} trigger={["click"]}>
                 <Space>
-                  <S.UserProfileImg src="../images/profile.png" alt="" />
+                  {/* <S.UserProfileImg src="../images/profile.png" alt="" /> */}
+                  <S.UserProfileImg
+                    src={`https://storage.googleapis.com/${String(
+                      data?.fetchUserLoggedIn.picture
+                    )}`}
+                    alt=""
+                  />
                   <S.UserProfileIcon rev={""} />
                 </Space>
               </Dropdown>

@@ -23,6 +23,7 @@ export const FETCH_USED_ITEMS = gql`
       seller {
         _id
         name
+        picture
       }
       soldAt
     }

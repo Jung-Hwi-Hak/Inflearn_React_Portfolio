@@ -5,7 +5,6 @@ import DaumPostcode from "react-daum-postcode";
 
 export const Wrapper = styled.div`
   width: 1200px;
-  /* height: 1847px; */
   border: 1px solid black;
   margin: 100px;
   padding-top: 80px;
@@ -165,8 +164,7 @@ export const SubmitButton = styled.button`
   color: #fff;
   cursor: pointer;
 
-  background-color: ${(props: ISubmitButtonProps) =>
-    props.buttonState ? "black" : "tomato"};
+  background-color: ${(props: ISubmitButtonProps) => (props.buttonState ? "black" : "tomato")};
 `;
 
 export const Error = styled.div`

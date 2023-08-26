@@ -9,7 +9,16 @@ function ProductDetailHeader(props: IProductDetailHeaderProps): JSX.Element {
     <>
       <S.Header>
         <S.AvatarWrapper>
-          <S.Avatar src="/images/avatar.png" />
+          <S.Avatar
+            src={
+              props.data?.fetchUseditem.seller?.picture !== null
+                ? `https://storage.googleapis.com/${String(
+                    props.data?.fetchUseditem.seller?.picture
+                  )}`
+                : "../images/profile.png"
+            }
+          />
+
           <S.Info>
             <S.Writer>{props.data?.fetchUseditem?.seller?.name}</S.Writer>
             <S.CreatedAt>{getDate(props.data?.fetchUseditem?.createdAt)}</S.CreatedAt>

@@ -8,7 +8,10 @@ export const Wrapper = styled.div`
 
 export const Icon = styled.img`
   display: block;
-  max-width: 35px;
+  border-radius: 50%;
+
+  width: 35px;
+  height: 35px;
 `;
 
 export const UserInfoWrapper = styled.div`

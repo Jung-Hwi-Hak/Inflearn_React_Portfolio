@@ -5,7 +5,6 @@ import DaumPostcode from "react-daum-postcode";
 
 export const Wrapper = styled.div`
   width: 1200px;
-  /* height: 1847px; */
   border: 1px solid black;
   margin: 100px;
   padding-top: 80px;

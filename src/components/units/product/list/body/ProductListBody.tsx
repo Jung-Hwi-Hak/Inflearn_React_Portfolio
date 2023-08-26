@@ -33,8 +33,14 @@ function ProductListBody(props: any): JSX.Element {
                 <S.ItenName>{el.name}</S.ItenName>
                 <S.ItemRemarks>{el.remarks}</S.ItemRemarks>
                 <S.ItemTags>{el.tags}</S.ItemTags>
-
                 <S.ItemInfoFooter>
+                  <S.SellerImg
+                    src={
+                      el.seller?.picture !== null
+                        ? `https://storage.googleapis.com/${String(el.seller?.picture)}`
+                        : "./images/profile.png"
+                    }
+                  />
                   <S.SellerName>{el.seller?.name}</S.SellerName>
                   <S.PickIcon rev={undefined} />
                   <S.PickCount>{el.pickedCount}</S.PickCount>

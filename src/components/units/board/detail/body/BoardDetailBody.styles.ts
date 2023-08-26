@@ -3,7 +3,6 @@ import ReactPlayer from "react-player";
 
 export const Body = styled.div`
   width: 100%;
-  /* min-height: 800px; */
 `;
 
 export const Title = styled.h1`
