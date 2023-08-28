@@ -3,6 +3,7 @@ import { memo } from "react";
 import * as S from "./AnswerProductWrite.styles";
 import type { IAnswerProductWriteProps } from "./AnswerProductWrite.types";
 import { useProductAnswer } from "../../../hooks/customs/product/useProductAnswer";
+import { useCheckLogin } from "../../../hooks/customs/useCheckLogin";
 
 function AnswerProductWrite(props: IAnswerProductWriteProps): JSX.Element {
   const { register, watch, handleSubmit, onCreateAnswer, onUpdateAnswer } = useProductAnswer({
@@ -12,6 +13,7 @@ function AnswerProductWrite(props: IAnswerProductWriteProps): JSX.Element {
     onToggleEdit: props.onToggleEdit ?? undefined,
     onToggleAnswer: props.onToggleAnswer ?? undefined,
   });
+  const { onClickCheckLogin } = useCheckLogin();
 
   return (
     <S.Wrapper>
@@ -26,7 +28,11 @@ function AnswerProductWrite(props: IAnswerProductWriteProps): JSX.Element {
           <S.ContentsLength>{watch("contents")?.length}/100</S.ContentsLength>
           <S.ButtonFlex>
             <S.Button
-              onClick={handleSubmit(props.isEdit === true ? onUpdateAnswer : onCreateAnswer)}
+              onClick={handleSubmit(
+                props.isEdit === true
+                  ? onClickCheckLogin(onUpdateAnswer)
+                  : onClickCheckLogin(onCreateAnswer)
+              )}
             >
               {props.isEdit === true ? "수정하기" : "등록하기"}
             </S.Button>

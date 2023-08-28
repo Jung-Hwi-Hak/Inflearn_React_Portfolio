@@ -19,6 +19,7 @@ function MyPageSide(props: IMyPageSideProps): JSX.Element {
         <S.UserPoint>
           {data?.fetchUserLoggedIn.userPoint?.amount.toLocaleString("ko-KR")}P
         </S.UserPoint>
+        {/* <S.ChargeIcon src="./images/add_circle.svg" onClick={}/> */}
       </S.UserPointWrapper>
       <S.NavigationList>
         <NavigationItems setPage={props.setPage} />

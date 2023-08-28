@@ -17,7 +17,6 @@ export const InputWrapper = styled.div`
   margin-top: 40px;
   margin-bottom: 20px;
 `;
-
 export const ContentWrapper = styled.div`
   border: 1px solid lightgray;
 `;

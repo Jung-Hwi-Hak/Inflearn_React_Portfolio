@@ -6,8 +6,32 @@ import { useForm } from "react-hook-form";
 import { useCallback } from "react";
 import { Modal } from "antd";
 import { useMutationLogoutUser } from "../../mutations/useMutationLogoutUser";
+import type { UseFormRegister, FormState, UseFormHandleSubmit } from "react-hook-form";
 
-export const useMyProfilePW = () => {
+interface IUseMyProfilePWReturns {
+  register: UseFormRegister<{
+    userPw: string;
+    changeUserPw: string;
+    changeUserPwConfirm: string;
+  }>;
+
+  formState: FormState<{
+    userPw: string;
+    changeUserPw: string;
+    changeUserPwConfirm: string;
+  }>;
+  handleSubmit: UseFormHandleSubmit<
+    {
+      userPw: string;
+      changeUserPw: string;
+      changeUserPwConfirm: string;
+    },
+    undefined
+  >;
+  onClickSubmit: (data: any) => Promise<void>;
+}
+
+export const useMyProfilePW = (): IUseMyProfilePWReturns => {
   const { warningModal, confirmModal } = useModal();
   const [resetPWMutation] = useMutationResetUserPassword();
   const [logoutMutation] = useMutationLogoutUser();

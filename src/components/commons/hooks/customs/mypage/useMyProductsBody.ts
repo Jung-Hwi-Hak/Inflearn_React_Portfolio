@@ -7,7 +7,11 @@ import { FETCH_USEDITEMS_COUNT_IPICKED } from "../../queries/useQueryFetchUsedit
 import { FETCH_USED_DETAIL_ITEM } from "../../queries/useQueryFetchUseditem";
 import { useCallback } from "react";
 
-export const useMyProductsBody = () => {
+interface IUseMyProductsBodyReturns {
+  checkDeleted: (useditemId: string) => () => Promise<void>;
+}
+
+export const useMyProductsBody = (): IUseMyProductsBodyReturns => {
   const client = useApolloClient();
   const router = useRouter();
 

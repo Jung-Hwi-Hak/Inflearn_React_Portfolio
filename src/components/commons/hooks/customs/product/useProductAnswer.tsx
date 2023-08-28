@@ -3,12 +3,11 @@ import { useForm } from "react-hook-form";
 import { yupSchema } from "../../../comments/product/answer/AnswerProductWrite.validation";
 import { useCallback } from "react";
 import { useMutationCreateUseditemQuestionAnswer } from "../../mutations/useMutationCreateUseditemQuestionAnswer";
-import { Modal } from "antd";
 import { useMutationDeleteUseditemQuestionAnswer } from "../../mutations/useMutationDeleteUseditemQuestionAnswer";
 import { useMutationUpdateUseditemQuestionAnswer } from "../../mutations/useMutationUpdateUseditemQuestionAnswer";
 import { FETCH_USEDITEM_QUESTION_ANSWERS } from "../../queries/useQueryFetchUseditemQuestionAnswers";
+import type { UseFormRegister, UseFormHandleSubmit, UseFormWatch } from "react-hook-form";
 import { useModal } from "../useModal";
-
 interface ICreateUseditemQuestionAnswerInput {
   contents: string;
 }
@@ -23,8 +22,25 @@ interface IUesProductAnswerArgs {
   onToggleEdit?: () => void;
   onToggleAnswer?: () => void;
 }
+interface IUseProductAnswerReturns {
+  onUpdateAnswer: (data: any) => Promise<void>;
+  onDeleteAnswer: (useditemQuestionAnswerId: any) => () => Promise<void>;
+  onCreateAnswer: (data: any) => Promise<void>;
+  register: UseFormRegister<{
+    contents: string;
+  }>;
+  handleSubmit: UseFormHandleSubmit<
+    {
+      contents: string;
+    },
+    undefined
+  >;
+  watch: UseFormWatch<{
+    contents: string;
+  }>;
+}
 
-export const useProductAnswer = (args: IUesProductAnswerArgs) => {
+export const useProductAnswer = (args: IUesProductAnswerArgs): IUseProductAnswerReturns => {
   const [createProductAnswer] = useMutationCreateUseditemQuestionAnswer();
   const [deleteProductAnswer] = useMutationDeleteUseditemQuestionAnswer();
   const [updateProductAnswer] = useMutationUpdateUseditemQuestionAnswer();
@@ -62,28 +78,32 @@ export const useProductAnswer = (args: IUesProductAnswerArgs) => {
       if (args.onToggleAnswer === undefined) return;
       args.onToggleAnswer();
     } catch (error) {
-      warningModal("로그인", "로그인후 이용이 가능합니다.", true);
+      if (error instanceof Error) warningModal("댓글 작성 오류", error.message, true);
     }
   }, []);
 
   const onDeleteAnswer = useCallback(
     (useditemQuestionAnswerId) => async () => {
-      await deleteProductAnswer({
-        variables: {
-          useditemQuestionAnswerId,
-        },
-        update(cache, { data }) {
-          cache.modify({
-            fields: {
-              fetchUseditemQuestionAnswers: (prev, { readField }) => {
-                const deletedId = data?.deleteUseditemQuestionAnswer;
-                const filteredPrev = prev.filter((el: any) => readField("_id", el) !== deletedId);
-                return filteredPrev;
+      try {
+        await deleteProductAnswer({
+          variables: {
+            useditemQuestionAnswerId,
+          },
+          update(cache, { data }) {
+            cache.modify({
+              fields: {
+                fetchUseditemQuestionAnswers: (prev, { readField }) => {
+                  const deletedId = data?.deleteUseditemQuestionAnswer;
+                  const filteredPrev = prev.filter((el: any) => readField("_id", el) !== deletedId);
+                  return filteredPrev;
+                },
               },
-            },
-          });
-        },
-      });
+            });
+          },
+        });
+      } catch (error) {
+        if (error instanceof Error) warningModal("댓글 삭제 오류", error.message, true);
+      }
     },
     []
   );
@@ -116,7 +136,7 @@ export const useProductAnswer = (args: IUesProductAnswerArgs) => {
       if (args.onToggleEdit === undefined) return;
       args.onToggleEdit();
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
+      if (error instanceof Error) warningModal("댓글 수정 오류", error.message, true);
     }
   }, []);
 

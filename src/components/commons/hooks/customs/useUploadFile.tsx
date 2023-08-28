@@ -1,7 +1,27 @@
 import { type ChangeEvent, useRef, type RefObject, useCallback } from "react";
 import { checkValidationImage } from "../../../../commons/libraries/validation/checkValidationImage";
+interface IReturns {
+  onClickUpload: (ref: RefObject<HTMLInputElement>) => () => void;
 
-export const useUploadFile = () => {
+  onChangeFile: (
+    fileUrls: any,
+    setFileUrls: any,
+    index: number,
+    files: any,
+    setFiles: any
+  ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  fileRef: RefObject<HTMLInputElement>;
+
+  onCancelFile: (
+    fileUrls: any,
+    setFileUrls: any,
+    index: number,
+    files: any,
+    setFiles: any
+  ) => () => void;
+}
+
+export const useUploadFile = (): IReturns => {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const onClickUpload = useCallback(

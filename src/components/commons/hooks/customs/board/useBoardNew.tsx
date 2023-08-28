@@ -15,8 +15,9 @@ export const useBoardNew = (args: IUseBoardEditArgs) => {
   const onClickCreateSubmit = useCallback(
     async (data: any): Promise<void> => {
       try {
+        const filteredArray = args.files.filter((item) => item !== undefined && item !== null);
         const results = await Promise.all(
-          args.files.map(async (el) => await uploadFileMutation({ variables: { file: el } }))
+          filteredArray.map(async (el) => await uploadFileMutation({ variables: { file: el } }))
         );
         const resultFilesUrl = results.map((el) => el.data?.uploadFile.url ?? "");
 

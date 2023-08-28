@@ -6,12 +6,14 @@ import type { IProductDetailFooterProps } from "./ProductDetailFooter.types";
 import { useRecoilState } from "recoil";
 import { userIDState } from "../../../../../commons/stores";
 import { usePayment } from "../../../../commons/hooks/customs/usePayment";
+import { useCheckLogin } from "../../../../commons/hooks/customs/useCheckLogin";
 
 function ProductDetailFooter(props: IProductDetailFooterProps): JSX.Element {
   const { id: productId } = useQueryIdChecker("productId");
   const [userId] = useRecoilState(userIDState);
   const { onClickDeleteProduct } = useProductDetailFooter();
   const { onClickBuyPayment } = usePayment();
+  const { onClickCheckLogin } = useCheckLogin();
   return (
     <>
       {props.data?.fetchUseditem?.seller?.email !== userId ? (
@@ -23,7 +25,9 @@ function ProductDetailFooter(props: IProductDetailFooterProps): JSX.Element {
             <S.Button
               onClick={
                 props.data
-                  ? onClickBuyPayment({ buyData: props.data.fetchUseditem }, productId)
+                  ? onClickCheckLogin(
+                      onClickBuyPayment({ buyData: props.data.fetchUseditem }, productId)
+                    )
                   : () => {}
               }
             >

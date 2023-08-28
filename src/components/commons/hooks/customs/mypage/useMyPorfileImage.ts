@@ -8,8 +8,20 @@ import {
   useQueryFetchUserLoggedIn,
 } from "../../queries/useQueryFetchUserLoggedIn";
 import { useModal } from "../useModal";
+import type { IQuery } from "../../../../../commons/types/generated/types";
 
-export const useMyPorfileImage = () => {
+interface IUsedMyProfileImageReturns {
+  userData: Pick<IQuery, "fetchUserLoggedIn"> | undefined;
+  userImgUrls: string;
+  handleImgError: (e: any) => void;
+  onClickImg: (ref: RefObject<HTMLInputElement>) => () => void;
+  userImgRef: RefObject<HTMLInputElement>;
+  onChangeImage: (event: ChangeEvent<HTMLInputElement>) => void;
+  onClickUploadImg: () => Promise<void>;
+  onCancelFile: () => void;
+  userImgFile: File | undefined;
+}
+export const useMyProfileImage = (): IUsedMyProfileImageReturns => {
   const userImgRef = useRef<HTMLInputElement>(null);
   const [userImgFile, setUserImgFile] = useState<File>();
   const [userImgUrls, setUserImgUrls] = useState("");

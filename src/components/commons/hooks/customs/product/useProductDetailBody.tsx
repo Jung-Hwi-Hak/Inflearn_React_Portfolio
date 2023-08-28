@@ -5,7 +5,21 @@ import { useModal } from "../useModal";
 import { FETCH_USEDITEMS_IPICKED } from "../../queries/useQueryFetchUseditemsIPicked";
 import { FETCH_USEDITEMS_COUNT_IPICKED } from "../../queries/useQueryFetchUseditemsCountIPicked";
 
-export const useProductDetailBody = () => {
+interface IUseProductDetailBodyReturns {
+  focusImg: number;
+  settings: {
+    dots: boolean;
+    arrows: boolean;
+    infinite: boolean;
+    speed: number;
+    slidesToShow: number;
+    slidesToScroll: number;
+    afterChange: (event: number) => void;
+  };
+  onClickPick: () => Promise<void>;
+}
+
+export const useProductDetailBody = (): IUseProductDetailBodyReturns => {
   const [focusImg, setFocusImg] = useState(1);
   const { id: useditemId } = useQueryIdChecker("productId");
   const [pickMutation] = useMutationToggleUseditemPick();
@@ -29,7 +43,7 @@ export const useProductDetailBody = () => {
         ],
       });
     } catch (error) {
-      warningModal("로그인", "로그인후 이용이 가능합니다.", true);
+      if (error instanceof Error) warningModal("상품목록 찜 오류", error.message, true);
     }
   }, [useditemId]);
 

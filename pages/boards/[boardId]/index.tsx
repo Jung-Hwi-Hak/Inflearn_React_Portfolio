@@ -4,8 +4,9 @@ import CommonetsBoardWrite from "../../../src/components/commons/comments/board/
 import BoardDetail from "../../../src/components/units/board/detail/BoardDetail.index";
 import { useQueryIdChecker } from "../../../src/components/commons/hooks/customs/useQueryIdChecker";
 import { useQueryFetchBoardComments } from "../../../src/components/commons/hooks/queries/useQueryFetchBoardComments";
+import { memo } from "react";
 
-export default function BoardDetailPage(): JSX.Element {
+function BoardDetailPage(): JSX.Element {
   const { id } = useQueryIdChecker("boardId");
   const { data, fetchMore } = useQueryFetchBoardComments({ boardId: id });
 
@@ -40,4 +41,4 @@ export default function BoardDetailPage(): JSX.Element {
   );
 }
 
-// export default memo(BoardDetailPage);
+export default memo(BoardDetailPage);

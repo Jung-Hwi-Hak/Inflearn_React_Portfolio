@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import { useMutationUploadFile } from "../../mutations/useMutationUploadFile";
 import { useQueryIdChecker } from "../useQueryIdChecker";
-import { Modal } from "antd";
 import type { IProductWriteYupSchema } from "../../../../units/product/write/ProductWrite.validation";
 import type { UseFormWatch, UseFormSetValue } from "react-hook-form";
 import { useModal } from "../useModal";
@@ -11,17 +10,21 @@ import type {
   IUseditemAddressInput,
 } from "../../../../../commons/types/generated/types";
 import { FETCH_USED_DETAIL_ITEM } from "../../queries/useQueryFetchUseditem";
-interface IUseBoardEditArgs {
+interface IUseProductEditArgs {
   setValue: UseFormSetValue<IProductWriteYupSchema>;
   files: File[];
   watch: UseFormWatch<IProductWriteYupSchema>;
 }
 
-export const useBoardEdit = (args: IUseBoardEditArgs) => {
+interface IUsedProductEditReturns {
+  onClickUpdateSubmit: (data: any) => Promise<void>;
+}
+
+export const useBoardEdit = (args: IUseProductEditArgs): IUsedProductEditReturns => {
   const { id: useditemId } = useQueryIdChecker("productId");
   const [mutationUpdateProduct] = useMutationUpdateUseditem();
   const [uploadFileMutation] = useMutationUploadFile();
-  const { successModal } = useModal();
+  const { successModal, warningModal } = useModal();
 
   const onClickUpdateSubmit = useCallback(
     async (data: any) => {
@@ -33,8 +36,9 @@ export const useBoardEdit = (args: IUseBoardEditArgs) => {
         if (data.tags) updateUseditemInput.tags = data.tags;
         if (data.remarks) updateUseditemInput.remarks = data.remarks;
         if (args.files.length > 0) {
+          const filteredArray = args.files.filter((item) => item !== undefined && item !== null);
           const promiseReulst = await Promise.all(
-            args.files.map(async (el) => await uploadFileMutation({ variables: { file: el } }))
+            filteredArray.map(async (el) => await uploadFileMutation({ variables: { file: el } }))
           );
           const resultFilesUrl = promiseReulst.map((el) => el.data?.uploadFile.url ?? "");
 
@@ -62,7 +66,7 @@ export const useBoardEdit = (args: IUseBoardEditArgs) => {
           `/products/${String(result.data?.updateUseditem._id)}`
         );
       } catch (error) {
-        if (error instanceof Error) Modal.warning({ content: error.message });
+        if (error instanceof Error) warningModal("게시글 수정 오류", error.message, true);
       }
     },
     [args.files]

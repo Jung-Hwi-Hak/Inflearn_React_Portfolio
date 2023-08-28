@@ -33,8 +33,9 @@ export const useBoardEdit = (args: IUseBoardEditArgs) => {
   const onClickUpdateSubmit = useCallback(
     async (data: any) => {
       try {
+        const filteredArray = args.files.filter((item) => item !== undefined && item !== null);
         const results = await Promise.all(
-          args.files.map(async (el) => await uploadFileMutation({ variables: { file: el } }))
+          filteredArray.map(async (el) => await uploadFileMutation({ variables: { file: el } }))
         );
         const resultFilesUrl = results.map((el) => el.data?.uploadFile.url ?? "");
         const result = await mutationUpdateBoard({

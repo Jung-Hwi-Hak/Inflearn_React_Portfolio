@@ -7,11 +7,13 @@ import { useProductAnswer } from "../../../hooks/customs/product/useProductAnswe
 import AnswerProductWrite from "../answer/AnswerProductWrite.index";
 import { useRecoilState } from "recoil";
 import { userIDState } from "../../../../../commons/stores";
+import { useCheckLogin } from "../../../hooks/customs/useCheckLogin";
 
 function AnswersProductItem(props: IAnswerProductViewProps) {
   const [userId] = useRecoilState(userIDState);
   const [isEdit, onToggleEdit] = useToggle();
   const { onDeleteAnswer } = useProductAnswer({});
+  const { onClickCheckLogin } = useCheckLogin();
   return (
     <>
       {!isEdit && (
@@ -33,7 +35,7 @@ function AnswersProductItem(props: IAnswerProductViewProps) {
                 />
                 <S.DeleteIcon
                   src="/images/boardComment/list/option_delete_icon.png/"
-                  onClick={onDeleteAnswer(props.answersData._id)}
+                  onClick={onClickCheckLogin(onDeleteAnswer(props.answersData._id))}
                 />
               </S.OptionWrapper>
             ) : (

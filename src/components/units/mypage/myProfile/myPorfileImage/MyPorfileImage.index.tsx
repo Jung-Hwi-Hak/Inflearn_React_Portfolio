@@ -1,6 +1,6 @@
 import { memo } from "react";
 import * as S from "./MyPorfileImage.styles";
-import { useMyPorfileImage } from "../../../../commons/hooks/customs/mypage/useMyPorfileImage";
+import { useMyProfileImage } from "../../../../commons/hooks/customs/mypage/useMyPorfileImage";
 
 function MyPorfileImage(): JSX.Element {
   const {
@@ -13,7 +13,7 @@ function MyPorfileImage(): JSX.Element {
     onClickUploadImg,
     userImgFile,
     onCancelFile,
-  } = useMyPorfileImage();
+  } = useMyProfileImage();
 
   return (
     <S.Wrapper>

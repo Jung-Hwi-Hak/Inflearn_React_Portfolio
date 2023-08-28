@@ -3,7 +3,7 @@ import ProductListHeader from "./header/ProductListHeader";
 import ProductListBody from "./body/ProductListBody";
 import BestProductListIndex from "./bestList/BestProductList.index";
 import { memo } from "react";
-import { useProductList } from "../../../commons/hooks/customs/useMarketList";
+import { useProductList } from "../../../commons/hooks/customs/product/useProductList";
 import SearchBar02 from "../../../commons/searchBars/searchBar02/SearchBar02.index";
 
 function ProductList(): JSX.Element {

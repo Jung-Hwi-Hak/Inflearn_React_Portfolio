@@ -1,8 +1,9 @@
 import * as S from "./Signup.styles";
 import { Error } from "../../commons/emotions/commonsStyle";
 import { useSignup } from "../../commons/hooks/customs/useSignup";
+import { memo } from "react";
 
-export default function SignupPage(): JSX.Element {
+function SignupPage(): JSX.Element {
   const { register, formState, handleSubmit, onClickSubmit } = useSignup();
 
   return (
@@ -11,11 +12,7 @@ export default function SignupPage(): JSX.Element {
       <S.LoginWrapper>
         <S.SubWrapper>
           <S.LoginText>ID: </S.LoginText>
-          <S.LoginInput
-            type="text"
-            {...register("userId")}
-            placeholder="아이디는 3~5자리입니다."
-          />
+          <S.LoginInput type="text" {...register("userId")} placeholder="아이디는 3~5자리입니다." />
         </S.SubWrapper>
         <Error>{formState.errors.userId?.message}</Error>
         <S.SubWrapper>
@@ -43,3 +40,4 @@ export default function SignupPage(): JSX.Element {
     </S.Container>
   );
 }
+export default memo(SignupPage);

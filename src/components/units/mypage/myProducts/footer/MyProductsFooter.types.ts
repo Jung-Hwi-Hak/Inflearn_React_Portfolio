@@ -1,3 +1,3 @@
-export interface IBoardListFooterProps {
+export interface IProductListFooterProps {
   children: JSX.Element;
 }

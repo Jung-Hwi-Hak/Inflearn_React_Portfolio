@@ -7,7 +7,11 @@ interface IUseBoardEditArgs {
   files: File[];
 }
 
-export const useBoardNew = (args: IUseBoardEditArgs) => {
+interface IReturns {
+  onClickCreateSubmit: (data: any) => Promise<void>;
+}
+
+export const useBoardNew = (args: IUseBoardEditArgs): IReturns => {
   const [mutationCreateProduct] = useMutationCreateUseditem();
   const [uploadFileMutation] = useMutationUploadFile();
   const { successModal, warningModal } = useModal();
@@ -20,9 +24,10 @@ export const useBoardNew = (args: IUseBoardEditArgs) => {
           .filter((tag: string) => tag !== "")
           .map((tag: string) => `#${tag}`);
 
-        const files = args.files.filter((el) => typeof el === "object");
+        // const files = args.files.filter((el) => typeof el === "object");
+        const filteredArray = args.files.filter((item) => item !== undefined && item !== null);
         const results = await Promise.all(
-          files.map(async (el) => await uploadFileMutation({ variables: { file: el } }))
+          filteredArray.map(async (el) => await uploadFileMutation({ variables: { file: el } }))
         );
         const resultFilesUrl = results.map((el) => el.data?.uploadFile.url ?? "");
 

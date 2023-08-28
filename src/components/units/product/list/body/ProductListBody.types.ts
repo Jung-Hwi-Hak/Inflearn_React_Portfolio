@@ -1,8 +1,8 @@
 import type { IQuery } from "../../../../../commons/types/generated/types";
 
-export interface IBoardListBodyProps {
-  // keyword: string;
-  data?: Pick<IQuery, "fetchBoards">;
+export interface IProductListBodyProps {
+  onLoadMore: () => void;
+  data: Pick<IQuery, "fetchUseditems"> | undefined;
 }
 
 export interface ITextTokenProps {

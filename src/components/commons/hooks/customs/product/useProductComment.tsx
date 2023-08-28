@@ -1,19 +1,15 @@
-import { Modal } from "antd";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { yupSchema } from "../../../comments/product/wirte/CommentsProductWrite.validation";
 import { useForm } from "react-hook-form";
 import { useMutationCreateUseditemQuestion } from "../../mutations/useMutationCreateUseditemQuestion";
 import { useMutationDeleteUseditemQuestion } from "../../mutations/useMutationDeleteUseditemQuestion";
 import { useModal } from "../useModal";
+
 import { useCallback } from "react";
 import { useMutationUseditemQuestion } from "../../mutations/useMutationUseditemQuestion";
-// import { useMutationCreateUseditemQuestionAnswer } from "../../mutations/useMutationCreateUseditemQuestionAnswer";
 interface IUpdateProductCommentInput {
   contents: string;
 }
-// interface ICreateUseditemQuestionAnswerInput {
-//   contents: string;
-// }
 interface IPrev {
   __ref: string;
 }
@@ -22,7 +18,6 @@ export const useProductComment = (args: any): any => {
   const [createProductComment] = useMutationCreateUseditemQuestion();
   const [updateProductComment] = useMutationUseditemQuestion();
   const [deleteProductComment] = useMutationDeleteUseditemQuestion();
-  // const [createProductAnswer] = useMutationCreateUseditemQuestionAnswer();
   const { confirmModal, warningModal } = useModal();
 
   const { register, handleSubmit, watch, reset } = useForm({
@@ -57,7 +52,7 @@ export const useProductComment = (args: any): any => {
               },
             });
           } catch (error) {
-            if (error instanceof Error) Modal.error({ content: error.message });
+            if (error instanceof Error) warningModal("댓글 삭제 오류", error.message, true);
           }
         },
         "댓글삭제",
@@ -70,6 +65,7 @@ export const useProductComment = (args: any): any => {
 
   const onClickUpdate = useCallback(
     async (data: any) => {
+      console.log(data);
       try {
         const updateUseditemQuestionInput: IUpdateProductCommentInput = {
           contents: data.contents,
@@ -94,7 +90,7 @@ export const useProductComment = (args: any): any => {
         });
         if (args.onToggleEdit) args.onToggleEdit();
       } catch (error) {
-        if (error instanceof Error) alert(error.message);
+        if (error instanceof Error) warningModal("댓글 수정 오류", error.message, true);
       }
     },
     [args.productCommentId, args.onToggleEdit]
@@ -102,6 +98,7 @@ export const useProductComment = (args: any): any => {
 
   const onClickWrite = useCallback(
     async (data: any) => {
+      console.log(data);
       try {
         await createProductComment({
           variables: {
@@ -122,31 +119,13 @@ export const useProductComment = (args: any): any => {
         });
         reset();
       } catch (error) {
-        warningModal("로그인", "로그인후 이용이 가능합니다.", true);
+        if (error instanceof Error) warningModal("댓글 작성 오류", error.message, true);
       }
     },
     [args.productId]
   );
 
-  // const onClickAnswer = useCallback(async (data: any) => {
-  //   try {
-  //     const createUseditemQuestionAnswerInput: ICreateUseditemQuestionAnswerInput = {
-  //       contents: data.contents,
-  //     };
-  //     if (!args.productCommentId) return;
-  //     await createProductAnswer({
-  //       variables: {
-  //         createUseditemQuestionAnswerInput,
-  //         useditemQuestionId: args.productCommentId,
-  //       },
-  //     });
-  //   } catch (error) {
-  //     if (error instanceof Error) Modal.error({ content: error.message });
-  //   }
-  // }, []);
-
   return {
-    // onClickAnswer,
     onClickUpdate,
     onClickDelete,
     onClickWrite,

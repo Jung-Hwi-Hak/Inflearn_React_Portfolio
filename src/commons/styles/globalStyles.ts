@@ -98,6 +98,24 @@ export const globalStyles = css`
     border-color: tomato !important;
   }
 
+  // ant Menu
+
+  .ant-menu-submenu-title:where(.css-dev-only-do-not-override-txh9fw).ant-menu-light
+    .ant-menu-submenu-selected
+    > .ant-menu-submenu-title,
+  :where(.css-dev-only-do-not-override-txh9fw).ant-menu-light
+    .ant-menu-submenu-selected
+    > .ant-menu-submenu-title {
+    color: black;
+  }
+  .ant-menu-item .ant-menu-item-selected .ant-menu-item-only-child::after {
+    color: red;
+  }
+  .ant-menu-item-selected {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    color: #fff !important;
+  }
+
   /* Film Animations */
   // Grain
   @keyframes grain {

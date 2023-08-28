@@ -2,9 +2,8 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.aside`
   display: flex;
-  max-width: 20%;
+  width: 20%;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;
 
@@ -34,12 +33,18 @@ export const UserPointWrapper = styled.div`
 `;
 export const UserPointImg = styled.img`
   width: 24px;
+  display: inline-block;
 `;
 
 export const UserPoint = styled.span`
   font-size: 16px;
   font-weight: 700;
   margin-left: 6px;
+`;
+export const ChargeIcon = styled.img`
+  width: 20px;
+  font-weight: 700;
+  margin-left: 3px;
 `;
 
 export const NavigationList = styled.ul`

@@ -30,8 +30,8 @@ function CommonetsBoardWrite(props: ICommentsBoardWriteProps): JSX.Element {
         </>
       )}
       <S.InputWrapper>
-        <S.Input placeholder="작성자" {...register("writer")} readOnly={props.isEdit} />
-        <S.Input type="password" placeholder="비밀번호" {...register("password")} />
+        <S.Input placeholder="작성자 ( 2~5 자리)" {...register("writer")} readOnly={props.isEdit} />
+        <S.Input type="password" placeholder="비밀번호 ( 4~15 )" {...register("password")} />
         <S.Star className="asdasd" ref={starRef} onChange={onChangeStar} value={watch("star")} />
       </S.InputWrapper>
       <S.ContentWrapper>

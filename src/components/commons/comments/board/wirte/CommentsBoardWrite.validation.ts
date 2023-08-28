@@ -2,7 +2,11 @@
 import * as yup from "yup";
 
 export const yupSchema = yup.object({
-  writer: yup.string().required("작성자를 입력해주세요."),
+  writer: yup
+    .string()
+    .min(2, "작성자는 최소 2자리 이상이여야 합니다.")
+    .max(5, "작성자는 최대 5자리입니다.")
+    .required("작성자를 입력해주세요."),
   contents: yup.string().required("본문을 입력해주세요."),
   star: yup.number(),
   password: yup

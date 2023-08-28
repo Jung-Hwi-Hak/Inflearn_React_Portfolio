@@ -1,10 +1,10 @@
 import * as S from "./MyPage.styles";
 import MyPageSide from "./side/MyPageSide.index";
 import MyProducts from "./myProducts/MyProducts.index";
-import { useState } from "react";
+import { memo, useState } from "react";
 import MyPoint from "./myPoint/MyPoint.index";
 import MyProfile from "./myProfile/MyProfile.index";
-export default function MyPageIndex(): JSX.Element {
+function MyPageIndex(): JSX.Element {
   const [page, setPage] = useState("myProducts");
 
   let contentComponent;
@@ -30,3 +30,4 @@ export default function MyPageIndex(): JSX.Element {
     </S.Wrapper>
   );
 }
+export default memo(MyPageIndex);

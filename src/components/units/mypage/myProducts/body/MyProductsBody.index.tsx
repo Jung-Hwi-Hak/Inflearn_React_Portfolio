@@ -1,10 +1,10 @@
 import { memo } from "react";
 import * as S from "../../../../commons/emotions/commonsListStyle";
-import type { IBoardListBodyProps } from "./MyProductsBody.types";
+import type { IProductListBodyProps } from "./MyProductsBody.types";
 import { getDate } from "../../../../../commons/libraries/utils";
 import type { IUseditem } from "../../../../../commons/types/generated/types";
 import { useMyProductsBody } from "../../../../commons/hooks/customs/mypage/useMyProductsBody";
-function MyPageBody(props: IBoardListBodyProps): JSX.Element {
+function MyPageBody(props: IProductListBodyProps): JSX.Element {
   const { checkDeleted } = useMyProductsBody();
 
   return (

@@ -3,7 +3,11 @@ import type { IQuery } from "../../../../../commons/types/generated/types";
 import { useQueryIdChecker } from "../useQueryIdChecker";
 import { useQueryFetchUsedItem } from "../../queries/useQueryFetchUseditem";
 
-export const useProductDetail = () => {
+interface IUseProductDetailReturns {
+  data: Pick<IQuery, "fetchUseditem"> | undefined;
+}
+
+export const useProductDetail = (): IUseProductDetailReturns => {
   const { id } = useQueryIdChecker("productId");
   const { data } = useQueryFetchUsedItem(id);
 

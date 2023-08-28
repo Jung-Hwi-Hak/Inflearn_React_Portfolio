@@ -1,12 +1,14 @@
-import { useMarketSidebar } from "../../../../commons/hooks/customs/useMarketSidebar";
+import { useProductSidebar } from "../../../../commons/hooks/customs/product/useProductSidebar";
 import * as S from "./ProductSidebar.styles";
 import type { IQuery } from "../../../../../commons/types/generated/types";
 import ProductSidebarItem from "../sidebarItem/ProductSidebarItem.index";
 import { memo } from "react";
+import { useCheckLogin } from "../../../../commons/hooks/customs/useCheckLogin";
 
 function ProductSideBar() {
   const { onClickScrollDown, onClickScrollUp, onClickMoveToPage, recentProduct } =
-    useMarketSidebar();
+    useProductSidebar();
+  const { onClickCheckLogin } = useCheckLogin();
 
   return (
     <S.Wrapper>
@@ -21,7 +23,10 @@ function ProductSideBar() {
         ))}
         <S.ScrollDownButton rev={""} onClick={onClickScrollDown} />
       </S.SidebarWrapper>
-      <S.CreateButton onClick={onClickMoveToPage("/products/new")}>등록하기</S.CreateButton>
+
+      <S.CreateButton onClick={onClickCheckLogin(onClickMoveToPage("/products/new"))}>
+        등록하기
+      </S.CreateButton>
     </S.Wrapper>
   );
 }

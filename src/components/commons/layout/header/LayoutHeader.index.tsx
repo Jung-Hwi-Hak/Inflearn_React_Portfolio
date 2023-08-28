@@ -18,10 +18,9 @@ function LayoutHeader(): JSX.Element {
             <>
               <Dropdown menu={{ items }} trigger={["click"]}>
                 <Space>
-                  {/* <S.UserProfileImg src="../images/profile.png" alt="" /> */}
                   <S.UserProfileImg
                     src={`https://storage.googleapis.com/${String(
-                      data?.fetchUserLoggedIn.picture
+                      data?.fetchUserLoggedIn?.picture
                     )}`}
                     alt=""
                   />

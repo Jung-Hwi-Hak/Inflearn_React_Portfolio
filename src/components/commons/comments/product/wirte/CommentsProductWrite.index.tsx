@@ -3,6 +3,7 @@ import { useProductComment } from "../../../hooks/customs/product/useProductComm
 import { useQueryIdChecker } from "../../../hooks/customs/useQueryIdChecker";
 import * as S from "./CommentsProductWrite.styles";
 import type { ICommentsProductWriteProps } from "./CommentsProductWrite.types";
+import { useCheckLogin } from "../../../hooks/customs/useCheckLogin";
 
 function CommentsProductWrite(props: ICommentsProductWriteProps): JSX.Element {
   const { id: productId } = useQueryIdChecker("productId");
@@ -12,6 +13,7 @@ function CommentsProductWrite(props: ICommentsProductWriteProps): JSX.Element {
     onToggleEdit: props.onToggleEdit,
     el: props.el,
   });
+  const { onClickCheckLogin } = useCheckLogin();
 
   return (
     <S.Wrapper>
@@ -30,7 +32,13 @@ function CommentsProductWrite(props: ICommentsProductWriteProps): JSX.Element {
         <S.BottomWrapper>
           <S.ContentsLength>{watch("contents")?.length}/100</S.ContentsLength>
           <S.ButtonFlex>
-            <S.Button onClick={handleSubmit(props.isEdit === true ? onClickUpdate : onClickWrite)}>
+            <S.Button
+              onClick={handleSubmit(
+                props.isEdit === true
+                  ? onClickCheckLogin(onClickUpdate)
+                  : onClickCheckLogin(onClickWrite)
+              )}
+            >
               {props.isEdit === true ? "수정하기" : "등록하기"}
             </S.Button>
             {props.isEdit === true ? <S.Button onClick={props.onToggleEdit}>취소</S.Button> : <></>}

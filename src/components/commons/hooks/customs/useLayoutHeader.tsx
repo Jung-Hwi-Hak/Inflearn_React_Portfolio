@@ -20,7 +20,12 @@ const Button = styled.button`
   }
 `;
 
-export const useLayoutHeader = () => {
+interface IReturns {
+  userId: string | undefined;
+  items: any;
+}
+
+export const useLayoutHeader = (): IReturns => {
   const { data } = useQueryFetchUserLoggedIn();
   const [, setUserId] = useRecoilState(userIDState);
   const [, setUserName] = useRecoilState(userNameState);

@@ -5,7 +5,6 @@ import { Error } from "../../commons/emotions/commonsStyle";
 export default function LoginPage(): JSX.Element {
   const { handleSubmit, register, onClickLogin, formState } = useLogin();
   const { onClickMoveToPage } = useMoveToPage();
-  // const { onClickMoveToPage } = useMemo(() => useMoveToPage(), []);
   return (
     <S.Container>
       <S.LoginH1>LOGIN</S.LoginH1>

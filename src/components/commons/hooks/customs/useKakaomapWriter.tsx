@@ -5,10 +5,17 @@ import type { IKakaomapProps } from "../../kakaomap/kakaomapWriter/kakaomap.type
 declare const window: typeof globalThis & {
   kakao: any;
 };
+
+interface IReturns {
+  onChangePlaceKeyword: (event: ChangeEvent<HTMLInputElement>) => void;
+  searchPlace: (event: KeyboardEvent<HTMLInputElement>) => void;
+  placeAddress: string;
+}
+
 let map: any;
 let marker: any;
 let geocoder: any;
-export const useKakaomapWriter = (props: IKakaomapProps) => {
+export const useKakaomapWriter = (props: IKakaomapProps): IReturns => {
   const [placeKeyword, setPlaceKeyword] = useState("");
   const [placeAddress, setPlaceAddress] = useState("");
   useEffect(() => {

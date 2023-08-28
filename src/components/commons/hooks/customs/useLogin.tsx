@@ -6,7 +6,27 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginYupSchema } from "../../../units/login/Login.validation";
 import { useModal } from "./useModal";
 
-export const useLogin = () => {
+import type { UseFormRegister, UseFormHandleSubmit, FormState } from "react-hook-form";
+
+interface IReturns {
+  onClickLogin: (data: any) => Promise<void>;
+  register: UseFormRegister<{
+    userId: string;
+    userPw: string;
+  }>;
+  handleSubmit: UseFormHandleSubmit<
+    {
+      userId: string;
+      userPw: string;
+    },
+    undefined
+  >;
+  formState: FormState<{
+    userId: string;
+    userPw: string;
+  }>;
+}
+export const useLogin = (): IReturns => {
   const [mutation] = useMutationLoginUser();
 
   const [, setUserId] = useRecoilState(userIDState);
@@ -31,7 +51,7 @@ export const useLogin = () => {
       setUserPw(data.userPw);
       successModal("로그인", "로그인 성공", true, "/boards");
     } catch (error) {
-      warningModal("로그인", "로그인 실패", true);
+      warningModal("로그인 오류", "로그인 실패", true);
     }
   };
 

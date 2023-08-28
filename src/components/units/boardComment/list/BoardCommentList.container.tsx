@@ -11,7 +11,6 @@ export default function BoardCommentList(): JSX.Element {
   const router = useRouter();
   if (typeof router.query.boardId !== "string") return <></>;
 
-  // ! 댓글 조회 API
   const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchBoardComments">,
     IQueryFetchBoardCommentsArgs
@@ -19,7 +18,6 @@ export default function BoardCommentList(): JSX.Element {
     variables: { boardId: router.query.boardId },
   });
 
-  // ! 댓글 API fetchMore
   const onLoadMore = (): void => {
     if (data === undefined) return;
     void fetchMore({
@@ -29,10 +27,7 @@ export default function BoardCommentList(): JSX.Element {
           return { fetchBoardComments: [...prev.fetchBoardComments] };
 
         return {
-          fetchBoardComments: [
-            ...prev.fetchBoardComments,
-            ...fetchMoreResult.fetchBoardComments,
-          ],
+          fetchBoardComments: [...prev.fetchBoardComments, ...fetchMoreResult.fetchBoardComments],
         };
       },
     });

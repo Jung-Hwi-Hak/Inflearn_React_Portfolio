@@ -7,7 +7,7 @@ export default function LayoutHeaderDetail(props: ULayoutHeaderDetail): JSX.Elem
   return (
     <S.Wrapper onClick={onClickMoveToPage("/mypage")}>
       <S.Icon
-        src={`https://storage.googleapis.com/${String(props.data?.fetchUserLoggedIn.picture)}`}
+        src={`https://storage.googleapis.com/${String(props.data?.fetchUserLoggedIn?.picture)}`}
       />
       <S.UserInfoWrapper>
         <S.UserName>{props.data?.fetchUserLoggedIn.name}</S.UserName>

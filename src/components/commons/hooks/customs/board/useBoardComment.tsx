@@ -9,7 +9,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { yupSchema } from "../../../comments/board/wirte/CommentsBoardWrite.validation";
 import type { IBoardComment } from "../../../../../commons/types/generated/types";
 import { useForm } from "react-hook-form";
-import type { UseFormWatch, UseFormRegister, UseFormHandleSubmit } from "react-hook-form";
+import type {
+  UseFormWatch,
+  UseFormRegister,
+  UseFormHandleSubmit,
+  FormState,
+} from "react-hook-form";
 interface IUpdateBoardCommentInput {
   contents?: string;
   rating?: number;
@@ -50,6 +55,12 @@ interface IUseBoardCommentReturn {
     password: string;
   }>;
   starRef: RefObject<HTMLInputElement>;
+  formState: FormState<{
+    writer: string;
+    contents: string;
+    star: number | undefined;
+    password: string;
+  }>;
 }
 
 export const useBoardComment = (args: IUseBoardCommentArgs): IUseBoardCommentReturn => {
@@ -58,7 +69,7 @@ export const useBoardComment = (args: IUseBoardCommentArgs): IUseBoardCommentRet
   const [updateBoardComment] = useMutationUpdateBoardComment();
   const [deleteBoardComment] = useMutationDeleteBoardComment();
   const starRef = useRef<HTMLInputElement>(null);
-  const { register, handleSubmit, watch, reset, setValue } = useForm({
+  const { register, handleSubmit, watch, reset, setValue, formState } = useForm({
     resolver: yupResolver(yupSchema),
     mode: "onChange",
     defaultValues: {
@@ -167,5 +178,6 @@ export const useBoardComment = (args: IUseBoardCommentArgs): IUseBoardCommentRet
     handleSubmit,
     watch,
     starRef,
+    formState,
   };
 };
